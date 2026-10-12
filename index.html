@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Traffy Fondue - รีเซ็ต OTP (Mobile App UI Designs - WCAG 2.2 AAA)</title>
+  <title>Traffy Fondue - รีเซ็ต OTP (5 Mobile Designs - WCAG 2.2 AAA)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -12,7 +12,7 @@
           colors: {
             traffy: {
               brand: '#694325',       // Primary Traffy Fondue Brown
-              brandDark: '#4A2E16',   // High-contrast brown (10.5:1 on white)
+              brandDark: '#4A2E16',   // High-contrast brown (10.5:1 on white - AAA)
               brandLight: '#8B5A2B',
               brandSurface: '#F5ECE5',
               warmCanvas: '#FAF9F6',
@@ -34,7 +34,7 @@
             sans: ['Prompt', 'Noto Sans Thai', 'sans-serif'],
           },
           boxShadow: {
-            phone: '0 25px 60px -15px rgba(0, 0, 0, 0.45), 0 0 0 10px #1e293b, 0 0 0 12px #334155',
+            chassis: '0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)',
           },
         },
       },
@@ -84,28 +84,26 @@
     }
   </style>
 </head>
-<body class="h-full flex flex-col text-slate-800 antialiased overflow-hidden bg-slate-100">
+<body class="h-full flex flex-col text-slate-800 antialiased overflow-hidden bg-[#EEF1F5]">
 
   <!-- =========================================================================
-       TOP SHOWCASE CONTROL BAR (CLEAN TABS FOR SWITCHING MOBILE DESIGNS)
+       TOP SHOWCASE CONTROL BAR (5 MOBILE DESIGNS TABS)
        ========================================================================= -->
-  <div class="bg-white border-b border-slate-200 px-4 sm:px-6 py-3 flex-shrink-0 z-30 shadow-xs">
-    <div class="max-w-7xl mx-auto flex flex-col gap-2.5">
+  <header class="bg-white border-b border-slate-200 px-4 sm:px-6 py-2.5 flex-shrink-0 z-30 shadow-xs">
+    <div class="max-w-6xl mx-auto flex flex-col gap-2">
       
       <!-- Top Title + Accessibility Badge + Actions -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <h1 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
-              <span>📱</span> ปลดล็อก OTP (8 Mobile Designs)
-            </h1>
-            <span class="text-[11px] bg-emerald-100 text-emerald-900 border border-emerald-300 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
-              <span>✓</span> WCAG 2.2 AAA Compliant
-            </span>
-          </div>
-          <p class="text-xs text-slate-500 mt-0.5">
-            ทดลองกดปุ่มปลดล็อก การตั้งค่าจะทำงานเชื่อมโยงกันทุกแท็บ • จำลองหน้าจอแอปมือถือ Traffy Fondue โดยเฉพาะ
-          </p>
+        <div class="flex items-center gap-2 flex-wrap">
+          <h1 class="text-base sm:text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <span>📱</span> ปลดล็อก OTP (5 Mobile Designs)
+          </h1>
+          <span class="text-[11px] bg-emerald-100 text-emerald-900 border border-emerald-300 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
+            <span>✓</span> WCAG 2.2 AAA Compliant
+          </span>
+          <span class="text-xs text-slate-500 hidden md:inline">
+            • จำลองหน้าจอแอป Traffy Fondue มือถือจริง
+          </span>
         </div>
 
         <!-- Quick Utilities -->
@@ -113,13 +111,13 @@
           <!-- Target Size Helper -->
           <button onclick="toggleTargetHelper()" id="btn-target-helper" class="px-2.5 py-1.5 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium flex items-center gap-1.5 shadow-xs active-scale" title="แสดงกรอบสัมผัสปุ่มทุกจุดว่าไม่เล็กกว่า 44x44px">
             <span id="target-helper-dot" class="w-2 h-2 rounded-full bg-slate-400"></span>
-            <span>Target Size 44px (เกณฑ์ AAA)</span>
+            <span>Target Size 44px</span>
           </button>
 
-          <!-- Frame Switcher -->
-          <button onclick="toggleDeviceFrame()" id="btn-device-frame" class="px-2.5 py-1.5 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium flex items-center gap-1.5 shadow-xs active-scale">
-            <span id="device-icon">📱</span>
-            <span id="device-label">กรอบ iPhone</span>
+          <!-- Scale / Zoom Switcher -->
+          <button onclick="cycleScale()" id="btn-scale" class="px-2.5 py-1.5 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium flex items-center gap-1 shadow-xs active-scale" title="ปรับขนาดการแสดงผลให้พอดีหน้าจอ">
+            <span>🔍</span>
+            <span id="scale-label">ขนาด 92%</span>
           </button>
 
           <!-- Reset Data -->
@@ -129,112 +127,108 @@
         </div>
       </div>
 
-      <!-- 8 Horizontal Design Selector Tabs -->
-      <div class="bg-slate-100 p-1.5 rounded-xl flex overflow-x-auto hide-scrollbar text-xs gap-1 max-w-full font-medium border border-slate-200">
-        <button onclick="switchDesign(1)" id="tab-1" class="tab-btn active flex-shrink-0 px-3.5 py-2 rounded-lg font-bold bg-white shadow-xs text-slate-900 ring-1 ring-slate-200">
+      <!-- 5 Horizontal Design Selector Tabs (Clean & Focused) -->
+      <div class="bg-slate-100 p-1 rounded-xl flex overflow-x-auto hide-scrollbar text-xs gap-1 max-w-full font-medium border border-slate-200">
+        <button onclick="switchDesign(1)" id="tab-1" class="tab-btn active flex-1 min-w-[170px] text-center px-3 py-2 rounded-lg font-bold bg-white shadow-xs text-slate-900 ring-1 ring-slate-200">
           1. Classic Tabs (มาตรฐานแอป)
         </button>
-        <button onclick="switchDesign(2)" id="tab-2" class="tab-btn flex-shrink-0 px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
-          2. Quick Search (ค้นหาด่วน & คิวติดล็อก)
+        <button onclick="switchDesign(2)" id="tab-2" class="tab-btn flex-1 min-w-[170px] text-center px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
+          2. Quick Search (คิวติดล็อกด่วน)
         </button>
-        <button onclick="switchDesign(3)" id="tab-3" class="tab-btn flex-shrink-0 px-3.5 py-2 rounded-lg text-blue-700 hover:bg-blue-50 font-medium">
-          3. Filter Grid (การ์ดแยกสถานะ ✨)
+        <button onclick="switchDesign(3)" id="tab-3" class="tab-btn flex-1 min-w-[170px] text-center px-3 py-2 rounded-lg text-blue-700 hover:bg-blue-50 font-medium">
+          3. Status Cards (การ์ดแยกสถานะ ✨)
         </button>
-        <button onclick="switchDesign(4)" id="tab-4" class="tab-btn flex-shrink-0 px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
+        <button onclick="switchDesign(4)" id="tab-4" class="tab-btn flex-1 min-w-[170px] text-center px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
           4. Stepper Flow (3 ขั้นตอนปลอดภัย)
         </button>
-        <button onclick="switchDesign(5)" id="tab-5" class="tab-btn flex-shrink-0 px-3.5 py-2 rounded-lg text-blue-700 hover:bg-blue-50 font-medium">
-          5. Bottom Sheet (แผ่นดึงด่วน ✨)
-        </button>
-        <button onclick="switchDesign(6)" id="tab-6" class="tab-btn flex-shrink-0 px-3.5 py-2 rounded-lg text-blue-700 hover:bg-blue-50 font-medium">
-          6. Security Feed (ประวัติ & ฟีดกิจกรรม ✨)
-        </button>
-        <button onclick="switchDesign(7)" id="tab-7" class="tab-btn flex-shrink-0 px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
-          7. Profile Card (บัตรข้อมูล & ปลดล็อก)
-        </button>
-        <button onclick="switchDesign(8)" id="tab-8" class="tab-btn flex-shrink-0 px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
-          8. Staff List (รายชื่อกระชับ & ประวัติ)
+        <button onclick="switchDesign(5)" id="tab-5" class="tab-btn flex-1 min-w-[170px] text-center px-3 py-2 rounded-lg text-blue-700 hover:bg-blue-50 font-medium">
+          5. Bottom Sheet (แผ่นดึงสไลด์ด่วน ✨)
         </button>
       </div>
 
       <!-- Quick Test Accounts Bar (Inline test switcher) -->
       <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar text-xs pt-1 border-t border-slate-100">
-        <span class="text-slate-500 font-medium flex-shrink-0 text-[11.5px]">สลับทดสอบเบอร์:</span>
-        <button onclick="selectUser('0812345678')" id="chip-0812345678" class="flex-shrink-0 px-2.5 py-1 rounded-lg border font-medium flex items-center gap-1.5 bg-red-50 text-red-900 border-red-300">
+        <span class="text-slate-500 font-medium flex-shrink-0 text-[11px]">ทดสอบเลือกเบอร์:</span>
+        <button onclick="selectUser('0812345678')" id="chip-0812345678" class="flex-shrink-0 px-2.5 py-0.5 rounded-lg border font-medium flex items-center gap-1.5 bg-red-50 text-red-900 border-red-300 ring-2 ring-slate-900 font-bold">
           <span>🔴</span> นายสมชาย (ผิด 3 ครั้ง)
         </button>
-        <button onclick="selectUser('0898765432')" id="chip-0898765432" class="flex-shrink-0 px-2.5 py-1 rounded-lg border font-medium flex items-center gap-1.5 bg-amber-50 text-amber-900 border-amber-300">
+        <button onclick="selectUser('0898765432')" id="chip-0898765432" class="flex-shrink-0 px-2.5 py-0.5 rounded-lg border font-medium flex items-center gap-1.5 bg-amber-50 text-amber-900 border-amber-300">
           <span>🔴</span> นางสมศรี (ขอเกิน 5 ครั้ง)
         </button>
-        <button onclick="selectUser('0829998877')" id="chip-0829998877" class="flex-shrink-0 px-2.5 py-1 rounded-lg border font-medium flex items-center gap-1.5 bg-emerald-50 text-emerald-900 border-emerald-300">
+        <button onclick="selectUser('0829998877')" id="chip-0829998877" class="flex-shrink-0 px-2.5 py-0.5 rounded-lg border font-medium flex items-center gap-1.5 bg-emerald-50 text-emerald-900 border-emerald-300">
           <span>🟢</span> นายประสิทธิ์ (ปกติ)
         </button>
-        <button onclick="selectUser('0861112233')" id="chip-0861112233" class="flex-shrink-0 px-2.5 py-1 rounded-lg border font-medium flex items-center gap-1.5 bg-stone-100 text-stone-700 border-stone-300">
+        <button onclick="selectUser('0861112233')" id="chip-0861112233" class="flex-shrink-0 px-2.5 py-0.5 rounded-lg border font-medium flex items-center gap-1.5 bg-stone-100 text-stone-700 border-stone-300">
           <span>⚠️</span> นายธนกร (ต่างสังกัด)
         </button>
       </div>
 
     </div>
-  </div>
+  </header>
 
   <!-- =========================================================================
-       CENTER WORKSPACE: PURE MOBILE APP SIMULATOR (CENTERED, CLEAN)
+       CENTER WORKSPACE: PROMINENT PHONE SIMULATOR WITH VISIBLE CHASSIS BEZELS
        ========================================================================= -->
-  <main class="flex-1 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+  <main class="flex-1 flex items-center justify-center p-3 sm:p-5 overflow-hidden relative">
     
-    <!-- MOBILE PHONE CONTAINER (iPhone 16 Pro mockup) -->
-    <div id="phone-container" class="relative w-[392px] h-[830px] max-h-[94vh] rounded-[52px] bg-white shadow-phone border-[4px] border-slate-800 flex flex-col overflow-hidden transition-all duration-300">
+    <!-- Phone Wrapper with Responsive Scaling to prevent clipping -->
+    <div id="phone-wrapper" class="flex items-center justify-center transition-all duration-200 origin-center">
       
-      <!-- Dynamic Island -->
-      <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-50 flex items-center justify-center pointer-events-none">
-        <div class="w-2.5 h-2.5 rounded-full bg-slate-900 mr-2.5"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-[#052e16] ring-1 ring-emerald-500/50"></div>
-      </div>
-
-      <!-- Phone Status Bar (Exact match with App Header color #694325) -->
-      <div class="h-11 px-7 flex items-center justify-between text-white text-[12px] font-semibold bg-[#694325] select-none flex-shrink-0 z-40">
-        <span id="live-clock" class="font-mono">18:30</span>
-        <div class="flex items-center gap-1.5">
-          <span class="text-[10px]">5G</span>
-          <span class="text-xs">📶</span>
-          <span class="text-xs">🔋</span>
+      <!-- REALISTIC MOBILE PHONE CHASSIS (iPhone 16 Pro Mockup with visible borders) -->
+      <div id="phone-container" class="relative w-[375px] h-[750px] rounded-[50px] bg-white shadow-chassis border-[12px] border-[#1C1C1E] ring-1 ring-slate-600/70 flex flex-col overflow-hidden">
+        
+        <!-- Dynamic Island (Centered inside chassis) -->
+        <div class="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-5 bg-black rounded-full z-50 flex items-center justify-center pointer-events-none">
+          <div class="w-2 h-2 rounded-full bg-slate-900 mr-2"></div>
+          <div class="w-2 h-2 rounded-full bg-[#052e16] ring-1 ring-emerald-500/50"></div>
         </div>
-      </div>
 
-      <!-- Real Traffy Fondue Mobile App Navigation Header -->
-      <div class="bg-[#694325] text-white px-4 py-3 flex items-center justify-between flex-shrink-0 z-30 shadow-md">
-        <div class="flex items-center gap-2.5">
-          <!-- Back Chevron Button -->
-          <button onclick="toastNotice('กลับสู่หน้าการตั้งค่า')" class="touch-target w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white active-scale" aria-label="ย้อนกลับ">
-            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <!-- Header Title & Subtitle (Exact from ResetOtpSettings.js) -->
-          <div>
-            <h2 id="phone-header-title" class="text-base font-bold leading-tight">รีเซ็ต OTP</h2>
-            <span class="text-[11px] text-amber-100 font-normal opacity-90">หน่วยงาน: ITS Lab2</span>
+        <!-- Phone Status Bar (Exact match with App Header color #694325) -->
+        <div class="h-10 px-6 pt-1 flex items-center justify-between text-white text-[11px] font-semibold bg-[#694325] select-none flex-shrink-0 z-40">
+          <span id="live-clock" class="font-mono">18:40</span>
+          <div class="flex items-center gap-1.5">
+            <span class="text-[9px]">5G</span>
+            <span class="text-xs">📶</span>
+            <span class="text-xs">🔋</span>
           </div>
         </div>
-        <!-- Right side empty as requested (No badges) -->
-        <div></div>
-      </div>
 
-      <!-- Phone Screen Dynamic Content (Renders each design) -->
-      <div id="phone-screen-content" class="flex-1 overflow-hidden flex flex-col bg-[#FAF9F6] relative">
-        <!-- Injected dynamically via renderCurrentDesign() -->
-      </div>
-
-      <!-- Phone Bottom Sheet Overlay (for Design 5 and others) -->
-      <div id="phone-bottom-sheet" class="hidden absolute inset-0 z-40 bg-black/50 backdrop-blur-xs flex flex-col justify-end transition-opacity duration-200">
-        <div id="phone-bottom-sheet-content" class="bg-white rounded-t-3xl p-4 shadow-2xl border-t border-stone-200 max-h-[85%] overflow-y-auto space-y-3.5">
-          <!-- Rendered dynamically -->
+        <!-- Real Traffy Fondue Mobile App Navigation Header -->
+        <div class="bg-[#694325] text-white px-4 py-2.5 flex items-center justify-between flex-shrink-0 z-30 shadow-md">
+          <div class="flex items-center gap-2">
+            <!-- Back Chevron Button -->
+            <button onclick="toastNotice('กลับสู่หน้าการตั้งค่า')" class="touch-target w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white active-scale" aria-label="ย้อนกลับ">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <!-- Header Title & Subtitle (Exact from ResetOtpSettings.js) -->
+            <div>
+              <h2 id="phone-header-title" class="text-sm font-bold leading-tight">รีเซ็ต OTP</h2>
+              <span class="text-[10px] text-amber-100 font-normal opacity-90">หน่วยงาน: ITS Lab2</span>
+            </div>
+          </div>
+          <!-- Right side empty (No badges) -->
+          <div></div>
         </div>
-      </div>
 
-      <!-- Phone Home Indicator Bar -->
-      <div class="h-5 bg-white flex items-center justify-center flex-shrink-0 select-none z-30">
-        <div class="w-32 h-1 bg-stone-300 rounded-full"></div>
+        <!-- Phone Screen Dynamic Content (Renders each design) -->
+        <div id="phone-screen-content" class="flex-1 overflow-hidden flex flex-col bg-[#FAF9F6] relative">
+          <!-- Injected dynamically via renderCurrentDesign() -->
+        </div>
+
+        <!-- Phone Bottom Sheet Overlay (for Design 5) -->
+        <div id="phone-bottom-sheet" class="hidden absolute inset-0 z-40 bg-black/50 backdrop-blur-xs flex flex-col justify-end transition-opacity duration-200">
+          <div id="phone-bottom-sheet-content" class="bg-white rounded-t-3xl p-4 shadow-2xl border-t border-stone-200 max-h-[85%] overflow-y-auto space-y-3">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- Phone Home Indicator Bar (Inside bottom border) -->
+        <div class="h-4 bg-white flex items-center justify-center flex-shrink-0 select-none z-30">
+          <div class="w-28 h-1 bg-stone-300 rounded-full"></div>
+        </div>
+
       </div>
 
     </div>
@@ -245,12 +239,12 @@
        ========================================================================= -->
   <div id="unlock-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-fade-in">
     <div class="bg-white rounded-3xl max-w-sm w-full shadow-2xl border-2 border-stone-300 overflow-hidden flex flex-col">
-      <div class="bg-[#F5ECE5] border-b border-[#D6D3D1] p-4 flex items-center justify-between">
+      <div class="bg-[#F5ECE5] border-b border-[#D6D3D1] p-3.5 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="text-xl">🔓</span>
-          <h3 class="font-bold text-sm text-[#694325]">ยืนยันการปลดล็อกรหัส OTP</h3>
+          <h3 class="font-bold text-xs text-[#694325]">ยืนยันการปลดล็อกรหัส OTP</h3>
         </div>
-        <button onclick="closeUnlockModal()" class="touch-target w-8 h-8 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-700 flex items-center justify-center font-bold text-xs active-scale" aria-label="ปิด">
+        <button onclick="closeUnlockModal()" class="touch-target w-7 h-7 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-700 flex items-center justify-center font-bold text-xs active-scale" aria-label="ปิด">
           ✕
         </button>
       </div>
@@ -268,24 +262,24 @@
           <label class="font-bold text-slate-900 block mb-1.5">
             เหตุผลในการปลดล็อก <span class="text-red-700 font-bold">*</span>
           </label>
-          <div class="space-y-1.5 text-xs text-slate-800">
-            <label class="touch-target flex items-center gap-2.5 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
+          <div class="space-y-1 text-xs text-slate-800">
+            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
               <input type="radio" name="unlock_reason" value="1" checked class="w-4 h-4 text-[#694325]" />
               <span>ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว</span>
             </label>
-            <label class="touch-target flex items-center gap-2.5 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
+            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
               <input type="radio" name="unlock_reason" value="2" class="w-4 h-4 text-[#694325]" />
               <span>ผู้ใช้งานขอรหัสซ้ำเนื่องจาก SMS ปลายทางล่าช้า</span>
             </label>
-            <label class="touch-target flex items-center gap-2.5 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
+            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
               <input type="radio" name="unlock_reason" value="3" class="w-4 h-4 text-[#694325]" />
               <span>ผู้ใช้งานกดรหัส OTP ผิดพลาดโดยไม่เจตนา</span>
             </label>
-            <label class="touch-target flex items-center gap-2.5 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
+            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
               <input type="radio" name="unlock_reason" value="4" class="w-4 h-4 text-[#694325]" />
               <span>ปัญหาเครือข่ายสัญญาณโทรศัพท์ของผู้ใช้</span>
             </label>
-            <label class="touch-target flex items-center gap-2.5 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
+            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
               <input type="radio" name="unlock_reason" value="5" class="w-4 h-4 text-[#694325]" />
               <span>อื่นๆ (ระบุหมายเหตุเพิ่มเติม)</span>
             </label>
@@ -294,15 +288,15 @@
 
         <div>
           <label class="font-bold text-slate-900 block mb-1">หมายเหตุเพิ่มเติม (ถ้ามี):</label>
-          <input type="text" id="modal-notes" placeholder="เช่น ผู้ใช้โทรแจ้งผ่านสายด่วน..." class="w-full h-11 px-3 bg-stone-50 border border-stone-300 rounded-xl text-xs outline-none focus:border-[#694325]" />
+          <input type="text" id="modal-notes" placeholder="เช่น ผู้ใช้โทรแจ้งผ่านสายด่วน..." class="w-full h-10 px-3 bg-stone-50 border border-stone-300 rounded-xl text-xs outline-none focus:border-[#694325]" />
         </div>
       </div>
 
-      <div class="bg-stone-100 px-4 py-3 border-t border-stone-200 flex items-center justify-end gap-2">
-        <button onclick="closeUnlockModal()" class="touch-target px-3.5 py-2 rounded-xl border border-stone-300 text-stone-700 hover:bg-white text-xs font-semibold active-scale">
+      <div class="bg-stone-100 px-4 py-2.5 border-t border-stone-200 flex items-center justify-end gap-2">
+        <button onclick="closeUnlockModal()" class="touch-target px-3 py-1.5 rounded-xl border border-stone-300 text-stone-700 hover:bg-white text-xs font-semibold active-scale">
           ยกเลิก
         </button>
-        <button onclick="confirmExecuteUnlock()" id="btn-modal-submit" class="touch-target px-4 py-2 rounded-xl bg-[#694325] hover:bg-[#4A2E16] text-white text-xs font-bold active-scale shadow-sm flex items-center gap-1.5">
+        <button onclick="confirmExecuteUnlock()" id="btn-modal-submit" class="touch-target px-4 py-1.5 rounded-xl bg-[#694325] hover:bg-[#4A2E16] text-white text-xs font-bold active-scale shadow-sm flex items-center gap-1.5">
           <span>✓</span>
           <span>ยืนยันปลดล็อก</span>
         </button>
@@ -317,15 +311,17 @@
   </div>
 
   <!-- =========================================================================
-       JAVASCRIPT LOGIC & 8 DIVERSE MOBILE UI RENDERERS
+       JAVASCRIPT LOGIC & 5 DIVERSE MOBILE UI RENDERERS
        ========================================================================= -->
   <script>
     // State
     let currentDesign = 1;
     let selectedPhone = '0812345678';
     let isTargetHelperActive = false;
-    let isTabletView = false;
     let classicActiveTab = 'reset'; // 'reset' | 'audit'
+    let scaleIndex = 1; // 0: 82%, 1: 92%, 2: 100%
+    const scaleValues = [0.82, 0.92, 1.0];
+    const scaleLabels = ['ขนาด 82%', 'ขนาด 92%', 'ขนาด 100%'];
 
     // Mock Users Database
     const usersData = {
@@ -434,13 +430,13 @@
 
     function switchDesign(dNum) {
       currentDesign = dNum;
-      for (let i = 1; i <= 8; i++) {
+      for (let i = 1; i <= 5; i++) {
         const btn = document.getElementById(`tab-${i}`);
         if (btn) {
           if (i === dNum) {
-            btn.className = 'tab-btn active flex-shrink-0 px-3.5 py-2 rounded-lg font-bold bg-white shadow-xs text-slate-900 ring-1 ring-slate-200';
+            btn.className = 'tab-btn active flex-1 min-w-[170px] text-center px-3 py-2 rounded-lg font-bold bg-white shadow-xs text-slate-900 ring-1 ring-slate-200';
           } else {
-            btn.className = 'tab-btn flex-shrink-0 px-3.5 py-2 rounded-lg text-slate-600 hover:bg-slate-200 font-medium';
+            btn.className = 'tab-btn flex-1 min-w-[170px] text-center px-3 py-2 rounded-lg text-slate-600 hover:bg-slate-200 font-medium';
           }
         }
       }
@@ -470,23 +466,21 @@
       document.body.classList.toggle('show-targets', isTargetHelperActive);
       const dot = document.getElementById('target-helper-dot');
       dot.className = isTargetHelperActive ? 'w-2 h-2 rounded-full bg-red-600 animate-ping' : 'w-2 h-2 rounded-full bg-slate-400';
-      toastNotice(isTargetHelperActive ? 'เปิดไฮไลต์ Target Size 44px (กรอบแดงประ)' : 'ปิดไฮไลต์ Target Size');
+      toastNotice(isTargetHelperActive ? 'เปิดไฮไลต์ Target Size 44px' : 'ปิดไฮไลต์ Target Size');
     }
 
-    function toggleDeviceFrame() {
-      isTabletView = !isTabletView;
-      const c = document.getElementById('phone-container');
-      const icon = document.getElementById('device-icon');
-      const label = document.getElementById('device-label');
-      
-      if (isTabletView) {
-        c.className = 'relative w-full max-w-lg h-[860px] max-h-[94vh] rounded-3xl bg-white border-2 border-slate-700 flex flex-col overflow-hidden shadow-2xl transition-all duration-300';
-        icon.textContent = '🖥️';
-        label.textContent = 'โหมดขยาย';
-      } else {
-        c.className = 'relative w-[392px] h-[830px] max-h-[94vh] rounded-[52px] bg-white shadow-phone border-[4px] border-slate-800 flex flex-col overflow-hidden transition-all duration-300';
-        icon.textContent = '📱';
-        label.textContent = 'กรอบ iPhone';
+    function cycleScale() {
+      scaleIndex = (scaleIndex + 1) % scaleValues.length;
+      applyScale();
+      toastNotice(`ปรับ${scaleLabels[scaleIndex]}`);
+    }
+
+    function applyScale() {
+      const wrapper = document.getElementById('phone-wrapper');
+      const label = document.getElementById('scale-label');
+      if (wrapper && label) {
+        wrapper.style.transform = `scale(${scaleValues[scaleIndex]})`;
+        label.textContent = scaleLabels[scaleIndex];
       }
     }
 
@@ -494,7 +488,7 @@
       const toast = document.getElementById('toast-bar');
       document.getElementById('toast-text').textContent = msg;
       toast.classList.remove('hidden');
-      setTimeout(() => toast.classList.add('hidden'), 2200);
+      setTimeout(() => toast.classList.add('hidden'), 2000);
     }
 
     function resetAllDemoData() {
@@ -581,7 +575,7 @@
       if (bs) bs.classList.add('hidden');
     }
 
-    // ─── DESIGN RENDERERS (1 to 8) ──────────────────────────────────
+    // ─── 5 MOBILE DESIGN RENDERERS ──────────────────────────────────
     function renderCurrentDesign() {
       const container = document.getElementById('phone-screen-content');
       const u = usersData[selectedPhone] || usersData['0812345678'];
@@ -592,111 +586,107 @@
         case 3: renderDesign3(container, u); break;
         case 4: renderDesign4(container, u); break;
         case 5: renderDesign5(container, u); break;
-        case 6: renderDesign6(container, u); break;
-        case 7: renderDesign7(container, u); break;
-        case 8: renderDesign8(container, u); break;
       }
     }
 
     // DESIGN 1: Classic Native Tabs (Exact Match with Traffy Mobile Code)
     function renderDesign1(c, u) {
       c.innerHTML = `
-        <!-- Segmented Tab Bar (Inside Real Mobile App) -->
+        <!-- Segmented Tab Bar -->
         <div class="bg-white border-b border-stone-200 flex flex-shrink-0 z-20">
-          <button onclick="switchClassicTab('reset')" class="touch-target flex-1 py-3 text-xs font-bold ${classicActiveTab === 'reset' ? 'text-[#694325] border-b-2 border-[#694325]' : 'text-stone-500 border-b-2 border-transparent'} flex items-center justify-center gap-1.5 active-scale">
+          <button onclick="switchClassicTab('reset')" class="touch-target flex-1 py-2.5 text-xs font-bold ${classicActiveTab === 'reset' ? 'text-[#694325] border-b-2 border-[#694325]' : 'text-stone-500 border-b-2 border-transparent'} flex items-center justify-center gap-1.5 active-scale">
             <span>🔑</span>
             <span>ปลดล็อก OTP</span>
           </button>
-          <button onclick="switchClassicTab('audit')" class="touch-target flex-1 py-3 text-xs font-medium ${classicActiveTab === 'audit' ? 'text-[#694325] font-bold border-b-2 border-[#694325]' : 'text-stone-500 border-b-2 border-transparent'} flex items-center justify-center gap-1.5 active-scale">
+          <button onclick="switchClassicTab('audit')" class="touch-target flex-1 py-2.5 text-xs font-medium ${classicActiveTab === 'audit' ? 'text-[#694325] font-bold border-b-2 border-[#694325]' : 'text-stone-500 border-b-2 border-transparent'} flex items-center justify-center gap-1.5 active-scale">
             <span>🕒</span>
             <span>ประวัติการปลดล็อก</span>
             <span class="ml-1 bg-amber-100 text-[#694325] text-[10px] px-1.5 py-0.2 rounded-full font-bold">${auditLogs.length}</span>
           </button>
         </div>
 
-        <div class="flex-1 overflow-y-auto p-4 space-y-3.5 hide-scrollbar">
+        <div class="flex-1 overflow-y-auto p-3.5 space-y-3 hide-scrollbar">
           ${classicActiveTab === 'reset' ? `
-            <!-- Info Banner (Warm Surface #F5ECE5) -->
-            <div class="bg-[#F5ECE5] border border-[#D6D3D1] rounded-2xl p-3.5 flex gap-3 text-xs shadow-xs">
-              <span class="text-[#694325] text-lg flex-shrink-0 mt-0.5">ℹ️</span>
+            <!-- Info Banner -->
+            <div class="bg-[#F5ECE5] border border-[#D6D3D1] rounded-2xl p-3 flex gap-2.5 text-xs shadow-xs">
+              <span class="text-[#694325] text-base flex-shrink-0 mt-0.5">ℹ️</span>
               <div>
-                <h4 class="font-bold text-[#694325] text-xs mb-0.5">คำแนะนำการปลดล็อกรหัส OTP</h4>
-                <p class="text-stone-800 text-[11.5px] leading-relaxed">
+                <h4 class="font-bold text-[#694325] text-[11.5px] mb-0.5">คำแนะนำการปลดล็อกรหัส OTP</h4>
+                <p class="text-stone-800 text-[11px] leading-relaxed">
                   กรณีผู้ใช้งานกรอกรหัสผิดติดต่อกันเกิน 3 ครั้ง หรือขอรหัสเกินกำหนด ระบบจะระงับการส่งรหัสชั่วคราวเพื่อความปลอดภัย ผู้ดูแลระบบสามารถตรวจสอบยืนยันตัวตน และกดปลดล็อกเพื่อให้กลับมารับรหัสได้ตามปกติ
                 </p>
               </div>
             </div>
 
             <!-- Search Card -->
-            <div class="bg-white border border-stone-300 rounded-2xl p-4 shadow-xs">
+            <div class="bg-white border border-stone-300 rounded-2xl p-3.5 shadow-xs">
               <h3 class="text-xs font-bold text-slate-900 mb-0.5">ค้นหาหมายเลขโทรศัพท์เป้าหมาย</h3>
-              <p class="text-[11px] text-slate-600 mb-3">กรอกเบอร์โทรศัพท์ 10 หลักของผู้ใช้งานที่ต้องการตรวจสอบสถานะ</p>
+              <p class="text-[10.5px] text-slate-600 mb-2.5">กรอกเบอร์โทรศัพท์ 10 หลักของผู้ใช้งานที่ต้องการตรวจสอบสถานะ</p>
 
               <div class="flex items-center gap-2">
-                <div class="flex-1 flex items-center bg-stone-50 border-2 border-stone-300 rounded-xl px-3 h-12 focus-within:border-[#694325]">
-                  <span class="text-stone-500 mr-2 text-sm">📞</span>
+                <div class="flex-1 flex items-center bg-stone-50 border-2 border-stone-300 rounded-xl px-2.5 h-11 focus-within:border-[#694325]">
+                  <span class="text-stone-500 mr-1.5 text-sm">📞</span>
                   <input type="tel" id="d1-input-phone" value="${u.phone}" maxlength="10" placeholder="เช่น 0812345678" class="w-full bg-transparent text-xs font-semibold text-slate-900 outline-none" />
                 </div>
-                <button onclick="handleD1Search()" class="touch-target h-12 px-4 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 active-scale shadow-xs flex-shrink-0">
-                  <span>🔍</span>
-                  <span>ค้นหา</span>
+                <button onclick="handleD1Search()" class="touch-target h-11 px-3.5 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 active-scale shadow-xs flex-shrink-0">
+                  <span>🔍 ค้นหา</span>
                 </button>
               </div>
-              <div class="text-[11px] text-[#694325] font-semibold mt-1.5">
+              <div class="text-[10.5px] text-[#694325] font-semibold mt-1">
                 หมายเลขที่ค้นหา: ${formatPhone(u.phone)}
               </div>
             </div>
 
             <!-- Result Card -->
-            <div class="bg-white border border-stone-300 rounded-2xl p-4 shadow-xs space-y-3.5">
+            <div class="bg-white border border-stone-300 rounded-2xl p-3.5 shadow-xs space-y-3">
               ${u.isLocked ? `
-                <div class="bg-red-50 border-2 border-red-300 rounded-xl p-3 flex items-center gap-2.5">
-                  <span class="text-xl">🔴</span>
+                <div class="bg-red-50 border-2 border-red-300 rounded-xl p-2.5 flex items-center gap-2">
+                  <span class="text-lg">🔴</span>
                   <div>
                     <h4 class="text-xs font-bold text-red-900 leading-tight">ถูกระงับการออกรหัส OTP ชั่วคราว</h4>
-                    <p class="text-[11px] text-red-700 mt-0.5">${u.reason}</p>
+                    <p class="text-[10.5px] text-red-700 mt-0.5">${u.reason}</p>
                   </div>
                 </div>
               ` : `
-                <div class="bg-emerald-50 border-2 border-emerald-300 rounded-xl p-3 flex items-center gap-2.5">
-                  <span class="text-xl">🟢</span>
+                <div class="bg-emerald-50 border-2 border-emerald-300 rounded-xl p-2.5 flex items-center gap-2">
+                  <span class="text-lg">🟢</span>
                   <div>
                     <h4 class="text-xs font-bold text-emerald-900 leading-tight">สถานะปกติ — ไม่ถูกระงับ</h4>
-                    <p class="text-[11px] text-emerald-700 mt-0.5">หมายเลขนี้สามารถขอและยืนยันรหัส OTP ได้ตามปกติ</p>
+                    <p class="text-[10.5px] text-emerald-700 mt-0.5">หมายเลขนี้สามารถขอและยืนยันรหัส OTP ได้ตามปกติ</p>
                   </div>
                 </div>
               `}
 
               <!-- User Meta -->
-              <div class="bg-stone-50 border border-stone-200 rounded-xl p-3 flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-[#F5ECE5] border border-[#D6D3D1] flex items-center justify-center text-sm font-bold text-[#694325]">
+              <div class="bg-stone-50 border border-stone-200 rounded-xl p-2.5 flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-full bg-[#F5ECE5] border border-[#D6D3D1] flex items-center justify-center text-xs font-bold text-[#694325]">
                   ${u.name.slice(0, 2)}
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="text-xs font-bold text-slate-900 truncate">${u.name}</div>
-                  <div class="text-[11px] text-slate-700 font-mono mt-0.5">📱 ${formatPhone(u.phone)}</div>
-                  <div class="text-[10.5px] text-slate-600 truncate mt-0.5">🏢 สังกัด: ${u.org} (${u.role})</div>
+                  <div class="text-[10.5px] text-slate-700 font-mono mt-0.5">📱 ${formatPhone(u.phone)}</div>
+                  <div class="text-[10px] text-slate-600 truncate mt-0.5">🏢 สังกัด: ${u.org} (${u.role})</div>
                 </div>
               </div>
 
               <!-- Counter Boxes -->
               <div class="grid grid-cols-2 gap-2">
-                <div class="${u.failCount >= 3 ? 'bg-red-50 border-2 border-red-300' : 'bg-stone-50 border border-stone-200'} rounded-xl p-2.5 text-center">
-                  <div class="text-[10.5px] text-slate-700 font-medium">กรอกรหัสผิดติดต่อกัน</div>
-                  <div class="text-lg font-bold ${u.failCount >= 3 ? 'text-red-800' : 'text-slate-900'} mt-0.5">${u.failCount} / 3</div>
-                  <div class="text-[10px] text-slate-600">ครั้ง (จำกัด 3 ครั้ง)</div>
+                <div class="${u.failCount >= 3 ? 'bg-red-50 border-2 border-red-300' : 'bg-stone-50 border border-stone-200'} rounded-xl p-2 text-center">
+                  <div class="text-[10px] text-slate-700 font-medium">กรอกผิดติดต่อกัน</div>
+                  <div class="text-base font-bold ${u.failCount >= 3 ? 'text-red-800' : 'text-slate-900'} mt-0.5">${u.failCount} / 3</div>
+                  <div class="text-[9.5px] text-slate-600">ครั้ง (จำกัด 3 ครั้ง)</div>
                 </div>
 
-                <div class="${u.sentCount >= 5 ? 'bg-red-50 border-2 border-red-300' : 'bg-stone-50 border border-stone-200'} rounded-xl p-2.5 text-center">
-                  <div class="text-[10.5px] text-slate-700 font-medium">ขอรับรหัส OTP วันนี้</div>
-                  <div class="text-lg font-bold ${u.sentCount >= 5 ? 'text-red-800' : 'text-slate-900'} mt-0.5">${u.sentCount} / 5</div>
-                  <div class="text-[10px] text-slate-600">ครั้ง (จำกัด 5 ครั้ง/วัน)</div>
+                <div class="${u.sentCount >= 5 ? 'bg-red-50 border-2 border-red-300' : 'bg-stone-50 border border-stone-200'} rounded-xl p-2 text-center">
+                  <div class="text-[10px] text-slate-700 font-medium">ขอรับรหัสวันนี้</div>
+                  <div class="text-base font-bold ${u.sentCount >= 5 ? 'text-red-800' : 'text-slate-900'} mt-0.5">${u.sentCount} / 5</div>
+                  <div class="text-[9.5px] text-slate-600">ครั้ง (จำกัด 5 ครั้ง/วัน)</div>
                 </div>
               </div>
 
               ${u.isOutOfScope ? `
-                <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-[11.5px] text-amber-900 leading-snug">
-                  ⚠️ หมายเลขนี้ไม่ได้สังกัดอยู่ในหน่วยงานของท่าน ไม่สามารถปลดล็อกได้ กรุณาติดต่อผู้ดูแลระดับสังกัดหลัก
+                <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-2.5 text-[11px] text-amber-900 leading-snug">
+                  ⚠️ หมายเลขนี้ไม่ได้สังกัดอยู่ในหน่วยงานของท่าน ไม่สามารถปลดล็อกได้
                 </div>
               ` : ''}
 
@@ -708,33 +698,26 @@
             </div>
           ` : `
             <!-- Tab 2: Native Mobile Audit Logs List -->
-            <div class="space-y-3">
+            <div class="space-y-2.5">
               <div class="flex items-center justify-between text-xs font-bold text-slate-800">
                 <span>📋 รายการปลดล็อกล่าสุด (${auditLogs.length} รายการ)</span>
                 <button onclick="toastNotice('รีเฟรชประวัติแล้ว')" class="text-[#694325] hover:underline flex items-center gap-1">🔄 รีเฟรช</button>
               </div>
 
-              <!-- Search in Logs -->
-              <div class="flex items-center bg-white border border-stone-300 rounded-xl px-3 h-11">
-                <span class="text-stone-400 mr-2">🔍</span>
-                <input type="text" placeholder="ค้นหาตามเบอร์ หรือผู้ดำเนินการ..." class="w-full bg-transparent text-xs text-slate-800 outline-none" />
-              </div>
-
-              <div class="space-y-2.5">
+              <div class="space-y-2">
                 ${auditLogs.map(log => `
-                  <div class="bg-white border border-stone-200 rounded-2xl p-3.5 shadow-xs space-y-2 text-xs">
-                    <div class="flex items-center justify-between border-b border-stone-100 pb-2">
-                      <span class="text-[10.5px] text-stone-600 font-medium">🕒 ${log.time}</span>
-                      <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[10px] px-2 py-0.5 rounded-full font-bold">ปลดล็อกสำเร็จ</span>
+                  <div class="bg-white border border-stone-200 rounded-2xl p-3 shadow-xs space-y-1.5 text-xs">
+                    <div class="flex items-center justify-between border-b border-stone-100 pb-1.5">
+                      <span class="text-[10px] text-stone-600 font-medium">🕒 ${log.time}</span>
+                      <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[9.5px] px-2 py-0.5 rounded-full font-bold">ปลดล็อกสำเร็จ</span>
                     </div>
-                    <div class="grid grid-cols-1 gap-1 text-[11.5px]">
+                    <div class="grid grid-cols-1 gap-0.5 text-[11px]">
                       <div><span class="text-stone-600 font-medium">📱 เบอร์เป้าหมาย:</span> <span class="font-bold text-[#694325]">${log.phone} (${log.name})</span></div>
                       <div><span class="text-stone-600 font-medium">👮 ผู้ดำเนินการ:</span> <span class="text-slate-800 font-semibold">${log.admin}</span></div>
                       <div><span class="text-stone-600 font-medium">📝 เหตุผล:</span> <span class="text-slate-700">${log.reason}</span></div>
-                      ${log.note ? `<div class="bg-stone-50 p-2 rounded-lg text-[10.5px] text-stone-700 italic">"${log.note}"</div>` : ''}
                     </div>
-                    <div class="border-t border-stone-100 pt-1.5 text-[10.5px] text-[#694325] font-semibold">
-                      🔄 ผลการปลดล็อก: ล้างประวัติกรอกผิด (${log.prevFail} ➔ 0 ครั้ง), ล้างประวัติขอรหัส (${log.prevSent} ➔ 0 ครั้ง)
+                    <div class="border-t border-stone-100 pt-1 text-[10px] text-[#694325] font-semibold">
+                      🔄 ผล: ล้างกรอกผิด (${log.prevFail}➔0), ล้างขอรหัส (${log.prevSent}➔0)
                     </div>
                   </div>
                 `).join('')}
@@ -764,22 +747,22 @@
       }
     }
 
-    // DESIGN 2: Quick Search & Active Queue (Fast Admin Mode)
+    // DESIGN 2: Quick Search & Locked Queue (Fast Admin Mode)
     function renderDesign2(c, u) {
       const lockedUsers = Object.values(usersData).filter(x => x.isLocked && !x.isOutOfScope);
 
       c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-4 space-y-3.5 hide-scrollbar">
+        <div class="flex-1 overflow-y-auto p-3.5 space-y-3 hide-scrollbar">
           <!-- Header Card -->
-          <div class="bg-white border border-stone-300 rounded-2xl p-4 shadow-xs">
-            <h2 class="text-xs font-bold text-slate-900 mb-1">⚡ ปลดล็อกด่วนสำหรับผู้ดูแล</h2>
-            <p class="text-[11px] text-slate-600 leading-relaxed">
-              แตะเลือกเจ้าหน้าที่ที่ถูกระงับในหน่วยงาน หรือพิมพ์เบอร์โทรศัพท์เพื่อตรวจสอบและปลดล็อกทันที
+          <div class="bg-white border border-stone-300 rounded-2xl p-3 shadow-xs">
+            <h2 class="text-xs font-bold text-slate-900 mb-0.5">⚡ ปลดล็อกด่วนสำหรับผู้ดูแล</h2>
+            <p class="text-[10.5px] text-slate-600 leading-relaxed">
+              แตะเลือกเจ้าหน้าที่ที่ถูกระงับในหน่วยงาน เพื่อตรวจสอบและปลดล็อกได้ทันทีโดยไม่ต้องพิมพ์เบอร์
             </p>
           </div>
 
-          <!-- Active Locked Queue Chips (Inside Mobile Screen) -->
-          <div class="bg-red-50/70 border border-red-200 rounded-2xl p-3.5 space-y-2.5">
+          <!-- Active Locked Queue Chips -->
+          <div class="bg-red-50/70 border border-red-200 rounded-2xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-xs font-bold text-red-950 flex items-center gap-1.5">
                 <span>🔴</span> เจ้าหน้าที่ติดล็อกขณะนี้ (${lockedUsers.length} ท่าน)
@@ -787,14 +770,14 @@
               <span class="text-[10px] text-red-800 font-semibold">แตะเพื่อเลือก</span>
             </div>
             
-            <div class="space-y-2">
+            <div class="space-y-1.5">
               ${lockedUsers.map(x => `
-                <div class="touch-target bg-white border ${selectedPhone === x.phone ? 'border-2 border-[#694325] shadow-xs' : 'border-stone-300'} p-3 rounded-xl flex items-center justify-between gap-2 cursor-pointer active-scale" onclick="selectUser('${x.phone}')">
+                <div class="touch-target bg-white border ${selectedPhone === x.phone ? 'border-2 border-[#694325] shadow-xs' : 'border-stone-300'} p-2.5 rounded-xl flex items-center justify-between gap-2 cursor-pointer active-scale" onclick="selectUser('${x.phone}')">
                   <div class="min-w-0">
                     <div class="font-bold text-slate-900 text-xs truncate">${x.name}</div>
-                    <div class="text-[11px] text-slate-600 font-mono">${formatPhone(x.phone)} • ${x.failCount >= 3 ? 'รหัสผิด 3 ครั้ง' : 'ขอเกินโควตา 5'}</div>
+                    <div class="text-[10.5px] text-slate-600 font-mono">${formatPhone(x.phone)} • ${x.failCount >= 3 ? 'รหัสผิด 3 ครั้ง' : 'ขอเกินโควตา 5'}</div>
                   </div>
-                  <button onclick="event.stopPropagation(); openUnlockModalFor('${x.phone}')" class="touch-target h-9 px-3 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-lg text-xs font-bold active-scale shadow-xs flex-shrink-0 flex items-center gap-1">
+                  <button onclick="event.stopPropagation(); openUnlockModalFor('${x.phone}')" class="touch-target h-8 px-2.5 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-lg text-xs font-bold active-scale shadow-xs flex-shrink-0 flex items-center gap-1">
                     <span>🔓</span> ปลดล็อก
                   </button>
                 </div>
@@ -803,28 +786,28 @@
           </div>
 
           <!-- Selected User Details Box -->
-          <div class="bg-white border border-stone-300 rounded-2xl p-4 shadow-xs space-y-3">
-            <div class="flex items-center justify-between border-b border-stone-100 pb-2.5">
+          <div class="bg-white border border-stone-300 rounded-2xl p-3.5 shadow-xs space-y-2.5">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-2">
               <span class="text-xs font-bold text-slate-900">รายละเอียดหมายเลขที่เลือก</span>
               <span class="text-xs font-mono font-bold text-[#694325]">${formatPhone(u.phone)}</span>
             </div>
 
-            <div class="space-y-1.5 text-xs">
+            <div class="space-y-1 text-xs">
               <div class="flex justify-between">
                 <span class="text-stone-500">ชื่อเจ้าหน้าที่:</span>
                 <span class="font-bold text-slate-800">${u.name}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-stone-500">สังกัด / บทบาท:</span>
+                <span class="text-stone-500">สังกัด:</span>
                 <span class="text-slate-700">${u.org} (${u.role})</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-stone-500">สถานะปัจจุบัน:</span>
+                <span class="text-stone-500">สถานะ:</span>
                 <span class="font-bold ${u.isLocked ? 'text-red-700' : 'text-emerald-700'}">${u.isLocked ? '🔴 ถูกระงับ' : '🟢 ปกติ'}</span>
               </div>
             </div>
 
-            <button onclick="openUnlockModalFor('${u.phone}')" ${!u.isLocked ? 'disabled' : ''} class="touch-target w-full h-12 ${!u.isLocked ? 'bg-stone-300 text-stone-600' : 'bg-[#694325] text-white hover:bg-[#4A2E16]'} font-bold rounded-xl text-xs flex items-center justify-center gap-2 active-scale shadow-xs">
+            <button onclick="openUnlockModalFor('${u.phone}')" ${!u.isLocked ? 'disabled' : ''} class="touch-target w-full h-11 ${!u.isLocked ? 'bg-stone-300 text-stone-600' : 'bg-[#694325] text-white hover:bg-[#4A2E16]'} font-bold rounded-xl text-xs flex items-center justify-center gap-2 active-scale shadow-xs">
               <span>${u.isLocked ? '🔓 ปลดล็อกหมายเลขนี้' : '✓ สถานะปกติ (ไม่ถูกระงับ)'}</span>
             </button>
           </div>
@@ -832,45 +815,48 @@
       `;
     }
 
-    // DESIGN 3: Filter Grid & Badge Cards (Card Dashboard)
+    // DESIGN 3: Status Cards Directory (Card Dashboard)
+    let d3Filter = 'all'; // 'all' | 'locked' | 'normal'
     function renderDesign3(c, u) {
-      const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
+      let list = Object.values(usersData).filter(x => !x.isOutOfScope);
+      if (d3Filter === 'locked') list = list.filter(x => x.isLocked);
+      if (d3Filter === 'normal') list = list.filter(x => !x.isLocked);
 
       c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-4 space-y-3 hide-scrollbar">
+        <div class="flex-1 overflow-y-auto p-3.5 space-y-2.5 hide-scrollbar">
           <!-- Summary Header -->
           <div class="flex items-center justify-between text-xs">
-            <span class="font-bold text-slate-900">รายชื่อเจ้าหน้าที่ในสังกัด (${allUsers.length} ท่าน)</span>
-            <span class="text-[11px] text-[#694325] font-semibold">Traffy @ ITS Lab2</span>
+            <span class="font-bold text-slate-900">รายชื่อเจ้าหน้าที่ในสังกัด (${list.length} ท่าน)</span>
+            <span class="text-[10.5px] text-[#694325] font-semibold">Traffy @ ITS Lab2</span>
           </div>
 
           <!-- Filter Pills -->
-          <div class="flex items-center gap-1.5 text-xs overflow-x-auto hide-scrollbar">
-            <button class="px-3 py-1.5 rounded-full bg-[#694325] text-white font-bold">ทั้งหมด</button>
-            <button class="px-3 py-1.5 rounded-full bg-white border border-stone-300 text-slate-700">🔴 ติดล็อก (3)</button>
-            <button class="px-3 py-1.5 rounded-full bg-white border border-stone-300 text-slate-700">🟢 ปกติ (1)</button>
+          <div class="flex items-center gap-1 text-xs">
+            <button onclick="d3Filter = 'all'; renderCurrentDesign();" class="px-2.5 py-1 rounded-full ${d3Filter === 'all' ? 'bg-[#694325] text-white font-bold' : 'bg-white border border-stone-300 text-slate-700'}">ทั้งหมด</button>
+            <button onclick="d3Filter = 'locked'; renderCurrentDesign();" class="px-2.5 py-1 rounded-full ${d3Filter === 'locked' ? 'bg-red-700 text-white font-bold' : 'bg-white border border-stone-300 text-slate-700'}">🔴 ติดล็อก</button>
+            <button onclick="d3Filter = 'normal'; renderCurrentDesign();" class="px-2.5 py-1 rounded-full ${d3Filter === 'normal' ? 'bg-emerald-700 text-white font-bold' : 'bg-white border border-stone-300 text-slate-700'}">🟢 ปกติ</button>
           </div>
 
           <!-- Cards Grid -->
-          <div class="space-y-2.5">
-            ${allUsers.map(x => `
-              <div class="bg-white border ${x.isLocked ? 'border-red-300 bg-red-50/20' : 'border-stone-300'} rounded-2xl p-3.5 shadow-xs space-y-2.5">
+          <div class="space-y-2">
+            ${list.map(x => `
+              <div class="bg-white border ${x.isLocked ? 'border-red-300 bg-red-50/15' : 'border-stone-300'} rounded-2xl p-3 shadow-xs space-y-2">
                 <div class="flex items-start justify-between gap-2">
                   <div class="min-w-0">
                     <div class="flex items-center gap-1.5">
                       <span class="font-bold text-xs text-slate-900">${x.name}</span>
-                      <span class="text-[10px] text-slate-500 font-mono">(${x.role})</span>
+                      <span class="text-[9.5px] text-slate-500 font-mono">(${x.role})</span>
                     </div>
-                    <div class="text-[11px] font-mono text-slate-700 mt-0.5">📱 ${formatPhone(x.phone)}</div>
+                    <div class="text-[10.5px] font-mono text-slate-700 mt-0.5">📱 ${formatPhone(x.phone)}</div>
                   </div>
                   
-                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 ${x.isLocked ? 'bg-red-100 text-red-900 border border-red-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300'}">
+                  <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold flex items-center gap-1 ${x.isLocked ? 'bg-red-100 text-red-900 border border-red-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300'}">
                     <span>${x.isLocked ? '🔴 ถูกระงับ' : '🟢 ปกติ'}</span>
                   </span>
                 </div>
 
                 <!-- Counter Indicator & Unlock Action -->
-                <div class="bg-stone-50 border border-stone-200 rounded-xl p-2 flex items-center justify-between text-[11px]">
+                <div class="bg-stone-50 border border-stone-200 rounded-xl p-2 flex items-center justify-between text-[10.5px]">
                   <div class="flex items-center gap-2">
                     <span class="text-stone-600">ผิด: <strong class="${x.failCount >= 3 ? 'text-red-700' : 'text-slate-800'}">${x.failCount}/3</strong></span>
                     <span class="text-stone-300">|</span>
@@ -878,11 +864,11 @@
                   </div>
                   
                   ${x.isLocked ? `
-                    <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target h-8 px-3 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-lg text-[10.5px] font-bold active-scale shadow-xs flex items-center gap-1">
+                    <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target h-8 px-3 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-lg text-[10px] font-bold active-scale shadow-xs flex items-center gap-1">
                       <span>🔓</span> ปลดล็อก
                     </button>
                   ` : `
-                    <span class="text-emerald-700 text-[10.5px] font-semibold">พร้อมใช้งาน</span>
+                    <span class="text-emerald-700 text-[10px] font-semibold">พร้อมใช้งาน</span>
                   `}
                 </div>
               </div>
@@ -896,41 +882,41 @@
     let d4Step = 1;
     function renderDesign4(c, u) {
       c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-4 space-y-4 hide-scrollbar">
+        <div class="flex-1 overflow-y-auto p-3.5 space-y-3.5 hide-scrollbar">
           <!-- Stepper Progress Bar -->
-          <div class="bg-white border border-stone-300 rounded-2xl p-3.5 shadow-xs">
-            <div class="flex items-center justify-between text-xs font-bold mb-2">
+          <div class="bg-white border border-stone-300 rounded-2xl p-3 shadow-xs">
+            <div class="flex items-center justify-between text-xs font-bold mb-1.5">
               <span class="${d4Step >= 1 ? 'text-[#694325]' : 'text-stone-400'}">1. ตรวจสอบ</span>
               <span class="text-stone-300">➔</span>
               <span class="${d4Step >= 2 ? 'text-[#694325]' : 'text-stone-400'}">2. ระบุเหตุผล</span>
               <span class="text-stone-300">➔</span>
               <span class="${d4Step >= 3 ? 'text-[#694325]' : 'text-stone-400'}">3. สำเร็จ</span>
             </div>
-            <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+            <div class="w-full h-1.5 bg-stone-200 rounded-full overflow-hidden">
               <div class="h-full bg-[#694325] transition-all duration-300" style="width: ${d4Step === 1 ? '33%' : d4Step === 2 ? '66%' : '100%'}"></div>
             </div>
           </div>
 
           ${d4Step === 1 ? `
-            <div class="bg-white border border-stone-300 rounded-2xl p-4 shadow-xs space-y-3 text-xs">
-              <h3 class="font-bold text-slate-900 text-sm">ขั้นตอนที่ 1: ตรวจสอบข้อมูลเจ้าหน้าที่</h3>
-              <div class="p-3 bg-stone-50 rounded-xl border border-stone-200 space-y-1">
+            <div class="bg-white border border-stone-300 rounded-2xl p-3.5 shadow-xs space-y-2.5 text-xs">
+              <h3 class="font-bold text-slate-900 text-xs">ขั้นตอนที่ 1: ตรวจสอบข้อมูลเจ้าหน้าที่</h3>
+              <div class="p-2.5 bg-stone-50 rounded-xl border border-stone-200 space-y-1">
                 <div>ชื่อ-นามสกุล: <strong>${u.name}</strong></div>
                 <div>หมายเลขโทรศัพท์: <strong class="font-mono text-[#694325]">${formatPhone(u.phone)}</strong></div>
                 <div>สังกัด: <strong>${u.org}</strong></div>
-                <div class="mt-2 text-red-800 font-semibold">สถานะ: ${u.reason}</div>
+                <div class="mt-1 text-red-800 font-semibold">สถานะ: ${u.reason}</div>
               </div>
 
-              <button onclick="d4Step = 2; renderCurrentDesign();" class="touch-target w-full h-12 bg-[#694325] text-white font-bold rounded-xl text-xs hover:bg-[#4A2E16] active-scale">
+              <button onclick="d4Step = 2; renderCurrentDesign();" class="touch-target w-full h-11 bg-[#694325] text-white font-bold rounded-xl text-xs hover:bg-[#4A2E16] active-scale">
                 ถัดไป: ระบุเหตุผลการปลดล็อก ➔
               </button>
             </div>
           ` : d4Step === 2 ? `
-            <div class="bg-white border border-stone-300 rounded-2xl p-4 shadow-xs space-y-3 text-xs">
-              <h3 class="font-bold text-slate-900 text-sm">ขั้นตอนที่ 2: ระบุเหตุผลการปลดล็อก</h3>
-              <p class="text-stone-600 text-[11px]">เลือกเหตุผลตามความเป็นจริงเพื่อบันทึกใน Audit Log:</p>
+            <div class="bg-white border border-stone-300 rounded-2xl p-3.5 shadow-xs space-y-2.5 text-xs">
+              <h3 class="font-bold text-slate-900 text-xs">ขั้นตอนที่ 2: ระบุเหตุผลการปลดล็อก</h3>
+              <p class="text-stone-600 text-[10.5px]">เลือกเหตุผลตามความเป็นจริงเพื่อบันทึกใน Audit Log:</p>
 
-              <select id="d4-reason-select" class="w-full p-3 bg-stone-50 border border-stone-300 rounded-xl text-xs outline-none font-medium">
+              <select id="d4-reason-select" class="w-full p-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs outline-none font-medium">
                 <option value="VERIFIED_OFFICER_IDENTITY">ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว</option>
                 <option value="SMS_DELAY">ผู้ใช้งานขอรหัสซ้ำเนื่องจาก SMS ปลายทางล่าช้า</option>
                 <option value="USER_TYPO">ผู้ใช้งานกดรหัส OTP ผิดพลาดโดยไม่เจตนา</option>
@@ -938,25 +924,25 @@
                 <option value="OTHER">อื่นๆ (ระบุหมายเหตุ)</option>
               </select>
 
-              <div class="flex gap-2 pt-2">
-                <button onclick="d4Step = 1; renderCurrentDesign();" class="touch-target flex-1 h-12 border-2 border-stone-300 text-slate-700 font-bold rounded-xl text-xs">
+              <div class="flex gap-2 pt-1">
+                <button onclick="d4Step = 1; renderCurrentDesign();" class="touch-target flex-1 h-11 border-2 border-stone-300 text-slate-700 font-bold rounded-xl text-xs">
                   ย้อนกลับ
                 </button>
-                <button onclick="executeD4Unlock('${u.phone}');" class="touch-target flex-1.5 h-12 bg-[#694325] text-white font-bold rounded-xl text-xs hover:bg-[#4A2E16] active-scale">
+                <button onclick="executeD4Unlock('${u.phone}');" class="touch-target flex-1.5 h-11 bg-[#694325] text-white font-bold rounded-xl text-xs hover:bg-[#4A2E16] active-scale">
                   ยืนยันปลดล็อก
                 </button>
               </div>
             </div>
           ` : `
-            <div class="bg-white border border-stone-300 rounded-2xl p-6 shadow-xs text-center space-y-3 text-xs">
-              <div class="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-full mx-auto flex items-center justify-center text-2xl font-bold border-2 border-emerald-300">
+            <div class="bg-white border border-stone-300 rounded-2xl p-5 shadow-xs text-center space-y-2.5 text-xs">
+              <div class="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full mx-auto flex items-center justify-center text-xl font-bold border-2 border-emerald-300">
                 ✓
               </div>
-              <h3 class="text-sm font-bold text-slate-900">ปลดล็อกรหัส OTP สำเร็จ</h3>
-              <p class="text-xs text-stone-600 leading-relaxed">
+              <h3 class="text-xs font-bold text-slate-900">ปลดล็อกรหัส OTP สำเร็จ</h3>
+              <p class="text-[11px] text-stone-600 leading-relaxed">
                 การบันทึกข้อผิดพลาดของหมายเลข ${formatPhone(u.phone)} ถูกรีเซ็ตเรียบร้อยแล้ว พร้อมบันทึกใน Audit Logs
               </p>
-              <button onclick="d4Step = 1; renderCurrentDesign();" class="touch-target w-full h-12 bg-[#694325] text-white font-bold rounded-xl text-xs active-scale">
+              <button onclick="d4Step = 1; renderCurrentDesign();" class="touch-target w-full h-11 bg-[#694325] text-white font-bold rounded-xl text-xs active-scale">
                 กลับสู่หน้าหลัก
               </button>
             </div>
@@ -990,31 +976,31 @@
       const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
 
       c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-4 space-y-3.5 hide-scrollbar">
+        <div class="flex-1 overflow-y-auto p-3.5 space-y-3 hide-scrollbar">
           <!-- Intro Card -->
-          <div class="bg-white border border-stone-300 rounded-2xl p-4 shadow-xs">
-            <h3 class="text-xs font-bold text-slate-900 mb-1">📱 ปลดล็อกด้วยมือเดียว (Bottom Sheet)</h3>
-            <p class="text-[11px] text-slate-600 leading-relaxed">
-              แตะที่รายชื่อเจ้าหน้าที่ด้านล่าง เพื่อเปิดแผ่นดึงสไลด์ขึ้นจากด้านล่าง (Bottom Sheet) ช่วยให้ใช้งานด้วยนิ้วโป้งมือเดียวได้อย่างคล่องตัว
+          <div class="bg-white border border-stone-300 rounded-2xl p-3 shadow-xs">
+            <h3 class="text-xs font-bold text-slate-900 mb-0.5">📱 ปลดล็อกด้วยมือเดียว (Bottom Sheet)</h3>
+            <p class="text-[10.5px] text-slate-600 leading-relaxed">
+              แตะที่รายชื่อเจ้าหน้าที่ด้านล่างเพื่อเปิดแผ่นดึงสไลด์ขึ้นจากขอบล่าง ใช้งานง่ายด้วยนิ้วโป้งมือเดียว
             </p>
           </div>
 
           <!-- Staff Items List -->
-          <div class="space-y-2">
+          <div class="space-y-1.5">
             ${allUsers.map(x => `
-              <div onclick="triggerDesign5Sheet('${x.phone}')" class="touch-target bg-white border border-stone-300 p-3.5 rounded-2xl flex items-center justify-between gap-3 shadow-xs cursor-pointer hover:border-[#694325] active-scale">
-                <div class="flex items-center gap-3 min-w-0">
-                  <div class="w-10 h-10 rounded-full bg-[#F5ECE5] text-[#694325] font-bold flex items-center justify-center text-xs flex-shrink-0">
+              <div onclick="triggerDesign5Sheet('${x.phone}')" class="touch-target bg-white border border-stone-300 p-3 rounded-2xl flex items-center justify-between gap-2.5 shadow-xs cursor-pointer hover:border-[#694325] active-scale">
+                <div class="flex items-center gap-2.5 min-w-0">
+                  <div class="w-9 h-9 rounded-full bg-[#F5ECE5] text-[#694325] font-bold flex items-center justify-center text-xs flex-shrink-0">
                     ${x.name.slice(0, 2)}
                   </div>
                   <div class="min-w-0">
                     <div class="text-xs font-bold text-slate-900 truncate">${x.name}</div>
-                    <div class="text-[11px] text-slate-600 font-mono">${formatPhone(x.phone)}</div>
+                    <div class="text-[10.5px] text-slate-600 font-mono">${formatPhone(x.phone)}</div>
                   </div>
                 </div>
 
-                <div class="flex items-center gap-2">
-                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${x.isLocked ? 'bg-red-100 text-red-900 border border-red-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300'}">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold ${x.isLocked ? 'bg-red-100 text-red-900 border border-red-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300'}">
                     ${x.isLocked ? '🔴 ติดล็อก' : '🟢 ปกติ'}
                   </span>
                   <span class="text-stone-400 text-xs">➔</span>
@@ -1045,7 +1031,7 @@
             <span class="font-bold ${x.isLocked ? 'text-red-700' : 'text-emerald-700'}">${x.isLocked ? 'ถูกระงับชั่วคราว' : 'ปกติ'}</span>
           </div>
 
-          <div class="grid grid-cols-2 gap-2 text-center text-[11px]">
+          <div class="grid grid-cols-2 gap-2 text-center text-[10.5px]">
             <div class="bg-stone-50 p-2 rounded-lg border border-stone-200">
               <span class="text-stone-500">ผิดติดต่อกัน:</span>
               <div class="font-bold text-sm ${x.failCount >= 3 ? 'text-red-700' : 'text-slate-800'}">${x.failCount} / 3</div>
@@ -1057,13 +1043,13 @@
           </div>
 
           ${x.isLocked ? `
-            <div class="pt-2">
-              <button onclick="closeBottomSheet(); openUnlockModalFor('${x.phone}')" class="touch-target w-full h-12 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-sm flex items-center justify-center gap-1.5">
+            <div class="pt-1.5">
+              <button onclick="closeBottomSheet(); openUnlockModalFor('${x.phone}')" class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-sm flex items-center justify-center gap-1.5">
                 <span>🔓</span> ยืนยันปลดล็อกหมายเลขนี้
               </button>
             </div>
           ` : `
-            <div class="p-3 bg-emerald-50 text-emerald-800 rounded-xl text-center text-xs font-bold border border-emerald-300">
+            <div class="p-2.5 bg-emerald-50 text-emerald-800 rounded-xl text-center text-xs font-bold border border-emerald-300">
               ✓ หมายเลขนี้อยู่ในสถานะปกติ ไม่จำเป็นต้องปลดล็อก
             </div>
           `}
@@ -1072,143 +1058,28 @@
       openBottomSheet(sheetHtml);
     }
 
-    // DESIGN 6: Security Feed & Activity Stream
-    function renderDesign6(c, u) {
-      c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-4 space-y-3.5 hide-scrollbar">
-          <!-- Top Metric Counters -->
-          <div class="grid grid-cols-2 gap-2 text-center text-xs">
-            <div class="bg-red-50 border border-red-200 rounded-2xl p-3">
-              <span class="text-[10.5px] text-red-800 font-medium">ติดล็อกขณะนี้</span>
-              <div class="text-xl font-bold text-red-900 mt-0.5">3 หมายเลข</div>
-            </div>
-            <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3">
-              <span class="text-[10.5px] text-emerald-800 font-medium">ปลดล็อกแล้ววันนี้</span>
-              <div class="text-xl font-bold text-emerald-900 mt-0.5">${auditLogs.length} ครั้ง</div>
-            </div>
-          </div>
-
-          <!-- Quick Action Bar -->
-          <div class="bg-white border border-stone-300 rounded-2xl p-3.5 shadow-xs space-y-2">
-            <span class="text-xs font-bold text-slate-900 block">ปลดล็อกด่วน (เลือกเบอร์เป้าหมาย)</span>
-            <div class="flex items-center gap-2">
-              <select onchange="selectUser(this.value)" class="flex-1 text-xs p-2.5 bg-stone-50 border border-stone-300 rounded-xl outline-none font-medium">
-                ${Object.values(usersData).filter(x => !x.isOutOfScope).map(x => `
-                  <option value="${x.phone}" ${x.phone === selectedPhone ? 'selected' : ''}>${x.name} (${formatPhone(x.phone)}) ${x.isLocked ? '[ติดล็อก]' : '[ปกติ]'}</option>
-                `).join('')}
-              </select>
-              <button onclick="openUnlockModalFor('${selectedPhone}')" ${!u.isLocked ? 'disabled' : ''} class="touch-target h-10 px-3 ${!u.isLocked ? 'bg-stone-300 text-stone-500' : 'bg-[#694325] text-white hover:bg-[#4A2E16]'} rounded-xl text-xs font-bold active-scale">
-                ปลดล็อก
-              </button>
-            </div>
-          </div>
-
-          <!-- Live Activity Feed Inside Mobile Screen -->
-          <div class="space-y-2">
-            <span class="text-xs font-bold text-slate-900 block">⚡ ฟีดความเคลื่อนไหวด้านความปลอดภัย</span>
-            ${auditLogs.map(l => `
-              <div class="bg-white border border-stone-200 rounded-xl p-3 text-xs shadow-xs space-y-1">
-                <div class="flex items-center justify-between text-[10.5px] text-stone-500">
-                  <span>🕒 ${l.time}</span>
-                  <span class="font-bold text-emerald-700">✓ ปลดล็อกแล้ว</span>
-                </div>
-                <div class="font-bold text-slate-900">${l.name} (${l.phone})</div>
-                <div class="text-slate-600 text-[11px]">เหตุผล: ${l.reason}</div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
+    // Auto-fit Phone to screen height
+    function autoScalePhone() {
+      const main = document.querySelector('main');
+      const wrapper = document.getElementById('phone-wrapper');
+      if (!main || !wrapper) return;
+      
+      const availH = main.clientHeight - 30; // padding
+      const phoneH = 750;
+      
+      if (availH < phoneH) {
+        const computedScale = Math.max(0.72, Math.min(1.0, availH / phoneH));
+        wrapper.style.transform = `scale(${computedScale})`;
+        const label = document.getElementById('scale-label');
+        if (label) label.textContent = `ขนาด ${Math.round(computedScale * 100)}%`;
+      } else {
+        wrapper.style.transform = `scale(${scaleValues[scaleIndex]})`;
+        const label = document.getElementById('scale-label');
+        if (label) label.textContent = scaleLabels[scaleIndex];
+      }
     }
 
-    // DESIGN 7: Profile Card & Digital ID Card
-    function renderDesign7(c, u) {
-      c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-4 space-y-4 hide-scrollbar">
-          <div class="bg-white border border-stone-300 rounded-3xl p-5 shadow-xs space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-[#694325] bg-[#F5ECE5] border border-[#D6D3D1] px-2.5 py-1 rounded-full">
-                บัตรประจำตัวผู้ใช้
-              </span>
-              <span class="text-xs font-mono font-bold ${u.isLocked ? 'text-red-700' : 'text-emerald-700'}">
-                ${u.isLocked ? '● ถูกระงับ' : '● ปกติ'}
-              </span>
-            </div>
-
-            <div class="text-center py-2">
-              <div class="w-16 h-16 rounded-full bg-[#F5ECE5] border-2 border-[#D6D3D1] mx-auto flex items-center justify-center text-xl font-bold text-[#694325] mb-2">
-                ${u.name.slice(0, 2)}
-              </div>
-              <h3 class="text-base font-bold text-slate-900">${u.name}</h3>
-              <p class="text-xs text-slate-600 font-mono mt-0.5">${formatPhone(u.phone)}</p>
-              <p class="text-[11px] text-slate-500 mt-0.5">${u.org} (${u.role})</p>
-            </div>
-
-            <!-- Stats Table -->
-            <div class="bg-stone-50 rounded-2xl p-3 border border-stone-200 grid grid-cols-2 gap-2 text-center text-xs">
-              <div>
-                <span class="text-stone-500 text-[10.5px]">กรอกผิด</span>
-                <div class="font-bold text-base ${u.failCount >= 3 ? 'text-red-700' : 'text-slate-900'}">${u.failCount} / 3 ครั้ง</div>
-              </div>
-              <div>
-                <span class="text-stone-500 text-[10.5px]">ขอรหัสวันนี้</span>
-                <div class="font-bold text-base ${u.sentCount >= 5 ? 'text-red-700' : 'text-slate-900'}">${u.sentCount} / 5 ครั้ง</div>
-              </div>
-            </div>
-
-            <!-- Action Button -->
-            ${u.isLocked ? `
-              <div class="pt-2">
-                <button onclick="openUnlockModalFor('${u.phone}')" class="touch-target w-full h-13 py-3.5 bg-gradient-to-r from-[#694325] to-[#8B5A2B] hover:opacity-95 text-white font-bold rounded-2xl text-xs flex items-center justify-center gap-2 active-scale shadow-md">
-                  <span>👉</span>
-                  <span>แตะเพื่อปลดล็อกรหัส OTP ทันที</span>
-                </button>
-              </div>
-            ` : `
-              <div class="p-3 bg-emerald-50 border border-emerald-300 rounded-2xl text-center text-xs text-emerald-800 font-bold">
-                ✓ หมายเลขนี้อยู่ในสถานะปกติ พร้อมรับรหัส OTP
-              </div>
-            `}
-          </div>
-        </div>
-      `;
-    }
-
-    // DESIGN 8: Staff List & Audit Explorer (Compact List)
-    function renderDesign8(c, u) {
-      const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
-
-      c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-3 space-y-2.5 hide-scrollbar">
-          <div class="bg-white border border-stone-300 rounded-2xl p-3 shadow-xs flex items-center justify-between text-xs">
-            <span class="font-bold text-slate-900">รายชื่อเจ้าหน้าที่ (Compact List)</span>
-            <span class="text-[10px] text-slate-500">แตะเพื่อดูรายละเอียด</span>
-          </div>
-
-          <div class="bg-white border border-stone-300 rounded-2xl overflow-hidden shadow-xs divide-y divide-stone-200">
-            ${allUsers.map(x => `
-              <div class="touch-target p-3 flex items-center justify-between gap-2 hover:bg-stone-50 transition-colors cursor-pointer" onclick="selectUser('${x.phone}')">
-                <div class="min-w-0">
-                  <div class="font-bold text-xs text-slate-900 truncate">${x.name}</div>
-                  <div class="text-[11px] text-slate-600 font-mono">${formatPhone(x.phone)}</div>
-                </div>
-
-                <div class="flex items-center gap-2 flex-shrink-0">
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded ${x.isLocked ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">
-                    ${x.isLocked ? 'ติดล็อก' : 'ปกติ'}
-                  </span>
-                  ${x.isLocked ? `
-                    <button onclick="event.stopPropagation(); openUnlockModalFor('${x.phone}')" class="touch-target h-8 px-2.5 bg-[#694325] text-white rounded-lg text-[10.5px] font-bold active-scale">
-                      ปลดล็อก
-                    </button>
-                  ` : ''}
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }
+    window.addEventListener('resize', autoScalePhone);
 
     // Live Clock
     setInterval(() => {
@@ -1221,6 +1092,7 @@
 
     // Initial render
     switchDesign(1);
+    setTimeout(autoScalePhone, 100);
   </script>
 </body>
 </html>
