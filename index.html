@@ -99,7 +99,7 @@
             <span>✓</span> WCAG 2.2 AAA
           </span>
           <span class="text-xs text-slate-500 hidden lg:inline">
-            • สอดคล้องกับเว็บ & จำลองหน้าจอแอปมือถือ
+            • อ้างอิงโค้ดจริง appfonduemanager & สอดคล้องกับเว็บ
           </span>
         </div>
 
@@ -127,19 +127,19 @@
       <!-- 5 Clean Horizontal Design Selector Tabs (Compact, Zero Overlap) -->
       <div class="bg-slate-100 p-1 rounded-xl flex items-center gap-1 overflow-x-auto hide-scrollbar text-xs font-medium border border-slate-200">
         <button onclick="switchDesign(1)" id="tab-1" class="tab-btn active flex-shrink-0 px-3 py-1.5 rounded-lg font-bold bg-white shadow-xs text-slate-900 ring-1 ring-slate-200">
-          1. การ์ดมาตรฐาน
+          1. ค้นหารายบุคคล (ResetOtp)
         </button>
         <button onclick="switchDesign(2)" id="tab-2" class="tab-btn flex-shrink-0 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
-          2. คิวเร่งด่วน 1-Tap ⚡
+          2. รายการติดล็อกด่วน (Smart Roster ⚡)
         </button>
         <button onclick="switchDesign(3)" id="tab-3" class="tab-btn flex-shrink-0 px-3 py-1.5 rounded-lg text-blue-700 hover:bg-blue-50 font-medium">
-          3. แดชบอร์ดกะทัดรัด ✨
+          3. สไตล์จัดการเจ้าหน้าที่ (ManageStaff 📋)
         </button>
         <button onclick="switchDesign(4)" id="tab-4" class="tab-btn flex-shrink-0 px-3 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
-          4. ตรวจสอบหน้าเดียวจบ 🎯
+          4. สรุปความปลอดภัย (Security Hub 🛡️)
         </button>
         <button onclick="switchDesign(5)" id="tab-5" class="tab-btn flex-shrink-0 px-3 py-1.5 rounded-lg text-blue-700 hover:bg-blue-50 font-medium">
-          5. แผ่นดึงสไลด์ด่วน ✨
+          5. สไลด์ด้านล่าง (Bottom Sheet ✨)
         </button>
       </div>
 
@@ -212,11 +212,13 @@
                   <h2 id="phone-header-title" class="text-xs font-bold leading-tight">รีเซ็ต OTP</h2>
                   <div class="flex items-center gap-1 mt-0.5">
                     <span class="text-[9.5px] text-amber-100 font-medium opacity-90">Traffy @ ITS Lab2</span>
-                    <span class="text-[8.5px] bg-amber-400 text-amber-950 px-1 rounded-xs font-bold">ทางการ</span>
+                    <span class="text-[8.5px] bg-amber-400 text-amber-950 px-1 rounded-xs font-bold">Admin</span>
                   </div>
                 </div>
               </div>
-              <div></div>
+              <div class="text-[10px] text-amber-200/90 font-mono">
+                หน่วยงาน
+              </div>
             </div>
 
             <!-- Phone Screen Dynamic Content -->
@@ -232,7 +234,7 @@
             </div>
 
             <!-- =========================================================================
-                 CONFIRMATION MODAL (EMBEDDED INSIDE PHONE SCREEN - WEB ALIGNED)
+                 CONFIRMATION MODAL (EMBEDDED INSIDE PHONE SCREEN - WEB & RESETOTP ALIGNED)
                  ========================================================================= -->
             <div id="unlock-modal" onclick="closeUnlockModal()" class="hidden absolute inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-3 animate-fade-in">
               <div onclick="event.stopPropagation()" class="bg-white rounded-3xl w-full max-w-[320px] shadow-2xl border border-slate-200 overflow-hidden flex flex-col relative p-4 space-y-2.5">
@@ -242,7 +244,7 @@
                   ✕
                 </button>
 
-                <!-- Blue Lock Icon -->
+                <!-- Blue Lock Icon (Matches Web) -->
                 <div class="w-11 h-11 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto border border-blue-100 shadow-xs">
                   <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
@@ -251,7 +253,7 @@
 
                 <!-- Title & Subtitle -->
                 <div class="text-center space-y-0.5">
-                  <h3 class="text-sm font-bold text-slate-900">ยืนยันการปลดล็อค</h3>
+                  <h3 class="text-sm font-bold text-slate-900">ยืนยันการปลดล็อค OTP</h3>
                   <p class="text-[10px] text-slate-500 leading-tight">
                     รีเซ็ตสถานะความปลอดภัยให้บัญชีผู้ใช้งานนี้
                   </p>
@@ -274,16 +276,19 @@
                     เหตุผลในการปลดล็อค <span class="text-red-500">*</span>
                   </label>
 
-                  <!-- Quick Shortcut Pills -->
+                  <!-- Quick Shortcut Pills (4 Reasons from OTP_RESET_REASONS) -->
                   <div class="flex items-center gap-1 overflow-x-auto hide-scrollbar pb-0.5">
-                    <button type="button" onclick="setQuickReason('ยืนยันตัวตนแล้ว')" id="qr-1" class="quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[10px] font-medium flex items-center gap-1 shrink-0 active-scale">
-                      <span>📞</span> <span>ยืนยันตัวตนแล้ว</span>
+                    <button type="button" onclick="setQuickReason('ยืนยันตัวตนแล้ว')" id="qr-1" class="quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[9.5px] font-medium flex items-center gap-1 shrink-0 active-scale">
+                      <span>📞</span> <span>ยืนยันตัวตน</span>
                     </button>
-                    <button type="button" onclick="setQuickReason('กดผิดเกินกำหนด')" id="qr-2" class="quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[10px] font-medium flex items-center gap-1 shrink-0 active-scale">
-                      <span>🔒</span> <span>กดผิดเกินกำหนด</span>
+                    <button type="button" onclick="setQuickReason('กดผิดเกินกำหนด')" id="qr-2" class="quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[9.5px] font-medium flex items-center gap-1 shrink-0 active-scale">
+                      <span>🔒</span> <span>กดผิดเกิน</span>
                     </button>
-                    <button type="button" onclick="setQuickReason('ขอรีเซ็ตสิทธิ์ด่วน')" id="qr-3" class="quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[10px] font-medium flex items-center gap-1 shrink-0 active-scale">
+                    <button type="button" onclick="setQuickReason('ขอรีเซ็ตด่วน')" id="qr-3" class="quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[9.5px] font-medium flex items-center gap-1 shrink-0 active-scale">
                       <span>⚡</span> <span>ขอรีเซ็ตด่วน</span>
+                    </button>
+                    <button type="button" onclick="setQuickReason('SMS ล่าช้า')" id="qr-4" class="quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[9.5px] font-medium flex items-center gap-1 shrink-0 active-scale">
+                      <span>📱</span> <span>SMS ล่าช้า</span>
                     </button>
                   </div>
 
@@ -301,8 +306,8 @@
                   <button onclick="closeUnlockModal()" class="touch-target flex-1 py-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 active-scale">
                     ยกเลิก
                   </button>
-                  <button onclick="confirmExecuteUnlock()" id="btn-modal-submit" class="touch-target flex-1 py-2 bg-[#0f172a] hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow-md active-scale">
-                    ยืนยันการปลดล็อค
+                  <button onclick="confirmExecuteUnlock()" id="btn-modal-submit" class="touch-target flex-1 py-2 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-xl text-xs font-bold shadow-md active-scale flex items-center justify-center gap-1">
+                    <span>🔓</span> <span>ยืนยันปลดล็อค</span>
                   </button>
                 </div>
 
@@ -336,10 +341,11 @@
     let currentDesign = 1;
     let selectedPhone = '0812345678';
     let isTargetHelperActive = false;
-    let classicActiveTab = 'reset';
-    let d1Filter = 'all';
-    let d3Filter = 'all';
-    let d4Reason = 'ยืนยันตัวตนแล้ว';
+    let classicActiveTab = 'reset'; // 'reset' | 'audit'
+    let d2SearchQuery = '';
+    let d3Filter = 'all'; // 'all' | 'locked' | 'normal'
+    let d3SearchQuery = '';
+    let d4Tab = 'pending'; // 'pending' | 'audit'
     let userZoomMode = 'fit'; // 'fit' | '100%' | 'compact'
 
     // Mock Database
@@ -458,106 +464,159 @@
     }
 
     // =========================================================================
-    // DESIGN 1: Classic List (การ์ดมาตรฐาน)
+    // DESIGN 1: Classic Diagnostic & Search (ตรงตาม ResetOtpSettings.js ในโค้ดจริง)
     // =========================================================================
     function renderDesign1(c, u) {
-      let list = Object.values(usersData).filter(x => !x.isOutOfScope);
-      if (d1Filter === 'locked') list = list.filter(x => x.isLocked);
-      if (d1Filter === 'normal') list = list.filter(x => !x.isLocked);
-
       c.innerHTML = `
         <div class="flex-1 overflow-y-auto p-3 space-y-2.5 hide-scrollbar">
           
-          <!-- Sub-Tabs -->
+          <!-- Segmented Tab Bar (ตาม ResetOtpSettings.js) -->
           <div class="bg-stone-200/80 p-0.5 rounded-xl flex text-xs font-semibold">
             <button onclick="switchClassicTab('reset')" class="flex-1 py-1 rounded-lg text-center transition-all ${classicActiveTab === 'reset' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
-              🔓 ปลดล็อก OTP
+              🔑 ปลดล็อก OTP
             </button>
             <button onclick="switchClassicTab('audit')" class="flex-1 py-1 rounded-lg text-center transition-all ${classicActiveTab === 'audit' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
-              📋 ประวัติ (${auditLogs.length})
+              🕒 ประวัติ (${auditLogs.length})
             </button>
           </div>
 
           ${classicActiveTab === 'reset' ? `
-            <!-- Search & Filters -->
-            <div class="space-y-1.5">
-              <input type="text" id="d1-search-input" placeholder="🔍 ค้นหาเบอร์ หรือชื่อ..." class="w-full h-8 px-2.5 bg-white border border-stone-300 rounded-xl text-xs outline-none focus:border-[#694325]" oninput="filterD1Live(this.value)" />
-
-              <div class="flex items-center gap-1 text-[10.5px]">
-                <button onclick="d1Filter = 'all'; renderCurrentDesign();" class="px-2 py-0.5 rounded-full font-medium ${d1Filter === 'all' ? 'bg-[#694325] text-white font-bold' : 'bg-white border border-stone-300 text-slate-700'}">
-                  ทั้งหมด (${Object.values(usersData).filter(x => !x.isOutOfScope).length})
-                </button>
-                <button onclick="d1Filter = 'locked'; renderCurrentDesign();" class="px-2 py-0.5 rounded-full font-medium ${d1Filter === 'locked' ? 'bg-red-700 text-white font-bold' : 'bg-white border border-stone-300 text-slate-700'}">
-                  🔴 ติดล็อก (${Object.values(usersData).filter(x => x.isLocked && !x.isOutOfScope).length})
-                </button>
-                <button onclick="d1Filter = 'normal'; renderCurrentDesign();" class="px-2 py-0.5 rounded-full font-medium ${d1Filter === 'normal' ? 'bg-emerald-700 text-white font-bold' : 'bg-white border border-stone-300 text-slate-700'}">
-                  🟢 ปกติ (${Object.values(usersData).filter(x => !x.isLocked && !x.isOutOfScope).length})
-                </button>
+            <!-- Guidance Info Banner (สไตล์ infoBanner ในโค้ด) -->
+            <div class="bg-[#F5ECE5] border border-amber-200/80 rounded-2xl p-2.5 flex items-start gap-2 text-xs">
+              <span class="text-base text-[#694325] leading-none mt-0.5">ⓘ</span>
+              <div class="space-y-0.5 text-[#4A2E16]">
+                <div class="font-bold text-[11px]">คำแนะนำการปลดล็อกรหัส OTP</div>
+                <div class="text-[9.5px] leading-relaxed opacity-90">
+                  กรณีกรอกรหัสผิดติดต่อกันเกิน 3 ครั้ง หรือขอรหัสเกินกำหนด ระบบจะระงับชั่วคราวเพื่อความปลอดภัย
+                </div>
               </div>
             </div>
 
-            <!-- Cards -->
-            <div class="space-y-2">
-              ${list.map(x => `
-                <div class="bg-white border ${x.isLocked ? 'border-red-300 bg-red-50/20' : 'border-stone-300'} rounded-2xl p-2.5 shadow-xs space-y-2">
-                  <div class="flex items-start justify-between gap-2">
-                    <div class="flex items-center gap-2 min-w-0">
-                      <div class="w-8 h-8 rounded-full ${x.isLocked ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'} font-bold flex items-center justify-center text-xs shrink-0">
-                        ${x.name.slice(0, 1)}
-                      </div>
-                      <div class="min-w-0">
-                        <div class="font-bold text-slate-900 text-xs truncate">${x.name}</div>
-                        <div class="text-[10px] text-slate-500">${x.role}</div>
-                        <div class="text-[10.5px] font-mono text-[#694325] font-semibold">📱 ${formatPhone(x.phone)}</div>
-                      </div>
-                    </div>
-
-                    <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold shrink-0 ${x.isLocked ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-emerald-100 text-emerald-800 border border-emerald-200'}">
-                      ${x.isLocked ? '🔴 ถูกระงับ' : '🟢 ปกติ'}
-                    </span>
-                  </div>
-
-                  <div class="p-1.5 rounded-xl ${x.isLocked ? 'bg-red-50 text-red-900' : 'bg-stone-50 text-stone-700'} text-[10px] flex items-center justify-between">
-                    <span class="truncate">${x.isLocked ? `⚠️ ${x.reason}` : `✓ พร้อมใช้งาน`}</span>
-                    <span class="font-mono font-semibold shrink-0 ml-1">${x.failCount >= 3 ? 'ผิด 3/3' : `ส่ง ${x.sentCount}/5`}</span>
-                  </div>
-
-                  ${x.isLocked ? `
-                    <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-10 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-xl text-xs font-bold active-scale shadow-xs flex items-center justify-center gap-1.5">
-                      <span>🔓</span> ปลดล็อกบัญชีนี้
-                    </button>
-                  ` : `
-                    <div class="text-center py-1 text-[10px] text-stone-400 font-medium">
-                      ✓ บัญชีพร้อมใช้งาน
-                    </div>
-                  `}
+            <!-- Search Card (searchRow ในโค้ด) -->
+            <div class="bg-white border border-stone-200 rounded-2xl p-3 shadow-xs space-y-2">
+              <div class="text-xs font-bold text-slate-800">ค้นหาหมายเลขโทรศัพท์เป้าหมาย</div>
+              
+              <div class="flex items-center gap-1.5">
+                <div class="flex-1 relative flex items-center">
+                  <span class="absolute left-2.5 text-stone-400 text-xs">📞</span>
+                  <input type="text" id="d1-phone-input" value="${selectedPhone}" maxlength="10" placeholder="เช่น 0812345678" class="w-full h-9 pl-7 pr-7 bg-stone-50 border border-stone-300 rounded-xl text-xs font-mono outline-none focus:border-[#694325] focus:bg-white transition-colors" oninput="handleD1SearchChange(this.value)" />
+                  <button onclick="clearD1Search()" class="absolute right-2 text-stone-400 hover:text-stone-700 text-xs font-bold">✕</button>
                 </div>
-              `).join('')}
+                <button onclick="executeD1Search()" class="touch-target px-3 h-9 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-xl text-xs font-bold active-scale shadow-xs flex items-center gap-1">
+                  <span>🔍</span> <span>ค้นหา</span>
+                </button>
+              </div>
+
+              <!-- Quick Suggestion Chips -->
+              <div class="flex items-center gap-1 overflow-x-auto hide-scrollbar pt-1 text-[10px]">
+                <span class="text-stone-400 shrink-0">ด่วน:</span>
+                <button onclick="selectUser('0812345678')" class="px-1.5 py-0.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 shrink-0">สมชาย (ผิด 3/3)</button>
+                <button onclick="selectUser('0898765432')" class="px-1.5 py-0.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 shrink-0">สมศรี (ขอเกิน 5)</button>
+                <button onclick="selectUser('0829998877')" class="px-1.5 py-0.5 rounded-lg bg-stone-100 hover:bg-stone-200 text-stone-700 shrink-0">ประสิทธิ์ (ปกติ)</button>
+              </div>
+            </div>
+
+            <!-- Diagnostic Result Card (resultCard ในโค้ด ResetOtpSettings.js) -->
+            <div class="bg-white border border-stone-200 rounded-3xl p-3 shadow-xs space-y-3">
+              
+              <!-- Status Banner (statusLockedBanner / statusNormalBanner) -->
+              ${u.isLocked ? `
+                <div class="bg-red-50 border border-red-200 text-red-900 rounded-2xl p-2.5 flex items-start gap-2">
+                  <span class="text-base leading-none text-red-600 mt-0.5">⚠️</span>
+                  <div>
+                    <h4 class="font-bold text-xs text-red-900">ถูกระงับการออกรหัส OTP ชั่วคราว</h4>
+                    <p class="text-[10px] text-red-700 leading-snug">${u.reason}</p>
+                  </div>
+                </div>
+              ` : `
+                <div class="bg-emerald-50 border border-emerald-200 text-emerald-900 rounded-2xl p-2.5 flex items-start gap-2">
+                  <span class="text-base leading-none text-emerald-600 mt-0.5">✓</span>
+                  <div>
+                    <h4 class="font-bold text-xs text-emerald-900">สถานะปกติ — ไม่ถูกระงับ</h4>
+                    <p class="text-[10px] text-emerald-700 leading-snug">หมายเลขนี้สามารถขอและยืนยันรหัส OTP ได้ตามปกติ</p>
+                  </div>
+                </div>
+              `}
+
+              <!-- Target User Info (profileSection ในโค้ด) -->
+              <div class="flex items-center gap-2.5 bg-stone-50 p-2.5 rounded-2xl border border-stone-100">
+                <div class="w-10 h-10 rounded-2xl bg-[#F5ECE5] text-[#694325] font-bold flex items-center justify-center text-sm shrink-0">
+                  ${u.name.slice(0, 1)}
+                </div>
+                <div class="min-w-0 flex-1">
+                  <div class="font-bold text-slate-900 text-xs truncate">${u.name}</div>
+                  <div class="text-[10.5px] font-mono text-[#694325] font-semibold">📱 ${formatPhone(u.phone)}</div>
+                  <div class="text-[9.5px] text-stone-500">🏢 สังกัด: ${u.org} (${u.role})</div>
+                </div>
+              </div>
+
+              <!-- Counter Statistics Grid 2 Boxes (counterGrid ในโค้ด) -->
+              <div class="grid grid-cols-2 gap-2">
+                <div class="bg-stone-50 border ${u.failCount >= 3 ? 'border-red-300 bg-red-50/50' : 'border-stone-200'} rounded-2xl p-2 text-center space-y-0.5">
+                  <div class="text-[9.5px] text-stone-500 font-medium">กรอกรหัสผิดติดต่อกัน</div>
+                  <div class="text-base font-mono font-bold ${u.failCount >= 3 ? 'text-red-600' : 'text-slate-800'}">
+                    ${u.failCount} / 3
+                  </div>
+                  <div class="text-[9px] text-stone-400">ครั้ง (จำกัด 3 ครั้ง)</div>
+                </div>
+
+                <div class="bg-stone-50 border ${u.sentCount >= 5 ? 'border-red-300 bg-red-50/50' : 'border-stone-200'} rounded-2xl p-2 text-center space-y-0.5">
+                  <div class="text-[9.5px] text-stone-500 font-medium">ขอรับรหัส OTP วันนี้</div>
+                  <div class="text-base font-mono font-bold ${u.sentCount >= 5 ? 'text-red-600' : 'text-slate-800'}">
+                    ${u.sentCount} / 5
+                  </div>
+                  <div class="text-[9px] text-stone-400">ครั้ง (จำกัด 5 ครั้ง/วัน)</div>
+                </div>
+              </div>
+
+              <!-- Out of scope notice if applicable -->
+              ${u.isOutOfScope ? `
+                <div class="bg-amber-50 border border-amber-200 p-2 rounded-xl text-[10px] text-amber-900 leading-snug">
+                  ⚠️ หมายเลขนี้ไม่ได้สังกัดอยู่ในหน่วยงานของท่าน ไม่สามารถปลดล็อกได้
+                </div>
+              ` : ''}
+
+              <!-- Action Button (resetBtn ในโค้ด) -->
+              <div class="pt-1">
+                ${u.isLocked && !u.isOutOfScope ? `
+                  <button onclick="openUnlockModalFor('${u.phone}')" class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-2xl text-xs active-scale shadow-sm flex items-center justify-center gap-1.5">
+                    <span>🔓</span> <span>ปลดล็อกรหัส OTP</span>
+                  </button>
+                ` : `
+                  <div class="w-full h-11 bg-stone-100 border border-stone-200 text-stone-400 font-medium rounded-2xl text-xs flex items-center justify-center">
+                    ${u.isOutOfScope ? 'สิทธิ์ไม่เพียงพอ (ต่างสังกัด)' : 'สถานะปกติ (ไม่ถูกระงับ)'}
+                  </div>
+                `}
+              </div>
+
             </div>
           ` : `
-            <!-- Audit Logs -->
+            <!-- Tab 2: Audit Logs -->
             <div class="space-y-2">
               <div class="flex items-center justify-between text-xs font-bold text-slate-800">
-                <span>📋 รายการปลดล็อกล่าสุด</span>
+                <span>📋 ประวัติการปลดล็อก (${auditLogs.length} รายการ)</span>
                 <button onclick="toastNotice('รีเฟรชประวัติแล้ว')" class="text-[#694325] hover:underline text-[10.5px]">🔄 รีเฟรช</button>
               </div>
 
-              <div class="space-y-1.5">
+              <div class="space-y-2">
                 ${auditLogs.map(log => `
-                  <div class="bg-white border border-stone-200 rounded-2xl p-2.5 shadow-xs space-y-1 text-xs">
+                  <div class="bg-white border border-stone-200 rounded-2xl p-2.5 shadow-xs space-y-1.5 text-xs">
                     <div class="flex items-center justify-between border-b border-stone-100 pb-1">
                       <span class="text-[9.5px] text-stone-500">🕒 ${log.time}</span>
-                      <span class="bg-emerald-50 text-emerald-800 border border-emerald-200 text-[9px] px-1.5 py-0.5 rounded-full font-bold">สำเร็จ</span>
+                      <span class="bg-emerald-50 text-emerald-800 border border-emerald-200 text-[9px] px-1.5 py-0.5 rounded-full font-bold">ปลดล็อกสำเร็จ</span>
                     </div>
                     <div class="text-[10.5px] space-y-0.5">
-                      <div><span class="text-stone-500">เบอร์:</span> <strong class="text-[#694325]">${log.phone}</strong> (${log.name})</div>
-                      <div><span class="text-stone-500">เหตุผล:</span> ${log.reason}</div>
+                      <div><span class="text-stone-500">📱 เบอร์เป้าหมาย:</span> <strong class="text-[#694325] font-mono">${log.phone}</strong> (${log.name})</div>
+                      <div><span class="text-stone-500">👮 ผู้ดำเนินการ:</span> ${log.admin}</div>
+                      <div><span class="text-stone-500">📝 เหตุผล:</span> ${log.reason}</div>
+                      <div class="text-[9.5px] text-emerald-700 bg-emerald-50/80 p-1 rounded-lg">🔄 ล้างประวัติ: ผิด (${log.prevFail} ➔ 0 ครั้ง), ขอ (${log.prevSent} ➔ 0 ครั้ง)</div>
                     </div>
                   </div>
                 `).join('')}
               </div>
             </div>
           `}
+
         </div>
       `;
     }
@@ -567,98 +626,130 @@
       renderCurrentDesign();
     }
 
-    function filterD1Live(val) {
+    function handleD1SearchChange(val) {
       const clean = val.replace(/\D/g, '');
-      const list = Object.values(usersData).filter(x => !x.isOutOfScope);
-      const found = list.find(x => x.phone.includes(clean) || x.name.includes(val));
-      if (found) selectedPhone = found.phone;
+      const found = Object.values(usersData).find(x => x.phone === clean);
+      if (found) {
+        selectedPhone = found.phone;
+        renderCurrentDesign();
+      }
+    }
+
+    function executeD1Search() {
+      const input = document.getElementById('d1-phone-input');
+      if (input) {
+        const val = input.value.replace(/\D/g, '');
+        const found = Object.values(usersData).find(x => x.phone === val);
+        if (found) {
+          selectedPhone = found.phone;
+          renderCurrentDesign();
+          toastNotice('พบข้อมูลหมายเลข ' + formatPhone(found.phone));
+        } else {
+          toastNotice('ไม่พบหมายเลขนี้ในหน่วยงาน');
+        }
+      }
+    }
+
+    function clearD1Search() {
+      const input = document.getElementById('d1-phone-input');
+      if (input) input.value = '';
     }
 
     // =========================================================================
-    // NEW DESIGN 2: Express Queue (คิวเร่งด่วน 1-Tap ⚡)
+    // DESIGN 2: Smart Search & Instant Lock Roster (ใช้งานง่ายสุด ไม่ต้องพิมพ์ 10 หลัก)
     // =========================================================================
     function renderDesign2(c, u) {
-      const lockedUsers = Object.values(usersData).filter(x => x.isLocked && !x.isOutOfScope);
-      const activeUser = (u.isLocked && !u.isOutOfScope) ? u : (lockedUsers[0] || u);
+      const allInOrg = Object.values(usersData).filter(x => !x.isOutOfScope);
+      let filtered = allInOrg;
+      if (d2SearchQuery.trim()) {
+        const q = d2SearchQuery.toLowerCase();
+        filtered = allInOrg.filter(x => x.name.toLowerCase().includes(q) || x.phone.includes(q));
+      }
+
+      const lockedList = filtered.filter(x => x.isLocked);
+      const normalList = filtered.filter(x => !x.isLocked);
 
       c.innerHTML = `
         <div class="flex-1 overflow-y-auto p-3 space-y-2.5 hide-scrollbar">
           
-          <!-- Urgent Queue Banner -->
-          <div class="bg-gradient-to-r from-red-600 to-amber-700 text-white rounded-2xl p-2.5 shadow-xs flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="text-base">⚡</span>
-              <div>
-                <h3 class="text-xs font-bold leading-tight">คิวติดล็อกเร่งด่วน</h3>
-                <p class="text-[9.5px] text-red-100 opacity-90">รอการปลดล็อก ${lockedUsers.length} ท่าน</p>
-              </div>
-            </div>
-            <span class="text-[10px] bg-white text-red-700 px-2 py-0.5 rounded-full font-bold">
-              ${lockedUsers.length > 0 ? 'รอทำรายการ' : 'เรียบร้อย'}
-            </span>
+          <!-- Instant Search Box -->
+          <div class="relative">
+            <span class="absolute left-3 top-2.5 text-stone-400 text-xs">🔍</span>
+            <input type="text" value="${d2SearchQuery}" placeholder="ค้นหาชื่อเจ้าหน้าที่ หรือเบอร์โทร..." class="w-full h-9 pl-8 pr-8 bg-white border border-stone-300 rounded-xl text-xs outline-none focus:border-[#694325] shadow-xs" oninput="d2SearchQuery = this.value; renderCurrentDesign();" />
+            ${d2SearchQuery ? `
+              <button onclick="d2SearchQuery = ''; renderCurrentDesign();" class="absolute right-2.5 top-2.5 text-stone-400 hover:text-stone-700 text-xs font-bold">✕</button>
+            ` : ''}
           </div>
 
-          <!-- Main Focus Action Card -->
-          <div class="bg-white border-2 ${activeUser.isLocked ? 'border-red-300' : 'border-emerald-300'} rounded-3xl p-3 shadow-xs space-y-2.5">
-            
-            <div class="flex items-start justify-between gap-2">
-              <div class="flex items-center gap-2.5 min-w-0">
-                <div class="w-10 h-10 rounded-2xl ${activeUser.isLocked ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'} font-bold flex items-center justify-center text-sm shrink-0">
-                  ${activeUser.name.slice(0, 1)}
-                </div>
-                <div class="min-w-0">
-                  <div class="font-bold text-slate-900 text-xs truncate">${activeUser.name}</div>
-                  <div class="text-[10px] text-slate-500">${activeUser.role}</div>
-                  <div class="text-xs font-mono font-bold text-[#694325]">📱 ${formatPhone(activeUser.phone)}</div>
-                </div>
-              </div>
-
-              <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold shrink-0 ${activeUser.isLocked ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-emerald-100 text-emerald-800 border border-emerald-200'}">
-                ${activeUser.isLocked ? '🔴 ถูกระงับ' : '🟢 ปกติ'}
+          <!-- Section 1: Locked Officers (Show immediately!) -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between text-xs font-bold text-slate-800">
+              <span class="flex items-center gap-1 text-red-800">
+                <span>🚨</span> เจ้าหน้าที่ที่ถูกระงับ OTP (${lockedList.length} ท่าน)
               </span>
+              <span class="text-[10px] text-stone-400 font-normal">กดปลดล็อกได้ทันที</span>
             </div>
 
-            <!-- Diagnosis -->
-            <div class="p-2 rounded-xl ${activeUser.isLocked ? 'bg-red-50 text-red-900 border border-red-200' : 'bg-emerald-50 text-emerald-900 border border-emerald-200'} text-[10.5px] space-y-0.5">
-              <div class="font-bold text-[10.5px] flex items-center justify-between">
-                <span>${activeUser.isLocked ? '⚠️ สาเหตุที่ถูกระงับสิทธิ์:' : '✓ บัญชีสถานะปกติ:'}</span>
-                <span class="font-mono text-[9.5px] opacity-80">${activeUser.isLocked ? (activeUser.failCount >= 3 ? 'ผิด 3/3' : 'ส่ง 5/5') : 'พร้อมใช้งาน'}</span>
-              </div>
-              <div class="leading-snug">${activeUser.reason}</div>
-            </div>
+            ${lockedList.length > 0 ? `
+              <div class="space-y-2">
+                ${lockedList.map(x => `
+                  <div class="bg-white border-2 border-red-200 rounded-2xl p-3 shadow-xs space-y-2">
+                    <div class="flex items-start justify-between gap-2">
+                      <div class="flex items-center gap-2.5 min-w-0">
+                        <div class="w-9 h-9 rounded-2xl bg-red-100 text-red-700 font-bold flex items-center justify-center text-xs shrink-0">
+                          ${x.name.slice(0, 1)}
+                        </div>
+                        <div class="min-w-0">
+                          <div class="font-bold text-slate-900 text-xs truncate">${x.name}</div>
+                          <div class="text-[10px] text-stone-500">${x.role}</div>
+                          <div class="text-[10.5px] font-mono text-[#694325] font-semibold">📱 ${formatPhone(x.phone)}</div>
+                        </div>
+                      </div>
 
-            <!-- Dual Fast Action Buttons -->
-            ${activeUser.isLocked ? `
-              <div class="flex items-center gap-1.5 pt-0.5">
-                <button onclick="toastNotice('กำลังโทรหา ' + formatPhone('${activeUser.phone}'))" class="touch-target px-3 h-10 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs flex items-center justify-center gap-1 active-scale">
-                  <span>📞</span> <span>โทรยืนยัน</span>
-                </button>
-                <button onclick="openUnlockModalFor('${activeUser.phone}')" class="touch-target flex-1 h-10 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 active-scale shadow-xs">
-                  <span>🔓</span> <span>ปลดล็อกทันที</span>
-                </button>
+                      <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold shrink-0 bg-red-100 text-red-800 border border-red-200">
+                        🔴 ผิด ${x.failCount}/3
+                      </span>
+                    </div>
+
+                    <div class="p-2 rounded-xl bg-red-50 text-red-900 text-[10.5px] flex items-center justify-between">
+                      <span class="truncate">⚠️ ${x.reason}</span>
+                      <span class="text-[9.5px] text-red-600 font-medium ml-1 shrink-0">ส่ง ${x.sentCount}/5</span>
+                    </div>
+
+                    <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-10 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
+                      <span>🔓</span> <span>ปลดล็อก OTP บัญชีนี้</span>
+                    </button>
+                  </div>
+                `).join('')}
               </div>
             ` : `
-              <div class="text-center py-1.5 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold border border-emerald-200">
-                ✓ บัญชีนี้อยู่ในสถานะปกติ
+              <div class="p-3 bg-emerald-50 text-emerald-800 rounded-2xl text-center text-xs border border-emerald-200 font-medium">
+                ✓ ไม่มีเจ้าหน้าที่ในหน่วยงานถูกระงับ OTP ในขณะนี้
               </div>
             `}
           </div>
 
-          <!-- Queue Switcher -->
-          <div class="space-y-1">
-            <span class="text-[11px] font-bold text-slate-800 block">คิวเจ้าหน้าที่อื่นๆ ที่ติดล็อก:</span>
-            
-            <div class="space-y-1">
-              ${lockedUsers.map(x => `
-                <div onclick="selectUser('${x.phone}')" class="touch-target bg-white border ${x.phone === activeUser.phone ? 'border-2 border-[#694325] shadow-xs' : 'border-stone-300'} p-2 rounded-xl flex items-center justify-between gap-2 cursor-pointer active-scale">
-                  <div class="flex items-center gap-1.5 min-w-0">
-                    <span class="text-xs">🔴</span>
+          <!-- Section 2: Normal Status Officers -->
+          <div class="space-y-1.5 pt-1">
+            <div class="text-xs font-bold text-slate-700 flex items-center gap-1">
+              <span>✓</span> เจ้าหน้าที่สถานะปกติ (${normalList.length} ท่าน)
+            </div>
+
+            <div class="space-y-1.5">
+              ${normalList.map(x => `
+                <div class="bg-white border border-stone-200 rounded-2xl p-2.5 flex items-center justify-between shadow-xs">
+                  <div class="flex items-center gap-2 min-w-0">
+                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 font-bold flex items-center justify-center text-xs shrink-0">
+                      ${x.name.slice(0, 1)}
+                    </div>
                     <div class="min-w-0">
                       <div class="text-xs font-bold text-slate-900 truncate">${x.name}</div>
-                      <div class="text-[9.5px] font-mono text-slate-500">${formatPhone(x.phone)} • ${x.failCount >= 3 ? 'ผิด 3 ครั้ง' : 'ขอเกินโควตา'}</div>
+                      <div class="text-[10px] font-mono text-stone-500">${formatPhone(x.phone)}</div>
                     </div>
                   </div>
-                  <span class="text-[9.5px] text-[#694325] font-bold">แตะเพื่อดู ➔</span>
+                  <span class="text-[9.5px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
+                    ✓ ปกติ
+                  </span>
                 </div>
               `).join('')}
             </div>
@@ -669,80 +760,92 @@
     }
 
     // =========================================================================
-    // NEW DESIGN 3: Compact Cards (แดชบอร์ด & การ์ดกะทัดรัด ✨)
+    // DESIGN 3: ManageStaff Integration (ถอดแบบหน้า ManageStaff.js 100%)
     // =========================================================================
     function renderDesign3(c, u) {
-      let list = Object.values(usersData).filter(x => !x.isOutOfScope);
-      if (d3Filter === 'locked') list = list.filter(x => x.isLocked);
-      if (d3Filter === 'normal') list = list.filter(x => !x.isLocked);
+      const allInOrg = Object.values(usersData).filter(x => !x.isOutOfScope);
+      const lockedUsers = allInOrg.filter(x => x.isLocked);
+      const normalUsers = allInOrg.filter(x => !x.isLocked);
 
-      const lockedCount = Object.values(usersData).filter(x => x.isLocked && !x.isOutOfScope).length;
-      const normalCount = Object.values(usersData).filter(x => !x.isLocked && !x.isOutOfScope).length;
+      let list = allInOrg;
+      if (d3Filter === 'locked') list = lockedUsers;
+      if (d3Filter === 'normal') list = normalUsers;
+
+      if (d3SearchQuery.trim()) {
+        const q = d3SearchQuery.toLowerCase();
+        list = list.filter(x => x.name.toLowerCase().includes(q) || x.phone.includes(q));
+      }
 
       c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-3 space-y-2 hide-scrollbar">
+        <div class="flex-1 overflow-y-auto p-3 space-y-2.5 hide-scrollbar">
           
-          <!-- Top Metric Cards -->
-          <div class="grid grid-cols-2 gap-1.5 text-xs">
-            <div onclick="d3Filter = 'locked'; renderCurrentDesign();" class="touch-target p-2 rounded-2xl border ${d3Filter === 'locked' ? 'border-2 border-red-500 bg-red-100/70' : 'border-red-200 bg-red-50'} cursor-pointer active-scale">
-              <div class="text-red-700 text-[10px] font-medium flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
-                <span>รอปลดล็อก</span>
-              </div>
-              <div class="text-lg font-bold text-red-950 mt-0.5">${lockedCount} <span class="text-xs font-normal">ท่าน</span></div>
-            </div>
-
-            <div onclick="d3Filter = 'normal'; renderCurrentDesign();" class="touch-target p-2 rounded-2xl border ${d3Filter === 'normal' ? 'border-2 border-emerald-500 bg-emerald-100/70' : 'border-emerald-200 bg-emerald-50'} cursor-pointer active-scale">
-              <div class="text-emerald-700 text-[10px] font-medium flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <span>สถานะปกติ</span>
-              </div>
-              <div class="text-lg font-bold text-emerald-950 mt-0.5">${normalCount} <span class="text-xs font-normal">ท่าน</span></div>
-            </div>
-          </div>
-
-          <!-- Filter Pills -->
-          <div class="bg-stone-200/70 p-0.5 rounded-xl flex text-xs font-semibold">
+          <!-- Sub-Tabs (ถอดแบบแท็บใน ManageStaff.js) -->
+          <div class="bg-stone-200/80 p-0.5 rounded-xl flex text-xs font-semibold">
             <button onclick="d3Filter = 'all'; renderCurrentDesign();" class="flex-1 py-1 rounded-lg text-center transition-all ${d3Filter === 'all' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
-              ทั้งหมด (4)
+              ทั้งหมด (${allInOrg.length})
             </button>
-            <button onclick="d3Filter = 'locked'; renderCurrentDesign();" class="flex-1 py-1 rounded-lg text-center transition-all ${d3Filter === 'locked' ? 'bg-red-700 text-white shadow-xs font-bold' : 'text-stone-600'}">
-              🔴 ติดล็อก (${lockedCount})
+            <button onclick="d3Filter = 'locked'; renderCurrentDesign();" class="flex-1 py-1 rounded-lg text-center transition-all ${d3Filter === 'locked' ? 'bg-red-700 text-white shadow-xs font-bold' : 'text-red-700'}">
+              🔴 ระงับ OTP (${lockedUsers.length})
             </button>
-            <button onclick="d3Filter = 'normal'; renderCurrentDesign();" class="flex-1 py-1 rounded-lg text-center transition-all ${d3Filter === 'normal' ? 'bg-emerald-700 text-white shadow-xs font-bold' : 'text-stone-600'}">
-              🟢 ปกติ (${normalCount})
+            <button onclick="d3Filter = 'normal'; renderCurrentDesign();" class="flex-1 py-1 rounded-lg text-center transition-all ${d3Filter === 'normal' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
+              🟢 ปกติ (${normalUsers.length})
             </button>
           </div>
 
-          <!-- Compact Cards List -->
-          <div class="space-y-1.5">
+          <!-- Search Input -->
+          <div class="relative">
+            <span class="absolute left-3 top-2.5 text-stone-400 text-xs">🔍</span>
+            <input type="text" value="${d3SearchQuery}" placeholder="ค้นหาตามชื่อ หรือเบอร์โทร..." class="w-full h-8 pl-8 pr-7 bg-white border border-stone-300 rounded-xl text-xs outline-none focus:border-[#694325]" oninput="d3SearchQuery = this.value; renderCurrentDesign();" />
+            ${d3SearchQuery ? `
+              <button onclick="d3SearchQuery = ''; renderCurrentDesign();" class="absolute right-2 top-2 text-stone-400 text-xs font-bold">✕</button>
+            ` : ''}
+          </div>
+
+          <!-- Staff Cards (renderStaffCard สไตล์ ManageStaff.js) -->
+          <div class="space-y-2">
             ${list.map(x => `
-              <div class="bg-white border ${x.isLocked ? 'border-red-200 shadow-xs' : 'border-stone-200'} rounded-2xl p-2 flex items-center justify-between gap-2">
+              <div class="bg-white border ${x.isLocked ? 'border-red-300' : 'border-stone-200'} rounded-2xl p-2.5 shadow-xs space-y-2">
                 
-                <div class="flex items-center gap-2 min-w-0">
-                  <div class="w-8 h-8 rounded-full ${x.isLocked ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'} font-bold flex items-center justify-center text-xs shrink-0">
-                    ${x.name.slice(0, 1)}
-                  </div>
+                <!-- Line 1: Name + Role Badge -->
+                <div class="flex items-start justify-between gap-1.5">
                   <div class="min-w-0">
-                    <div class="font-bold text-xs text-slate-900 truncate">${x.name}</div>
-                    <div class="text-[10px] font-mono text-slate-600">${formatPhone(x.phone)}</div>
-                    <div class="text-[9px] ${x.isLocked ? 'text-red-700 font-semibold' : 'text-emerald-700'} truncate">
-                      ${x.isLocked ? `⚠️ ${x.reason}` : `✓ พร้อมใช้งาน`}
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <span class="font-bold text-slate-900 text-xs truncate">${x.name}</span>
+                      <span class="text-[9px] px-1.5 py-0.5 rounded font-bold ${x.role.includes('ผู้ดูแล') ? 'bg-[#F5ECE5] text-[#694325]' : 'bg-blue-50 text-blue-700'}">
+                        ${x.role.includes('ผู้ดูแล') ? 'ผู้ดูแล' : 'เจ้าหน้าที่'}
+                      </span>
                     </div>
                   </div>
+
+                  <!-- Security Status Tag -->
+                  <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold shrink-0 ${x.isLocked ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-emerald-100 text-emerald-800 border border-emerald-200'}">
+                    ${x.isLocked ? `🔴 ระงับ OTP (ผิด ${x.failCount} ครั้ง)` : '✓ ปกติ'}
+                  </span>
                 </div>
 
-                <div class="shrink-0">
-                  ${x.isLocked ? `
-                    <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target px-2.5 h-8 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-xl text-xs font-bold active-scale shadow-xs flex items-center gap-1">
-                      <span>🔓</span> <span>ปลดล็อก</span>
-                    </button>
-                  ` : `
-                    <span class="text-[9.5px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold">
-                      ✓ ปกติ
-                    </span>
-                  `}
+                <!-- Line 2: Phone with Copy Button (เหมือนใน ManageStaff.js) -->
+                <div class="flex items-center justify-between text-xs text-stone-600 bg-stone-50 px-2 py-1.5 rounded-xl">
+                  <div class="flex items-center gap-1.5 font-mono text-[11px]">
+                    <span>📞</span>
+                    <span>${formatPhone(x.phone)}</span>
+                    <button onclick="toastNotice('คัดลอกเบอร์ ${formatPhone(x.phone)} แล้ว')" class="text-stone-400 hover:text-stone-700 ml-1 text-[11px]" title="คัดลอก">📋</button>
+                  </div>
+                  
+                  <div class="text-[10px] text-stone-500">
+                    ${x.org}
+                  </div>
                 </div>
+
+                <!-- Action Button -->
+                ${x.isLocked ? `
+                  <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-9 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-xl text-xs font-bold active-scale shadow-xs flex items-center justify-center gap-1.5">
+                    <span>🔓</span> <span>ปลดล็อกรหัส OTP</span>
+                  </button>
+                ` : `
+                  <div class="text-right text-[10px] text-stone-400 pr-1">
+                    สถานะการรับรหัสปกติ ➔
+                  </div>
+                `}
 
               </div>
             `).join('')}
@@ -753,122 +856,110 @@
     }
 
     // =========================================================================
-    // NEW DESIGN 4: Single-Screen (หน้าเดียวจบ ไม่ต้องข้ามสเต็ป 🎯)
+    // DESIGN 4: Organization Security Hub (สรุปความปลอดภัย & บันทึกในหน้าเดียว)
     // =========================================================================
     function renderDesign4(c, u) {
-      const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
+      const allInOrg = Object.values(usersData).filter(x => !x.isOutOfScope);
+      const lockedUsers = allInOrg.filter(x => x.isLocked);
+      const normalUsers = allInOrg.filter(x => !x.isLocked);
 
       c.innerHTML = `
-        <div class="flex-1 overflow-y-auto p-3 space-y-2 hide-scrollbar">
+        <div class="flex-1 overflow-y-auto p-3 space-y-2.5 hide-scrollbar">
           
-          <!-- Staff Picker Strip -->
-          <div>
-            <div class="flex items-center justify-between text-[11px] font-bold text-slate-800 mb-1">
-              <span>เลือกเจ้าหน้าที่:</span>
-              <span class="text-[9.5px] text-stone-500 font-normal">แตะเปลี่ยนคนได้ทันที</span>
+          <!-- Org Overview Card -->
+          <div class="bg-white border border-stone-200 rounded-3xl p-3 shadow-xs space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-xs font-bold text-slate-900">🏢 ITS Lab2</h3>
+                <p class="text-[10px] text-stone-500">ศูนย์ความปลอดภัยและการจัดการ OTP</p>
+              </div>
+              <span class="text-[9.5px] bg-[#F5ECE5] text-[#694325] px-2 py-0.5 rounded-full font-bold">Admin Portal</span>
             </div>
-            
-            <div class="flex items-center gap-1 overflow-x-auto hide-scrollbar pb-0.5">
-              ${allUsers.map(x => `
-                <button onclick="selectUser('${x.phone}')" class="touch-target flex-shrink-0 px-2 py-1 rounded-xl border text-xs flex items-center gap-1 active-scale ${selectedPhone === x.phone ? 'bg-[#694325] text-white border-[#4A2E16] font-bold shadow-xs' : 'bg-white border-stone-300 text-slate-800'}">
-                  <span class="${x.isLocked ? 'text-red-400' : 'text-emerald-400'} text-[10px]">${x.isLocked ? '🔴' : '🟢'}</span>
-                  <span class="text-[10.5px] truncate max-w-[85px]">${x.name.split(' ')[0]}</span>
-                </button>
+
+            <!-- 3 Stat Metrics -->
+            <div class="grid grid-cols-3 gap-1.5 text-center">
+              <div class="bg-stone-50 p-1.5 rounded-xl border border-stone-200">
+                <div class="text-[9.5px] text-stone-500">สมาชิก</div>
+                <div class="text-xs font-bold text-slate-800">${allInOrg.length} ท่าน</div>
+              </div>
+              <div class="bg-red-50 p-1.5 rounded-xl border border-red-200">
+                <div class="text-[9.5px] text-red-600 font-medium">ติดล็อก</div>
+                <div class="text-xs font-bold text-red-700">${lockedUsers.length} ท่าน</div>
+              </div>
+              <div class="bg-emerald-50 p-1.5 rounded-xl border border-emerald-200">
+                <div class="text-[9.5px] text-emerald-600 font-medium">ปลอดภัย</div>
+                <div class="text-xs font-bold text-emerald-700">${normalUsers.length} ท่าน</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Switcher: Pending vs Recent Audit -->
+          <div class="bg-stone-200/80 p-0.5 rounded-xl flex text-xs font-semibold">
+            <button onclick="d4Tab = 'pending'; renderCurrentDesign();" class="flex-1 py-1 rounded-lg text-center transition-all ${d4Tab === 'pending' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
+              🚨 รายการรอปลดล็อก (${lockedUsers.length})
+            </button>
+            <button onclick="d4Tab = 'audit'; renderCurrentDesign();" class="flex-1 py-1 rounded-lg text-center transition-all ${d4Tab === 'audit' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
+              📋 ประวัติล่าสุด (${auditLogs.length})
+            </button>
+          </div>
+
+          <!-- Tab Content -->
+          ${d4Tab === 'pending' ? `
+            <div class="space-y-2">
+              ${lockedUsers.length > 0 ? lockedUsers.map(x => `
+                <div class="bg-white border-2 border-red-200 rounded-2xl p-3 shadow-xs space-y-2">
+                  <div class="flex items-start justify-between gap-1.5">
+                    <div>
+                      <div class="font-bold text-slate-900 text-xs">${x.name}</div>
+                      <div class="text-[10px] text-stone-500">${x.role}</div>
+                      <div class="text-[10.5px] font-mono text-[#694325] font-semibold">📱 ${formatPhone(x.phone)}</div>
+                    </div>
+                    <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold bg-red-100 text-red-800">
+                      ผิด ${x.failCount}/3 ครั้ง
+                    </span>
+                  </div>
+
+                  <!-- Details -->
+                  <div class="p-2 rounded-xl bg-red-50 text-red-900 text-[10px] space-y-0.5">
+                    <div>⚠️ สาเหตุ: ${x.reason}</div>
+                    <div class="text-[9.5px] text-stone-500">🕒 ล็อกเมื่อ: วันนี้ 11:15 น. (จำกัด 3 ครั้ง/วัน)</div>
+                  </div>
+
+                  <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-10 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
+                    <span>🔓</span> <span>ปลดล็อกและคืนสิทธิ์</span>
+                  </button>
+                </div>
+              `).join('') : `
+                <div class="p-4 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-2xl text-center text-xs font-medium">
+                  ✓ ยอดเยี่ยม! ไม่มีสมาชิกติดล็อก OTP
+                </div>
+              `}
+            </div>
+          ` : `
+            <!-- Inline Audit Logs -->
+            <div class="space-y-2">
+              ${auditLogs.map(log => `
+                <div class="bg-white border border-stone-200 rounded-2xl p-2.5 shadow-xs space-y-1 text-xs">
+                  <div class="flex items-center justify-between border-b border-stone-100 pb-1">
+                    <span class="text-[9.5px] text-stone-500">🕒 ${log.time}</span>
+                    <span class="bg-emerald-50 text-emerald-800 text-[9px] px-1.5 py-0.5 rounded-full font-bold">สำเร็จ</span>
+                  </div>
+                  <div class="text-[10.5px] space-y-0.5">
+                    <div><span class="text-stone-500">เบอร์:</span> <strong class="text-[#694325] font-mono">${log.phone}</strong> (${log.name})</div>
+                    <div><span class="text-stone-500">ผู้ดำเนินการ:</span> ${log.admin}</div>
+                    <div><span class="text-stone-500">เหตุผล:</span> ${log.reason}</div>
+                  </div>
+                </div>
               `).join('')}
             </div>
-          </div>
-
-          <!-- Inspection Card -->
-          <div class="bg-white border-2 ${u.isLocked ? 'border-red-300' : 'border-emerald-300'} rounded-3xl p-3 shadow-xs space-y-2">
-            
-            <div class="flex items-start justify-between gap-1.5 border-b border-stone-100 pb-2">
-              <div class="flex items-center gap-2">
-                <div class="w-9 h-9 rounded-2xl ${u.isLocked ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'} font-bold flex items-center justify-center text-xs shrink-0">
-                  ${u.name.slice(0, 1)}
-                </div>
-                <div>
-                  <div class="text-xs font-bold text-slate-900">${u.name}</div>
-                  <div class="text-[10.5px] font-mono text-[#694325] font-semibold">${formatPhone(u.phone)}</div>
-                  <div class="text-[9.5px] text-slate-500">${u.org} (${u.role})</div>
-                </div>
-              </div>
-
-              <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold ${u.isLocked ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-emerald-100 text-emerald-800 border border-emerald-200'}">
-                ${u.isLocked ? '🔴 ถูกระงับ' : '🟢 ปกติ'}
-              </span>
-            </div>
-
-            <!-- Details -->
-            <div class="p-2 rounded-xl ${u.isLocked ? 'bg-red-50 text-red-900 border border-red-200' : 'bg-emerald-50 text-emerald-900 border border-emerald-200'} text-xs space-y-0.5">
-              <div class="font-bold text-[10.5px]">
-                <span>${u.isLocked ? '🚨 สถานะการระงับ OTP:' : '✅ สถานะการใช้งาน:'}</span>
-              </div>
-              <div class="text-[10px] leading-snug">${u.reason}</div>
-            </div>
-
-            <!-- Fast Reason Selector -->
-            ${u.isLocked ? `
-              <div>
-                <label class="text-[10.5px] font-bold text-slate-800 block mb-1">แตะเลือกเหตุผลปลดล็อก:</label>
-                <div class="grid grid-cols-1 gap-1 text-xs">
-                  <button type="button" onclick="d4Reason = 'ยืนยันตัวตนแล้ว'; renderCurrentDesign();" class="touch-target p-1.5 rounded-xl border text-left text-[10.5px] flex items-center justify-between transition-all ${d4Reason === 'ยืนยันตัวตนแล้ว' ? 'border-2 border-[#694325] bg-[#F5ECE5] text-[#694325] font-bold' : 'border-stone-200 bg-stone-50 text-slate-700'}">
-                    <span>📞 ยืนยันตัวตนเจ้าหน้าที่เรียบร้อย</span>
-                    <span>${d4Reason === 'ยืนยันตัวตนแล้ว' ? '✓' : ''}</span>
-                  </button>
-                  <button type="button" onclick="d4Reason = 'กดผิดเกินกำหนด'; renderCurrentDesign();" class="touch-target p-1.5 rounded-xl border text-left text-[10.5px] flex items-center justify-between transition-all ${d4Reason === 'กดผิดเกินกำหนด' ? 'border-2 border-[#694325] bg-[#F5ECE5] text-[#694325] font-bold' : 'border-stone-200 bg-stone-50 text-slate-700'}">
-                    <span>🔒 กดรหัสผิดพลาดโดยไม่เจตนา</span>
-                    <span>${d4Reason === 'กดผิดเกินกำหนด' ? '✓' : ''}</span>
-                  </button>
-                  <button type="button" onclick="d4Reason = 'ขอรีเซ็ตสิทธิ์ด่วน'; renderCurrentDesign();" class="touch-target p-1.5 rounded-xl border text-left text-[10.5px] flex items-center justify-between transition-all ${d4Reason === 'ขอรีเซ็ตสิทธิ์ด่วน' ? 'border-2 border-[#694325] bg-[#F5ECE5] text-[#694325] font-bold' : 'border-stone-200 bg-stone-50 text-slate-700'}">
-                    <span>⚡ SMS ล่าช้า / ขอรีเซ็ตด่วน</span>
-                    <span>${d4Reason === 'ขอรีเซ็ตสิทธิ์ด่วน' ? '✓' : ''}</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Button -->
-              <div class="pt-0.5">
-                <button onclick="executeD4FastUnlock()" class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-2xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
-                  <span>🔓</span> <span>ยืนยันปลดล็อกและคืนสิทธิ์ทันที</span>
-                </button>
-              </div>
-            ` : `
-              <div class="text-center py-2 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold border border-emerald-200">
-                ✓ บัญชีนี้ใช้งานได้ปกติ ไม่จำเป็นต้องปลดล็อก
-              </div>
-            `}
-
-          </div>
+          `}
 
         </div>
       `;
     }
 
-    function executeD4FastUnlock() {
-      const u = usersData[selectedPhone];
-      if (u) {
-        u.isLocked = false;
-        u.failCount = 0;
-        u.sentCount = 0;
-
-        auditLogs.unshift({
-          id: 'LOG-' + Date.now().toString().slice(-4),
-          time: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.',
-          admin: 'Admin ITS Lab2',
-          phone: formatPhone(u.phone),
-          name: u.name,
-          reason: d4Reason,
-          prevFail: 3,
-          prevSent: 2,
-        });
-
-        renderCurrentDesign();
-        toastNotice(`ปลดล็อกสำเร็จ! คืนสิทธิ์ให้ ${u.name} แล้ว`);
-      }
-    }
-
     // =========================================================================
-    // DESIGN 5: Bottom Sheet Quick Action (แผ่นดึงสไลด์ด่วน ✨)
+    // DESIGN 5: Bottom Sheet Quick Action (สไตล์ Bottom Sheet ใน ManageStaff.js)
     // =========================================================================
     function renderDesign5(c, u) {
       const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
@@ -877,28 +968,28 @@
         <div class="flex-1 overflow-y-auto p-3 space-y-2.5 hide-scrollbar">
           
           <!-- Intro -->
-          <div class="bg-white border border-stone-300 rounded-2xl p-2.5 shadow-xs">
+          <div class="bg-white border border-stone-200 rounded-2xl p-2.5 shadow-xs">
             <h3 class="text-xs font-bold text-slate-900 mb-0.5">📱 ปลดล็อกด้วยมือเดียว (Bottom Sheet)</h3>
-            <p class="text-[10px] text-slate-600 leading-relaxed">
+            <p class="text-[10px] text-stone-600 leading-relaxed">
               แตะที่รายชื่อเจ้าหน้าที่ด้านล่างเพื่อเปิดแผ่นดึงสไลด์ขึ้นจากขอบล่าง สะดวกด้วยนิ้วโป้งมือเดียว
             </p>
           </div>
 
           <!-- Staff Items -->
-          <div class="space-y-1">
+          <div class="space-y-1.5">
             ${allUsers.map(x => `
-              <div onclick="triggerDesign5Sheet('${x.phone}')" class="touch-target bg-white border border-stone-300 p-2.5 rounded-2xl flex items-center justify-between gap-2 shadow-xs cursor-pointer hover:border-[#694325] active-scale">
+              <div onclick="triggerDesign5Sheet('${x.phone}')" class="touch-target bg-white border border-stone-200 p-2.5 rounded-2xl flex items-center justify-between gap-2 shadow-xs cursor-pointer hover:border-[#694325] active-scale">
                 <div class="flex items-center gap-2 min-w-0">
                   <div class="w-8 h-8 rounded-full ${x.isLocked ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'} font-bold flex items-center justify-center text-xs shrink-0">
                     ${x.name.slice(0, 1)}
                   </div>
                   <div class="min-w-0">
                     <div class="text-xs font-bold text-slate-900 truncate">${x.name}</div>
-                    <div class="text-[10px] text-slate-600 font-mono">${formatPhone(x.phone)}</div>
+                    <div class="text-[10px] text-stone-500 font-mono">${formatPhone(x.phone)}</div>
                   </div>
                 </div>
 
-                <div class="flex items-center gap-1">
+                <div class="flex items-center gap-1.5">
                   <span class="text-[9px] px-2 py-0.5 rounded-full font-bold ${x.isLocked ? 'bg-red-100 text-red-900 border border-red-300' : 'bg-emerald-100 text-emerald-900 border border-emerald-300'}">
                     ${x.isLocked ? '🔴 ติดล็อก' : '🟢 ปกติ'}
                   </span>
@@ -919,7 +1010,7 @@
 
       const sheetHtml = `
         <div class="space-y-2.5">
-          <div class="w-10 h-1 bg-stone-300 rounded-full mx-auto"></div>
+          <div class="w-10 h-1 bg-stone-300 rounded-full mx-auto cursor-pointer" onclick="closeBottomSheet()"></div>
 
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-2.5">
@@ -938,7 +1029,7 @@
           ${x.isLocked ? `
             <div class="p-2 bg-red-50 border border-red-200 rounded-2xl text-xs space-y-0.5">
               <div class="font-bold text-red-900 text-[10.5px]">🚨 ถูกระงับสิทธิ์การขอรหัส OTP</div>
-              <div class="text-[10px] text-red-800">${x.reason}</div>
+              <div class="text-[10px] text-red-800">${x.reason} (ผิด ${x.failCount}/3 ครั้ง)</div>
             </div>
 
             <div>
@@ -946,7 +1037,7 @@
               <div class="flex items-center gap-1 overflow-x-auto hide-scrollbar pb-1">
                 <button type="button" onclick="setSheetReason('ยืนยันตัวตนแล้ว')" class="px-2 py-0.5 bg-stone-100 border border-stone-200 rounded-lg text-[10.5px] font-medium text-slate-700">📞 ยืนยันตัวตน</button>
                 <button type="button" onclick="setSheetReason('กดผิดเกินกำหนด')" class="px-2 py-0.5 bg-stone-100 border border-stone-200 rounded-lg text-[10.5px] font-medium text-slate-700">🔒 กดผิด</button>
-                <button type="button" onclick="setSheetReason('ขอรีเซ็ตสิทธิ์ด่วน')" class="px-2 py-0.5 bg-stone-100 border border-stone-200 rounded-lg text-[10.5px] font-medium text-slate-700">⚡ ขอรีเซ็ตด่วน</button>
+                <button type="button" onclick="setSheetReason('ขอรีเซ็ตด่วน')" class="px-2 py-0.5 bg-stone-100 border border-stone-200 rounded-lg text-[10.5px] font-medium text-slate-700">⚡ ขอรีเซ็ตด่วน</button>
               </div>
               <input type="text" id="d5-sheet-reason-input" value="ยืนยันตัวตนแล้ว" class="w-full h-9 px-2.5 bg-stone-50 border border-stone-300 rounded-xl text-xs outline-none focus:border-[#694325]" placeholder="ระบุเหตุผล หรือเลือกปุ่มลัดด้านบน" />
             </div>
@@ -1001,13 +1092,13 @@
       if (phoneEl) phoneEl.textContent = formatPhone(u.phone);
       if (inputEl) inputEl.value = 'ยืนยันตัวตนแล้ว';
 
-      ['qr-1', 'qr-2', 'qr-3'].forEach(id => {
+      ['qr-1', 'qr-2', 'qr-3', 'qr-4'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
           if (id === 'qr-1') {
-            el.className = 'quick-reason-btn touch-target px-2 py-1 rounded-lg border-2 border-slate-900 bg-slate-900 text-white text-[10px] font-bold flex items-center gap-1 transition-colors shrink-0 active-scale shadow-xs';
+            el.className = 'quick-reason-btn touch-target px-2 py-1 rounded-lg border-2 border-slate-900 bg-slate-900 text-white text-[9.5px] font-bold flex items-center gap-1 transition-colors shrink-0 active-scale shadow-xs';
           } else {
-            el.className = 'quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[10px] font-medium flex items-center gap-1 transition-colors shrink-0 active-scale';
+            el.className = 'quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[9.5px] font-medium flex items-center gap-1 transition-colors shrink-0 active-scale';
           }
         }
       });
@@ -1022,13 +1113,13 @@
         input.value = text;
         input.focus();
       }
-      ['qr-1', 'qr-2', 'qr-3'].forEach(id => {
+      ['qr-1', 'qr-2', 'qr-3', 'qr-4'].forEach(id => {
         const el = document.getElementById(id);
         if (el) {
           if (el.textContent.includes(text)) {
-            el.className = 'quick-reason-btn touch-target px-2 py-1 rounded-lg border-2 border-slate-900 bg-slate-900 text-white text-[10px] font-bold flex items-center gap-1 transition-colors shrink-0 active-scale shadow-xs';
+            el.className = 'quick-reason-btn touch-target px-2 py-1 rounded-lg border-2 border-slate-900 bg-slate-900 text-white text-[9.5px] font-bold flex items-center gap-1 transition-colors shrink-0 active-scale shadow-xs';
           } else {
-            el.className = 'quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[10px] font-medium flex items-center gap-1 transition-colors shrink-0 active-scale';
+            el.className = 'quick-reason-btn touch-target px-2 py-1 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 text-[9.5px] font-medium flex items-center gap-1 transition-colors shrink-0 active-scale';
           }
         }
       });
@@ -1082,7 +1173,11 @@
     function resetAllDemoData() {
       usersData = JSON.parse(JSON.stringify(initialUsersData));
       selectedPhone = '0812345678';
-      d4Reason = 'ยืนยันตัวตนแล้ว';
+      d2SearchQuery = '';
+      d3SearchQuery = '';
+      d3Filter = 'all';
+      d4Tab = 'pending';
+      classicActiveTab = 'reset';
       renderCurrentDesign();
       toastNotice('รีเซ็ตข้อมูลทดสอบเรียบร้อยแล้ว');
     }
@@ -1149,19 +1244,29 @@
 
     window.addEventListener('resize', fitPhoneToScreen);
 
-    // Live Clock
-    setInterval(() => {
-      const now = new Date();
+    // Live clock update
+    function updateClock() {
       const el = document.getElementById('live-clock');
       if (el) {
-        el.textContent = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+        const now = new Date();
+        const hrs = String(now.getHours()).padStart(2, '0');
+        const mins = String(now.getMinutes()).padStart(2, '0');
+        el.textContent = `${hrs}:${mins}`;
       }
-    }, 1000);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    // Initial Render & Auto-Fit
-    switchDesign(1);
-    setTimeout(fitPhoneToScreen, 50);
-    setTimeout(fitPhoneToScreen, 200);
+    // Initial Setup
+    window.addEventListener('DOMContentLoaded', () => {
+      fitPhoneToScreen();
+      switchDesign(1);
+    });
+    setTimeout(() => {
+      fitPhoneToScreen();
+      switchDesign(1);
+    }, 150);
+
   </script>
 </body>
 </html>
