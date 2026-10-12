@@ -253,72 +253,83 @@
   </main>
 
   <!-- =========================================================================
-       NATIVE MOBILE CONFIRMATION MODAL (WCAG 2.2 AAA COMPLIANT & WEB ALIGNED)
+       NATIVE CONFIRMATION MODAL (EXACT 100% MATCH WITH WEB DESIGN SCREENSHOT)
        ========================================================================= -->
-  <div id="unlock-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-fade-in">
-    <div class="bg-white rounded-3xl max-w-sm w-full shadow-2xl border-2 border-stone-300 overflow-hidden flex flex-col">
-      <div class="bg-[#F5ECE5] border-b border-[#D6D3D1] p-3.5 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <span class="text-xl">🔓</span>
-          <h3 class="font-bold text-xs text-[#694325]">ยืนยันการปลดล็อกรหัส OTP</h3>
-        </div>
-        <button onclick="closeUnlockModal()" class="touch-target w-7 h-7 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-700 flex items-center justify-center font-bold text-xs active-scale" aria-label="ปิด">
-          ✕
-        </button>
+  <div id="unlock-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 animate-fade-in">
+    <div class="bg-white rounded-3xl max-w-sm w-full shadow-2xl border border-slate-200 overflow-hidden flex flex-col relative p-5 sm:p-6 space-y-4">
+      
+      <!-- Close Button Top Right -->
+      <button onclick="closeUnlockModal()" class="touch-target absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 flex items-center justify-center font-bold text-sm transition-colors active-scale" aria-label="ปิด">
+        ✕
+      </button>
+
+      <!-- Top Lock Icon (Blue Outline in Light Blue Box) -->
+      <div class="w-16 h-16 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto border border-blue-100 shadow-xs">
+        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+        </svg>
       </div>
 
-      <div class="p-4 space-y-3 text-xs">
-        <div class="bg-stone-50 border border-stone-200 rounded-xl p-3">
-          <div class="text-stone-500 text-[11px]">เจ้าหน้าที่เป้าหมาย:</div>
-          <div id="modal-user-summary" class="font-bold text-slate-900 text-sm mt-0.5">นายสมชาย มั่นคง (081-234-5678)</div>
-          <div class="text-[11px] text-emerald-800 font-semibold mt-1">
-            ✓ การปลดล็อกจะล้างประวัติการกรอกผิด และคืนสิทธิ์การขอรหัส OTP ทันที
-          </div>
-        </div>
+      <!-- Title & Description -->
+      <div class="text-center space-y-1">
+        <h3 class="text-xl font-bold text-slate-900">ยืนยันการปลดล็อค</h3>
+        <p class="text-xs text-slate-500 leading-relaxed px-2">
+          คุณกำลังดำเนินการรีเซ็ตสถานะความปลอดภัยให้กับบัญชีผู้ใช้งานด้านล่างนี้
+        </p>
+      </div>
 
-        <div>
-          <label class="font-bold text-slate-900 block mb-1.5">
-            เหตุผลในการปลดล็อก <span class="text-red-700 font-bold">*</span>
-          </label>
-          <div class="space-y-1 text-xs text-slate-800">
-            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
-              <input type="radio" name="unlock_reason" value="1" checked class="w-4 h-4 text-[#694325]" />
-              <span>ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว</span>
-            </label>
-            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
-              <input type="radio" name="unlock_reason" value="2" class="w-4 h-4 text-[#694325]" />
-              <span>ผู้ใช้งานขอรหัสซ้ำเนื่องจาก SMS ปลายทางล่าช้า</span>
-            </label>
-            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
-              <input type="radio" name="unlock_reason" value="3" class="w-4 h-4 text-[#694325]" />
-              <span>ผู้ใช้งานกดรหัส OTP ผิดพลาดโดยไม่เจตนา</span>
-            </label>
-            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
-              <input type="radio" name="unlock_reason" value="4" class="w-4 h-4 text-[#694325]" />
-              <span>ปัญหาเครือข่ายสัญญาณโทรศัพท์ของผู้ใช้</span>
-            </label>
-            <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 hover:bg-stone-100 border border-stone-200 cursor-pointer">
-              <input type="radio" name="unlock_reason" value="5" class="w-4 h-4 text-[#694325]" />
-              <span>อื่นๆ (ระบุหมายเหตุเพิ่มเติม)</span>
-            </label>
-          </div>
+      <!-- Target Account Box -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-3.5 flex items-center gap-3.5 shadow-xs">
+        <div id="modal-user-avatar" class="w-11 h-11 rounded-full bg-slate-100 text-slate-700 font-bold flex items-center justify-center text-base border border-slate-200 shrink-0">
+          ส
         </div>
-
-        <div>
-          <label class="font-bold text-slate-900 block mb-1">หมายเหตุเพิ่มเติม (ถ้ามี):</label>
-          <input type="text" id="modal-notes" placeholder="เช่น ผู้ใช้โทรแจ้งผ่านสายด่วน..." class="w-full h-10 px-3 bg-stone-50 border border-stone-300 rounded-xl text-xs outline-none focus:border-[#694325]" />
+        <div class="min-w-0">
+          <div id="modal-user-name" class="font-bold text-slate-900 text-sm truncate">นายสมชาย มั่นคง</div>
+          <div id="modal-user-phone" class="text-xs text-slate-500 font-mono mt-0.5">081-234-5678</div>
         </div>
       </div>
 
-      <div class="bg-stone-100 px-4 py-2.5 border-t border-stone-200 flex items-center justify-end gap-2">
-        <button onclick="closeUnlockModal()" class="touch-target px-3 py-1.5 rounded-xl border border-stone-300 text-stone-700 hover:bg-white text-xs font-semibold active-scale">
+      <!-- Reason Selection & Free-text Area -->
+      <div class="space-y-2">
+        <label class="text-xs font-bold text-slate-900 block">
+          เหตุผลในการปลดล็อค <span class="text-red-500">*</span>
+        </label>
+
+        <!-- Quick Shortcut Pills (Like Web) -->
+        <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar pb-0.5">
+          <button type="button" onclick="setQuickReason('ยืนยันตัวตนแล้ว')" id="qr-1" class="quick-reason-btn touch-target px-2.5 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors shrink-0 active-scale">
+            <span>📞</span> <span>ยืนยันตัวตนแล้ว</span>
+          </button>
+          <button type="button" onclick="setQuickReason('กดผิดเกินกำหนด')" id="qr-2" class="quick-reason-btn touch-target px-2.5 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors shrink-0 active-scale">
+            <span>🔒</span> <span>กดผิดเกินกำหนด</span>
+          </button>
+          <button type="button" onclick="setQuickReason('ขอรีเซ็ตสิทธิ์ด่วน')" id="qr-3" class="quick-reason-btn touch-target px-2.5 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors shrink-0 active-scale">
+            <span>⚡</span> <span>ขอรีเซ็ตสิทธิ์ด่วน</span>
+          </button>
+        </div>
+
+        <!-- Free-text / Auto-filled Textarea -->
+        <div class="relative">
+          <textarea id="modal-reason-input" rows="3" placeholder="โปรดระบุสาเหตุ หรือคลิกเลือกจากปุ่มลัดด้านบน" class="w-full p-3 bg-white border-2 border-slate-200 rounded-2xl text-xs outline-none focus:border-slate-800 transition-colors resize-none leading-relaxed text-slate-800"></textarea>
+        </div>
+
+        <!-- Audit Log Hint -->
+        <div class="text-[11px] text-slate-400 flex items-center gap-1">
+          <span>ⓘ</span>
+          <span>บันทึกนี้จะถูกเก็บใน Audit Log เพื่อความปลอดภัย</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2 pt-1">
+        <button onclick="closeUnlockModal()" class="touch-target flex-1 py-3 border border-slate-200 rounded-2xl text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors active-scale">
           ยกเลิก
         </button>
-        <button onclick="confirmExecuteUnlock()" id="btn-modal-submit" class="touch-target px-4 py-1.5 rounded-xl bg-[#694325] hover:bg-[#4A2E16] text-white text-xs font-bold active-scale shadow-sm flex items-center gap-1.5">
-          <span>✓</span>
-          <span>ยืนยันปลดล็อก</span>
+        <button onclick="confirmExecuteUnlock()" id="btn-modal-submit" class="touch-target flex-1 py-3 bg-[#0f172a] hover:bg-slate-800 text-white rounded-2xl text-xs font-bold shadow-md transition-colors active-scale">
+          ยืนยันการปลดล็อค
         </button>
       </div>
+
     </div>
   </div>
 
@@ -400,7 +411,7 @@
         admin: 'Admin ITS Lab2',
         phone: '081-234-5678',
         name: 'นายสมชาย มั่นคง',
-        reason: 'ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว',
+        reason: 'ยืนยันตัวตนแล้ว',
         prevFail: 3,
         prevSent: 2,
       },
@@ -690,7 +701,7 @@
     }
 
     // =========================================================================
-    // DESIGN 3: Status Filter Cards (สอดคล้องกับ Filter Grid ✨ บนเว็บ)
+    // DESIGN 3: Status Cards (สอดคล้องกับ Filter Grid ✨ บนเว็บ)
     // =========================================================================
     function renderDesign3(c, u) {
       let list = Object.values(usersData).filter(x => !x.isOutOfScope);
@@ -822,12 +833,16 @@
                 <label class="text-[11px] font-bold text-slate-800 block mb-1">เลือกเหตุผลการปลดล็อก:</label>
                 <div class="space-y-1 text-xs">
                   <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 border border-stone-200 cursor-pointer">
-                    <input type="radio" name="d4_reason" checked class="w-4 h-4 text-[#694325]" />
-                    <span class="text-[11px]">ยืนยันตัวตนเจ้าหน้าที่เรียบร้อย</span>
+                    <input type="radio" name="d4_reason" value="ยืนยันตัวตนแล้ว" checked class="w-4 h-4 text-[#694325]" />
+                    <span class="text-[11px]">📞 ยืนยันตัวตนเจ้าหน้าที่เรียบร้อย</span>
                   </label>
                   <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 border border-stone-200 cursor-pointer">
-                    <input type="radio" name="d4_reason" class="w-4 h-4 text-[#694325]" />
-                    <span class="text-[11px]">SMS ปลายทางล่าช้า / ขอใหม่</span>
+                    <input type="radio" name="d4_reason" value="กดผิดเกินกำหนด" class="w-4 h-4 text-[#694325]" />
+                    <span class="text-[11px]">🔒 กดรหัสผิดพลาดโดยไม่เจตนา</span>
+                  </label>
+                  <label class="touch-target flex items-center gap-2 p-2 rounded-xl bg-stone-50 border border-stone-200 cursor-pointer">
+                    <input type="radio" name="d4_reason" value="ขอรีเซ็ตสิทธิ์ด่วน" class="w-4 h-4 text-[#694325]" />
+                    <span class="text-[11px]">⚡ SMS ล่าช้า / ขอรีเซ็ตสิทธิ์ด่วน</span>
                   </label>
                 </div>
               </div>
@@ -869,13 +884,16 @@
         u.isLocked = false;
         u.failCount = 0;
         u.sentCount = 0;
+        const selectedReasonEl = document.querySelector('input[name="d4_reason"]:checked');
+        const reasonText = selectedReasonEl ? selectedReasonEl.value : 'ยืนยันตัวตนแล้ว';
+
         auditLogs.unshift({
           id: 'LOG-' + Date.now().toString().slice(-4),
           time: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.',
           admin: 'Admin ITS Lab2',
           phone: formatPhone(u.phone),
           name: u.name,
-          reason: 'ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว (ผ่าน Stepper)',
+          reason: reasonText,
           prevFail: 3,
           prevSent: 2,
         });
@@ -965,15 +983,16 @@
 
             <div>
               <label class="text-[11px] font-bold text-slate-800 block mb-1">เหตุผลการปลดล็อก:</label>
-              <select id="d5-sheet-reason" class="w-full h-10 px-3 bg-stone-50 border border-stone-300 rounded-xl text-xs outline-none">
-                <option value="1">ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว</option>
-                <option value="2">SMS ปลายทางล่าช้า / ขอใหม่</option>
-                <option value="3">กดรหัสผิดพลาดโดยไม่เจตนา</option>
-              </select>
+              <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar pb-1">
+                <button type="button" onclick="setSheetReason('ยืนยันตัวตนแล้ว')" class="px-2.5 py-1 bg-stone-100 border border-stone-200 rounded-lg text-xs font-medium text-slate-700">📞 ยืนยันตัวตนแล้ว</button>
+                <button type="button" onclick="setSheetReason('กดผิดเกินกำหนด')" class="px-2.5 py-1 bg-stone-100 border border-stone-200 rounded-lg text-xs font-medium text-slate-700">🔒 กดผิดเกินกำหนด</button>
+                <button type="button" onclick="setSheetReason('ขอรีเซ็ตสิทธิ์ด่วน')" class="px-2.5 py-1 bg-stone-100 border border-stone-200 rounded-lg text-xs font-medium text-slate-700">⚡ ขอรีเซ็ตด่วน</button>
+              </div>
+              <input type="text" id="d5-sheet-reason-input" value="ยืนยันตัวตนแล้ว" class="w-full h-10 px-3 bg-stone-50 border border-stone-300 rounded-xl text-xs outline-none focus:border-[#694325]" placeholder="ระบุเหตุผล หรือเลือกปุ่มลัดด้านบน" />
             </div>
 
             <div class="pt-1">
-              <button onclick="closeBottomSheet(); openUnlockModalFor('${x.phone}')" class="touch-target w-full h-12 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-sm flex items-center justify-center gap-1.5">
+              <button onclick="executeSheetUnlock('${x.phone}')" class="touch-target w-full h-12 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-sm flex items-center justify-center gap-1.5">
                 <span>🔓</span> ยืนยันปลดล็อกหมายเลขนี้
               </button>
             </div>
@@ -985,6 +1004,36 @@
         </div>
       `;
       openBottomSheet(sheetHtml);
+    }
+
+    function setSheetReason(text) {
+      const input = document.getElementById('d5-sheet-reason-input');
+      if (input) input.value = text;
+    }
+
+    function executeSheetUnlock(phone) {
+      const u = usersData[phone];
+      if (!u) return;
+      u.isLocked = false;
+      u.failCount = 0;
+      u.sentCount = 0;
+      const input = document.getElementById('d5-sheet-reason-input');
+      const reasonText = input && input.value.trim() ? input.value.trim() : 'ยืนยันตัวตนแล้ว';
+
+      auditLogs.unshift({
+        id: 'LOG-' + Date.now().toString().slice(-4),
+        time: new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.',
+        admin: 'Admin ITS Lab2',
+        phone: formatPhone(u.phone),
+        name: u.name,
+        reason: reasonText,
+        prevFail: 3,
+        prevSent: 2,
+      });
+
+      closeBottomSheet();
+      renderCurrentDesign();
+      toastNotice(`ปลดล็อกสำเร็จ! คืนสิทธิ์ให้ ${u.name} แล้ว`);
     }
 
     function openBottomSheet(html) {
@@ -1001,17 +1050,54 @@
       if (sheet) sheet.classList.add('hidden');
     }
 
-    // Modal Control
+    // Modal Control (Matching Web Screenshot)
     function openUnlockModalFor(phone) {
       selectedPhone = phone;
       const u = usersData[phone];
       if (!u) return;
-      const summaryEl = document.getElementById('modal-user-summary');
-      if (summaryEl) {
-        summaryEl.textContent = `${u.name} (${formatPhone(u.phone)})`;
-      }
+
+      const avatarEl = document.getElementById('modal-user-avatar');
+      const nameEl = document.getElementById('modal-user-name');
+      const phoneEl = document.getElementById('modal-user-phone');
+      const inputEl = document.getElementById('modal-reason-input');
+
+      if (avatarEl) avatarEl.textContent = u.name.slice(0, 1);
+      if (nameEl) nameEl.textContent = u.name;
+      if (phoneEl) phoneEl.textContent = formatPhone(u.phone);
+      if (inputEl) inputEl.value = 'ยืนยันตัวตนแล้ว';
+
+      // Highlight first shortcut by default
+      ['qr-1', 'qr-2', 'qr-3'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (id === 'qr-1') {
+            el.className = 'quick-reason-btn touch-target px-2.5 py-1.5 rounded-xl border-2 border-slate-900 bg-slate-900 text-white text-xs font-bold flex items-center gap-1.5 transition-colors shrink-0 active-scale shadow-xs';
+          } else {
+            el.className = 'quick-reason-btn touch-target px-2.5 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors shrink-0 active-scale';
+          }
+        }
+      });
+
       const modal = document.getElementById('unlock-modal');
       if (modal) modal.classList.remove('hidden');
+    }
+
+    function setQuickReason(text) {
+      const input = document.getElementById('modal-reason-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+      }
+      ['qr-1', 'qr-2', 'qr-3'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (el.textContent.includes(text)) {
+            el.className = 'quick-reason-btn touch-target px-2.5 py-1.5 rounded-xl border-2 border-slate-900 bg-slate-900 text-white text-xs font-bold flex items-center gap-1.5 transition-colors shrink-0 active-scale shadow-xs';
+          } else {
+            el.className = 'quick-reason-btn touch-target px-2.5 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-medium flex items-center gap-1.5 transition-colors shrink-0 active-scale';
+          }
+        }
+      });
     }
 
     function closeUnlockModal() {
@@ -1026,6 +1112,9 @@
         u.failCount = 0;
         u.sentCount = 0;
 
+        const input = document.getElementById('modal-reason-input');
+        const reasonText = input && input.value.trim() ? input.value.trim() : 'ยืนยันตัวตนแล้ว';
+
         // Record Audit Log
         auditLogs.unshift({
           id: 'LOG-' + Date.now().toString().slice(-4),
@@ -1033,7 +1122,7 @@
           admin: 'Admin ITS Lab2',
           phone: formatPhone(u.phone),
           name: u.name,
-          reason: 'ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว',
+          reason: reasonText,
           prevFail: 3,
           prevSent: 2,
         });
