@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="th" class="h-full bg-slate-900">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traffy Fondue App - Reset OTP Mobile UI Showcase</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fondue: {
+              brown: '#694325',
+              dark: '#4A2E16',
+              light: '#8B5A2B',
+              surface: '#F5ECE5',
+              canvas: '#FAF9F6',
+              accent: '#C3A9A0',
+            },
+          },
+          fontFamily: {
+            sans: ['Prompt', 'sans-serif'],
+          },
+          boxShadow: {
+            phone: '0 25px 60px -15px rgba(0, 0, 0, 0.4), 0 0 0 12px #1e293b, 0 0 0 14px #334155',
+          },
+        },
+      },
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Prompt', sans-serif; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .active-scale { transition: transform 0.12s ease; }
+    .active-scale:active { transform: scale(0.96); }
+  </style>
+</head>
+<body class="h-full flex flex-col text-slate-100 antialiased overflow-hidden bg-slate-950">
+
+  <!-- TOP APP BAR / DEMO HEADER -->
+  <header class="bg-slate-900 border-b border-slate-800 flex-shrink-0 z-30 h-16 px-4 lg:px-8 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl bg-amber-800/40 border border-amber-600/40 flex items-center justify-center text-amber-400 font-bold text-lg shadow-inner">
+        📱
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-white text-base tracking-wide">Traffy Fondue Mobile</span>
+          <span class="text-[11px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-medium">App Feature Showcase</span>
+        </div>
+        <p class="text-xs text-slate-400">ระบบปลดล็อก & รีเซ็ตรหัส OTP (Admin Settings)</p>
+      </div>
+    </div>
+
+    <!-- Controls / Quick Presets -->
+    <div class="flex items-center gap-2">
+      <div class="hidden md:flex items-center gap-1.5 bg-slate-800/80 p-1 rounded-xl border border-slate-700/60 text-xs">
+        <span class="text-slate-400 px-2 font-medium">จำลองสถานะ:</span>
+        <button onclick="loadScenario('locked_fail')" class="px-2.5 py-1.5 rounded-lg bg-red-500/20 text-red-300 hover:bg-red-500/30 border border-red-500/30 transition-colors font-medium">
+          🔴 รหัสผิดเกิน 3 ครั้ง
+        </button>
+        <button onclick="loadScenario('locked_sent')" class="px-2.5 py-1.5 rounded-lg bg-orange-500/20 text-orange-300 hover:bg-orange-500/30 border border-orange-500/30 transition-colors font-medium">
+          🟠 ขอเกินโควตา 5 ครั้ง
+        </button>
+        <button onclick="loadScenario('normal')" class="px-2.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border border-emerald-500/30 transition-colors font-medium">
+          🟢 สถานะปกติ
+        </button>
+        <button onclick="loadScenario('out_of_scope')" class="px-2.5 py-1.5 rounded-lg bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors font-medium">
+          ⚠️ นอกสังกัด
+        </button>
+      </div>
+
+      <button onclick="toggleDeviceView()" id="device-toggle-btn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs text-slate-200 transition-colors">
+        <span id="device-icon">📱</span>
+        <span id="device-text">iPhone 16 Pro Frame</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- WORKSPACE CONTAINER -->
+  <div class="flex-1 flex overflow-hidden relative">
+
+    <!-- LEFT SIDEBAR: Architecture & Highlights -->
+    <aside class="hidden xl:flex w-80 flex-col bg-slate-900/60 border-r border-slate-800/80 p-5 overflow-y-auto hide-scrollbar">
+      <div class="mb-5">
+        <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-1">สถาปัตยกรรมฟีเจอร์</h3>
+        <p class="text-xs text-slate-400">ระบบปลดล็อกรหัส OTP สำหรับผู้ดูแล</p>
+      </div>
+
+      <div class="space-y-3.5 text-xs">
+        <div class="bg-slate-800/60 border border-slate-700/60 p-3.5 rounded-xl">
+          <div class="flex items-center gap-2 text-amber-400 font-bold mb-1">
+            <span>🛡️</span> สิทธิ์เฉพาะผู้ดูแล (Admin Only)
+          </div>
+          <p class="text-slate-300 leading-relaxed">
+            จำกัดการมองเห็นและการเข้าใช้งานเฉพาะบัญชีระดับ <code>admin</code> เท่านั้น เจ้าหน้าที่ทั่วไปหรือประชาชนจะไม่เห็นเมนูนี้
+          </p>
+        </div>
+
+        <div class="bg-slate-800/60 border border-slate-700/60 p-3.5 rounded-xl">
+          <div class="flex items-center gap-2 text-blue-400 font-bold mb-1">
+            <span>🏢</span> ขอบเขตระดับหน่วยงาน (Scoped)
+          </div>
+          <p class="text-slate-300 leading-relaxed">
+            ผู้ดูแลสามารถปลดล็อกได้เฉพาะเจ้าหน้าที่ในหน่วยงานของตนเองเท่านั้น ป้องกันการแทรกแซงข้ามหน่วยงาน
+          </p>
+        </div>
+
+        <div class="bg-slate-800/60 border border-slate-700/60 p-3.5 rounded-xl">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold mb-1">
+            <span>📋</span> บันทึกประวัติ (Audit Logs)
+          </div>
+          <p class="text-slate-300 leading-relaxed">
+            ทุกการปลดล็อกจะบังคับเลือกเหตุผล 5 ประการ และบันทึกชื่อผู้ดำเนินการ เวลา และค่าเคาน์เตอร์ย้อนหลัง
+          </p>
+        </div>
+
+        <div class="bg-slate-800/60 border border-slate-700/60 p-3.5 rounded-xl">
+          <div class="flex items-center gap-2 text-purple-400 font-bold mb-1">
+            <span>⚡</span> ปลดล็อกทันที (No Manual DB)
+          </div>
+          <p class="text-slate-300 leading-relaxed">
+            รีเซ็ตค่าเคาน์เตอร์เป็น 0 ผ่านหน้าบ้านทันที ลดภาระของทีม Dev / DevOps ไม่ต้องเข้าฐานข้อมูลโดยตรง
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-auto pt-6 border-t border-slate-800/80">
+        <div class="text-[11px] text-slate-500 text-center">
+          Traffy Fondue © 2026 NECTEC / NSTDA
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER CANVAS: Mobile Phone Viewport -->
+    <main class="flex-1 flex items-center justify-center p-2 sm:p-6 overflow-y-auto bg-slate-950/80">
+      
+      <!-- PHONE CONTAINER -->
+      <div id="phone-wrapper" class="relative w-[390px] h-[820px] max-h-[96vh] rounded-[52px] bg-black shadow-phone border-[4px] border-slate-800 flex flex-col overflow-hidden transition-all duration-300">
+        
+        <!-- DYNAMIC ISLAND / TOP NOTCH -->
+        <div class="absolute top-2.5 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-50 flex items-center justify-center pointer-events-none">
+          <div class="w-2.5 h-2.5 rounded-full bg-slate-900 mr-2.5"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-[#052e16] ring-1 ring-emerald-500/50"></div>
+        </div>
+
+        <!-- STATUS BAR -->
+        <div class="h-11 px-7 flex items-center justify-between text-white text-[12px] font-semibold bg-[#694325] select-none flex-shrink-0 z-40">
+          <span id="current-time">12:25</span>
+          <div class="flex items-center gap-1.5 text-[11px]">
+            <span>􀙇</span>
+            <span>5G</span>
+            <span>􀛨</span>
+          </div>
+        </div>
+
+        <!-- APP HEADER (Traffy Fondue Brown) -->
+        <header class="bg-[#694325] text-white px-4 py-2.5 flex items-center justify-between flex-shrink-0 z-30 shadow-sm">
+          <div class="flex items-center gap-3">
+            <button onclick="simulateBack()" class="p-1 -ml-1 text-white active-scale hover:opacity-80">
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <div>
+              <h1 class="text-[15px] font-bold leading-tight">รีเซ็ต OTP</h1>
+              <p class="text-[10px] text-amber-300 font-medium">หน่วยงาน: Traffy @ ITS Lab2</p>
+            </div>
+          </div>
+          <!-- No right badge as requested -->
+          <div class="w-8"></div>
+        </header>
+
+        <!-- SEGMENTED TABS BAR -->
+        <div class="bg-white border-b border-stone-200 flex flex-shrink-0 z-20">
+          <button onclick="switchTab('reset')" id="tab-btn-reset" class="flex-1 py-3 text-xs font-bold text-[#694325] border-b-2 border-[#694325] flex items-center justify-center gap-1.5 active-scale">
+            <span>🔑</span>
+            <span>ปลดล็อก OTP</span>
+          </button>
+          <button onclick="switchTab('audit')" id="tab-btn-audit" class="flex-1 py-3 text-xs font-medium text-stone-500 border-b-2 border-transparent flex items-center justify-center gap-1.5 active-scale">
+            <span>🕒</span>
+            <span>ประวัติการปลดล็อก</span>
+            <span id="audit-badge" class="ml-1 bg-amber-100 text-[#694325] text-[10px] px-1.5 py-0.2 rounded-full font-bold">2</span>
+          </button>
+        </div>
+
+        <!-- TAB 1 CONTENT: UNLOCK OTP SCREEN -->
+        <div id="screen-reset" class="flex-1 bg-[#FAF9F6] overflow-y-auto p-4 space-y-3.5 hide-scrollbar text-stone-800">
+          
+          <!-- INFO BANNER (Friendly Thai Copy) -->
+          <div class="bg-[#F5ECE5] border border-[#E8D9CD] rounded-2xl p-3.5 flex gap-3 text-xs shadow-xs">
+            <span class="text-[#694325] text-lg flex-shrink-0 mt-0.5">ℹ️</span>
+            <div>
+              <h4 class="font-bold text-[#694325] text-xs mb-1">คำแนะนำการปลดล็อกรหัส OTP</h4>
+              <p class="text-stone-700 text-[11.5px] leading-relaxed">
+                กรณีผู้ใช้งานกรอกรหัสผิดติดต่อกันเกิน 3 ครั้ง หรือขอรหัสเกินกำหนด ระบบจะระงับการส่งรหัสชั่วคราวเพื่อความปลอดภัย ผู้ดูแลระบบสามารถตรวจสอบยืนยันตัวตน และกดปลดล็อกเพื่อให้ผู้ใช้งานกลับมารับรหัส OTP ได้ตามปกติ
+              </p>
+            </div>
+          </div>
+
+          <!-- SEARCH CARD -->
+          <div class="bg-white border border-stone-200 rounded-2xl p-4 shadow-xs">
+            <h3 class="text-xs font-bold text-stone-800 mb-0.5">ค้นหาหมายเลขโทรศัพท์เป้าหมาย</h3>
+            <p class="text-[11px] text-stone-500 mb-3">กรอกเบอร์โทรศัพท์ 10 หลักของผู้ใช้งานที่ต้องการตรวจสอบสถานะ</p>
+
+            <div class="flex items-center gap-2">
+              <div class="flex-1 flex items-center bg-stone-50 border border-stone-300 rounded-xl px-3 h-11 focus-within:border-[#694325] focus-within:ring-1 focus-within:ring-[#694325]">
+                <span class="text-stone-400 mr-2 text-sm">📞</span>
+                <input type="tel" id="input-phone" value="0812345678" maxlength="10" placeholder="เช่น 0812345678" class="w-full bg-transparent text-xs font-semibold text-stone-800 outline-none" oninput="formatPhoneInput(this)" />
+                <button onclick="clearPhoneInput()" class="text-stone-400 hover:text-stone-600 text-xs p-1">✕</button>
+              </div>
+              <button onclick="searchPhoneStatus()" class="h-11 px-4 bg-[#694325] hover:bg-[#52331c] text-white rounded-xl text-xs font-bold flex items-center gap-1.5 active-scale shadow-xs flex-shrink-0">
+                <span>🔍</span>
+                <span>ค้นหา</span>
+              </button>
+            </div>
+            <div id="phone-hint" class="text-[11px] text-[#694325] font-medium mt-1.5">
+              หมายเลขที่ค้นหา: 081-234-5678
+            </div>
+          </div>
+
+          <!-- RESULT CARD -->
+          <div id="result-card" class="bg-white border border-stone-200 rounded-2xl p-4 shadow-xs space-y-3.5">
+            
+            <!-- Status Badge Header -->
+            <div id="status-banner" class="bg-red-50 border border-red-200 rounded-xl p-3 flex items-center gap-2.5">
+              <span id="status-icon" class="text-xl">🔴</span>
+              <div>
+                <h4 id="status-title" class="text-xs font-bold text-red-600 leading-tight">ถูกระงับการออกรหัส OTP ชั่วคราว</h4>
+                <p id="status-desc" class="text-[10.5px] text-stone-600 mt-0.5">กรอกรหัสผิดติดต่อกันเกินกำหนด 3 ครั้ง</p>
+              </div>
+            </div>
+
+            <!-- User Info Card -->
+            <div class="bg-stone-50 border border-stone-200 rounded-xl p-3 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#F5ECE5] border border-[#E8D9CD] flex items-center justify-center text-sm font-bold text-[#694325]">
+                สม
+              </div>
+              <div class="flex-1 min-w-0">
+                <div id="user-name" class="text-xs font-bold text-stone-900 truncate">นายสมชาย มั่นคง</div>
+                <div id="user-phone" class="text-[11px] text-stone-600 font-mono mt-0.5">📱 081-234-5678</div>
+                <div id="user-org" class="text-[10px] text-stone-500 truncate mt-0.5">🏢 สังกัด: Traffy @ ITS Lab2 (เจ้าหน้าที่)</div>
+              </div>
+            </div>
+
+            <!-- Counter Details Grid -->
+            <div class="grid grid-cols-2 gap-2">
+              <div id="box-fail" class="bg-red-50 border border-red-200 rounded-xl p-2.5 text-center">
+                <div class="text-[10.5px] text-stone-600 font-medium">กรอกรหัสผิดติดต่อกัน</div>
+                <div id="val-fail" class="text-lg font-bold text-red-600 mt-0.5">3 / 3</div>
+                <div class="text-[9.5px] text-stone-500">ครั้ง (จำกัด 3 ครั้ง)</div>
+              </div>
+
+              <div id="box-sent" class="bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-center">
+                <div class="text-[10.5px] text-stone-600 font-medium">ขอรับรหัส OTP วันนี้</div>
+                <div id="val-sent" class="text-lg font-bold text-stone-800 mt-0.5">5 / 5</div>
+                <div class="text-[9.5px] text-stone-500">ครั้ง (จำกัด 5 ครั้ง/วัน)</div>
+              </div>
+            </div>
+
+            <div id="locked-time-row" class="text-center text-[10.5px] text-stone-500">
+              🕒 เวลาที่ถูกระงับ: 12 ต.ค. 2569 11:30 น.
+            </div>
+
+            <!-- Scope Warning Banner (Hidden by default) -->
+            <div id="scope-warning" class="hidden bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-700 leading-snug">
+              ⚠️ หมายเลขนี้ไม่ได้สังกัดอยู่ในหน่วยงานของท่าน ไม่สามารถปลดล็อกได้ กรุณาติดต่อผู้ดูแลระดับสังกัดหลัก
+            </div>
+
+            <!-- Action Button -->
+            <div class="pt-1">
+              <button onclick="openUnlockModal()" id="btn-unlock-action" class="w-full py-3 bg-[#694325] hover:bg-[#52331c] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 active-scale shadow-xs">
+                <span>🔓</span>
+                <span>ปลดล็อกรหัส OTP</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2 CONTENT: AUDIT LOGS SCREEN -->
+        <div id="screen-audit" class="hidden flex-1 bg-[#FAF9F6] overflow-y-auto p-4 space-y-3 hide-scrollbar text-stone-800">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xs font-bold text-stone-800">📋 รายการปลดล็อกล่าสุด (<span id="audit-count">2</span> รายการ)</h3>
+            <button onclick="refreshAuditLogs()" class="text-xs text-[#694325] hover:underline flex items-center gap-1 font-semibold">
+              <span>🔄</span> รีเฟรช
+            </button>
+          </div>
+
+          <!-- Dynamic Audit Logs Container -->
+          <div id="audit-logs-list" class="space-y-2.5 text-xs">
+            <!-- Log item 1 -->
+            <div class="bg-white border border-stone-200 rounded-2xl p-3.5 shadow-xs space-y-2">
+              <div class="flex items-center justify-between border-b border-stone-100 pb-2">
+                <span class="text-[10.5px] text-stone-500 flex items-center gap-1">🕒 12 ต.ค. 2569 11:42 น.</span>
+                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] px-2 py-0.5 rounded-full font-bold">ปลดล็อกสำเร็จ</span>
+              </div>
+              <div class="grid grid-cols-1 gap-1 text-[11.5px]">
+                <div><span class="text-stone-500">📱 เบอร์เป้าหมาย:</span> <span class="font-bold text-[#694325]">081-234-5678 (นายสมชาย)</span></div>
+                <div><span class="text-stone-500">👮 ผู้ดำเนินการ:</span> <span class="text-stone-800 font-medium">แอดมินสมศักดิ์ (Admin)</span></div>
+                <div><span class="text-stone-500">📝 เหตุผล:</span> <span class="text-stone-700">ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว</span></div>
+                <div class="bg-stone-50 p-2 rounded-lg text-[10.5px] text-stone-600 italic">"เจ้าหน้าที่โทรมายืนยันผ่านบัตรประจำตัวเรียบร้อย"</div>
+              </div>
+              <div class="border-t border-stone-100 pt-1.5 text-[10.5px] text-[#8B5A2B] font-medium">
+                🔄 ผลการปลดล็อก: ล้างประวัติกรอกผิด (3 ➔ 0 ครั้ง), ล้างประวัติขอรหัส (5 ➔ 0 ครั้ง)
+              </div>
+            </div>
+
+            <!-- Log item 2 -->
+            <div class="bg-white border border-stone-200 rounded-2xl p-3.5 shadow-xs space-y-2">
+              <div class="flex items-center justify-between border-b border-stone-100 pb-2">
+                <span class="text-[10.5px] text-stone-500 flex items-center gap-1">🕒 10 ต.ค. 2569 09:15 น.</span>
+                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] px-2 py-0.5 rounded-full font-bold">ปลดล็อกสำเร็จ</span>
+              </div>
+              <div class="grid grid-cols-1 gap-1 text-[11.5px]">
+                <div><span class="text-stone-500">📱 เบอร์เป้าหมาย:</span> <span class="font-bold text-[#694325]">089-876-5432 (นางสมศรี)</span></div>
+                <div><span class="text-stone-500">👮 ผู้ดำเนินการ:</span> <span class="text-stone-800 font-medium">แอดมินสมศักดิ์ (Admin)</span></div>
+                <div><span class="text-stone-500">📝 เหตุผล:</span> <span class="text-stone-700">ผู้ใช้งานขอรหัสซ้ำเนื่องจาก SMS ปลายทางล่าช้า</span></div>
+              </div>
+              <div class="border-t border-stone-100 pt-1.5 text-[10.5px] text-[#8B5A2B] font-medium">
+                🔄 ผลการปลดล็อก: ล้างประวัติกรอกผิด (0 ➔ 0 ครั้ง), ล้างประวัติขอรหัส (5 ➔ 0 ครั้ง)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM MOBILE NAV BAR (Like actual App) -->
+        <footer class="bg-white border-t border-stone-200 px-6 py-2 flex items-center justify-between text-stone-500 text-[10px] font-medium flex-shrink-0 z-30">
+          <div class="flex flex-col items-center gap-0.5 text-stone-400">
+            <span class="text-base">📋</span>
+            <span>รายการแจ้ง</span>
+          </div>
+          <div class="flex flex-col items-center gap-0.5 text-[#694325] font-bold">
+            <span class="text-base">🏢</span>
+            <span>หน่วยงาน</span>
+          </div>
+          <div class="flex flex-col items-center gap-0.5 text-stone-400">
+            <span class="text-base">👤</span>
+            <span>โปรไฟล์</span>
+          </div>
+        </footer>
+
+        <!-- BOTTOM HOME BAR -->
+        <div class="h-5 bg-white flex items-center justify-center flex-shrink-0">
+          <div class="w-32 h-1 bg-stone-300 rounded-full"></div>
+        </div>
+
+        <!-- CONFIRMATION & REASON MODAL OVERLAY -->
+        <div id="unlock-modal" class="hidden absolute inset-0 z-50 bg-black/60 flex items-end sm:items-center justify-center p-0 sm:p-4 transition-opacity">
+          <div class="bg-white w-full rounded-t-3xl sm:rounded-2xl p-5 max-h-[85%] overflow-y-auto hide-scrollbar text-stone-800 shadow-2xl animate-slide-up">
+            <div class="w-10 h-1 bg-stone-300 rounded-full mx-auto mb-3 sm:hidden"></div>
+            
+            <div class="text-center mb-4">
+              <div class="w-12 h-12 bg-[#F5ECE5] text-[#694325] rounded-full mx-auto flex items-center justify-center text-xl mb-2">
+                🛡️
+              </div>
+              <h3 class="text-sm font-bold text-stone-900">ยืนยันการปลดล็อก OTP</h3>
+              <p id="modal-target-info" class="text-xs text-[#694325] font-medium mt-0.5">
+                หมายเลข 081-234-5678 (นายสมชาย มั่นคง)
+              </p>
+            </div>
+
+            <!-- Form: Reason Selection -->
+            <div class="space-y-2 mb-4 text-xs">
+              <label class="font-bold text-stone-700 block">กรุณาระบุเหตุผลในการปลดล็อก *</label>
+              
+              <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-stone-200 hover:bg-stone-50 cursor-pointer text-[11.5px]">
+                <input type="radio" name="otp_reason" value="VERIFIED_OFFICER_IDENTITY" checked class="accent-[#694325]" />
+                <span>ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว</span>
+              </label>
+
+              <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-stone-200 hover:bg-stone-50 cursor-pointer text-[11.5px]">
+                <input type="radio" name="otp_reason" value="SMS_DELAY" class="accent-[#694325]" />
+                <span>ผู้ใช้งานขอรหัสซ้ำเนื่องจาก SMS ปลายทางล่าช้า</span>
+              </label>
+
+              <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-stone-200 hover:bg-stone-50 cursor-pointer text-[11.5px]">
+                <input type="radio" name="otp_reason" value="USER_TYPO" class="accent-[#694325]" />
+                <span>ผู้ใช้งานกดรหัส OTP ผิดพลาดโดยไม่เจตนา</span>
+              </label>
+
+              <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-stone-200 hover:bg-stone-50 cursor-pointer text-[11.5px]">
+                <input type="radio" name="otp_reason" value="CARRIER_NETWORK_ISSUE" class="accent-[#694325]" />
+                <span>ปัญหาเครือข่ายสัญญาณโทรศัพท์ของผู้ใช้</span>
+              </label>
+
+              <label class="flex items-center gap-2.5 p-2.5 rounded-xl border border-stone-200 hover:bg-stone-50 cursor-pointer text-[11.5px]">
+                <input type="radio" name="otp_reason" value="OTHER" class="accent-[#694325]" />
+                <span>อื่นๆ (ระบุรายละเอียดเพิ่มเติมในช่องหมายเหตุ)</span>
+              </label>
+            </div>
+
+            <!-- Additional Note Input -->
+            <div class="mb-4">
+              <label class="text-[11.5px] font-bold text-stone-700 block mb-1">หมายเหตุเพิ่มเติม (ถ้ามี)</label>
+              <textarea id="modal-notes" rows="2" placeholder="เช่น ตรวจสอบผ่านบัตรเจ้าหน้าที่ และแจ้งผลทางไลน์เรียบร้อย" class="w-full text-xs p-2.5 bg-stone-50 border border-stone-200 rounded-xl outline-none focus:border-[#694325]"></textarea>
+            </div>
+
+            <div class="bg-stone-100 rounded-xl p-2.5 text-[10.5px] text-stone-600 mb-4 flex items-center gap-2">
+              <span>🔒</span>
+              <span>การดำเนินการนี้จะถูกบันทึกลงในระบบ Audit Logs พร้อมระบุชื่อผู้ดูแล</span>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="flex items-center gap-2">
+              <button onclick="closeUnlockModal()" class="flex-1 py-2.5 border border-stone-300 text-stone-600 font-semibold rounded-xl text-xs hover:bg-stone-50 active-scale">
+                ยกเลิก
+              </button>
+              <button onclick="confirmUnlock()" id="btn-confirm-submit" class="flex-1.5 py-2.5 bg-[#694325] hover:bg-[#52331c] text-white font-bold rounded-xl text-xs active-scale">
+                ยืนยันปลดล็อก
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOAST NOTIFICATION -->
+        <div id="toast" class="hidden absolute top-14 left-4 right-4 z-50 bg-stone-900 text-white px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs animate-bounce">
+          <span class="text-emerald-400 text-base">✓</span>
+          <span id="toast-message" class="font-medium">ปลดล็อกรหัส OTP สำเร็จ</span>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // State
+    let currentScenario = 'locked_fail';
+    let isDeviceFrame = true;
+
+    const scenarios = {
+      locked_fail: {
+        phone: '0812345678',
+        name: 'นายสมชาย มั่นคง',
+        org: 'Traffy @ ITS Lab2 (เจ้าหน้าที่)',
+        isLocked: true,
+        failCount: 3,
+        sentCount: 2,
+        reason: 'กรอกรหัสผิดติดต่อกันเกินกำหนด 3 ครั้ง',
+        isOutOfScope: false,
+      },
+      locked_sent: {
+        phone: '0898765432',
+        name: 'นางสมศรี มีสุข',
+        org: 'Traffy @ ITS Lab2 (เจ้าหน้าที่)',
+        isLocked: true,
+        failCount: 1,
+        sentCount: 5,
+        reason: 'ขอรหัส OTP เกินโควตารายวัน (5 ครั้ง)',
+        isOutOfScope: false,
+      },
+      normal: {
+        phone: '0829998877',
+        name: 'นายประสิทธิ์ พัฒนา',
+        org: 'Traffy @ ITS Lab2 (เจ้าหน้าที่)',
+        isLocked: false,
+        failCount: 0,
+        sentCount: 1,
+        reason: 'สถานะปกติ — ไม่ถูกระงับ',
+        isOutOfScope: false,
+      },
+      out_of_scope: {
+        phone: '0951112233',
+        name: 'น.ส.มาลี แสนดี',
+        org: 'สำนักงานเขตดินแดง (นอกสังกัด)',
+        isLocked: true,
+        failCount: 3,
+        sentCount: 4,
+        reason: 'กรอกรหัสผิดเกินกำหนด (นอกสังกัด)',
+        isOutOfScope: true,
+      },
+    };
+
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('current-time').textContent = `${h}:${m}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function formatPhone(digits) {
+      if (!digits) return '';
+      const clean = digits.replace(/\D/g, '');
+      if (clean.length <= 3) return clean;
+      if (clean.length <= 6) return `${clean.slice(0, 3)}-${clean.slice(3)}`;
+      return `${clean.slice(0, 3)}-${clean.slice(3, 6)}-${clean.slice(6, 10)}`;
+    }
+
+    function formatPhoneInput(input) {
+      const clean = input.value.replace(/\D/g, '');
+      document.getElementById('phone-hint').textContent = `หมายเลขที่ค้นหา: ${formatPhone(clean)}`;
+    }
+
+    function clearPhoneInput() {
+      document.getElementById('input-phone').value = '';
+      document.getElementById('phone-hint').textContent = 'กรุณาระบุหมายเลขโทรศัพท์';
+    }
+
+    function loadScenario(type) {
+      currentScenario = type;
+      const data = scenarios[type];
+      document.getElementById('input-phone').value = data.phone;
+      document.getElementById('phone-hint').textContent = `หมายเลขที่ค้นหา: ${formatPhone(data.phone)}`;
+      renderScenario(data);
+    }
+
+    function searchPhoneStatus() {
+      const input = document.getElementById('input-phone').value.replace(/\D/g, '');
+      if (!input || input.length < 9) {
+        showToast('⚠️ กรุณากรอกหมายเลขโทรศัพท์ 10 หลัก');
+        return;
+      }
+      showToast('🔍 กำลังตรวจสอบสถานะ...');
+      setTimeout(() => {
+        if (input.endsWith('0') || input.endsWith('2') || input.endsWith('8')) {
+          loadScenario('locked_fail');
+        } else if (input.endsWith('5')) {
+          loadScenario('locked_sent');
+        } else {
+          loadScenario('normal');
+        }
+      }, 300);
+    }
+
+    function renderScenario(data) {
+      document.getElementById('user-name').textContent = data.name;
+      document.getElementById('user-phone').textContent = `📱 ${formatPhone(data.phone)}`;
+      document.getElementById('user-org').textContent = `🏢 สังกัด: ${data.org}`;
+
+      const banner = document.getElementById('status-banner');
+      const title = document.getElementById('status-title');
+      const desc = document.getElementById('status-desc');
+      const icon = document.getElementById('status-icon');
+      const boxFail = document.getElementById('box-fail');
+      const boxSent = document.getElementById('box-sent');
+      const valFail = document.getElementById('val-fail');
+      const valSent = document.getElementById('val-sent');
+      const btnUnlock = document.getElementById('btn-unlock-action');
+      const scopeWarning = document.getElementById('scope-warning');
+
+      valFail.textContent = `${data.failCount} / 3`;
+      valSent.textContent = `${data.sentCount} / 5`;
+
+      if (data.isLocked) {
+        banner.className = 'bg-red-50 border border-red-200 rounded-xl p-3 flex items-center gap-2.5';
+        title.className = 'text-xs font-bold text-red-600 leading-tight';
+        title.textContent = 'ถูกระงับการออกรหัส OTP ชั่วคราว';
+        desc.textContent = data.reason;
+        icon.textContent = '🔴';
+        boxFail.className = data.failCount >= 3 ? 'bg-red-50 border border-red-200 rounded-xl p-2.5 text-center' : 'bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-center';
+        valFail.className = data.failCount >= 3 ? 'text-lg font-bold text-red-600 mt-0.5' : 'text-lg font-bold text-stone-800 mt-0.5';
+        boxSent.className = data.sentCount >= 5 ? 'bg-red-50 border border-red-200 rounded-xl p-2.5 text-center' : 'bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-center';
+        valSent.className = data.sentCount >= 5 ? 'text-lg font-bold text-red-600 mt-0.5' : 'text-lg font-bold text-stone-800 mt-0.5';
+      } else {
+        banner.className = 'bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center gap-2.5';
+        title.className = 'text-xs font-bold text-emerald-600 leading-tight';
+        title.textContent = 'สถานะปกติ — ไม่ถูกระงับ';
+        desc.textContent = 'หมายเลขนี้สามารถขอและยืนยันรหัส OTP ได้ตามปกติ';
+        icon.textContent = '🟢';
+        boxFail.className = 'bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-center';
+        valFail.className = 'text-lg font-bold text-stone-800 mt-0.5';
+        boxSent.className = 'bg-stone-50 border border-stone-200 rounded-xl p-2.5 text-center';
+        valSent.className = 'text-lg font-bold text-stone-800 mt-0.5';
+      }
+
+      if (data.isOutOfScope) {
+        scopeWarning.classList.remove('hidden');
+        btnUnlock.disabled = true;
+        btnUnlock.className = 'w-full py-3 bg-stone-300 text-stone-500 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-not-allowed';
+        btnUnlock.innerHTML = '<span>⚠️</span><span>ไม่สามารถปลดล็อกได้ (นอกสังกัด)</span>';
+      } else if (!data.isLocked && data.failCount === 0 && data.sentCount === 0) {
+        scopeWarning.classList.add('hidden');
+        btnUnlock.disabled = true;
+        btnUnlock.className = 'w-full py-3 bg-stone-300 text-stone-500 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-not-allowed';
+        btnUnlock.innerHTML = '<span>✓</span><span>สถานะปกติ (ไม่ถูกระงับ)</span>';
+      } else {
+        scopeWarning.classList.add('hidden');
+        btnUnlock.disabled = false;
+        btnUnlock.className = 'w-full py-3 bg-[#694325] hover:bg-[#52331c] text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 active-scale shadow-xs cursor-pointer';
+        btnUnlock.innerHTML = '<span>🔓</span><span>ปลดล็อกรหัส OTP</span>';
+      }
+    }
+
+    function switchTab(tab) {
+      const btnReset = document.getElementById('tab-btn-reset');
+      const btnAudit = document.getElementById('tab-btn-audit');
+      const screenReset = document.getElementById('screen-reset');
+      const screenAudit = document.getElementById('screen-audit');
+
+      if (tab === 'reset') {
+        btnReset.className = 'flex-1 py-3 text-xs font-bold text-[#694325] border-b-2 border-[#694325] flex items-center justify-center gap-1.5 active-scale';
+        btnAudit.className = 'flex-1 py-3 text-xs font-medium text-stone-500 border-b-2 border-transparent flex items-center justify-center gap-1.5 active-scale';
+        screenReset.classList.remove('hidden');
+        screenAudit.classList.add('hidden');
+      } else {
+        btnAudit.className = 'flex-1 py-3 text-xs font-bold text-[#694325] border-b-2 border-[#694325] flex items-center justify-center gap-1.5 active-scale';
+        btnReset.className = 'flex-1 py-3 text-xs font-medium text-stone-500 border-b-2 border-transparent flex items-center justify-center gap-1.5 active-scale';
+        screenAudit.classList.remove('hidden');
+        screenReset.classList.add('hidden');
+      }
+    }
+
+    function openUnlockModal() {
+      const data = scenarios[currentScenario];
+      document.getElementById('modal-target-info').textContent = `หมายเลข ${formatPhone(data.phone)} (${data.name})`;
+      document.getElementById('unlock-modal').classList.remove('hidden');
+    }
+
+    function closeUnlockModal() {
+      document.getElementById('unlock-modal').classList.add('hidden');
+    }
+
+    function confirmUnlock() {
+      const submitBtn = document.getElementById('btn-confirm-submit');
+      submitBtn.textContent = 'กำลังดำเนินการ...';
+      submitBtn.disabled = true;
+
+      const reasonInput = document.querySelector('input[name="otp_reason"]:checked');
+      const reasonLabel = reasonInput ? reasonInput.parentElement.querySelector('span').textContent : 'ตรวจสอบยืนยันตัวตนเรียบร้อย';
+      const notes = document.getElementById('modal-notes').value.trim();
+
+      setTimeout(() => {
+        closeUnlockModal();
+        submitBtn.textContent = 'ยืนยันปลดล็อก';
+        submitBtn.disabled = false;
+
+        // Reset current scenario to normal
+        const data = scenarios[currentScenario];
+        data.isLocked = false;
+        data.failCount = 0;
+        data.sentCount = 0;
+        renderScenario(data);
+
+        // Prepend to audit log
+        addAuditLogEntry(data.phone, data.name, reasonLabel, notes);
+
+        showToast('✓ ปลดล็อกรหัส OTP สำเร็จ');
+      }, 500);
+    }
+
+    function addAuditLogEntry(phone, name, reason, notes) {
+      const list = document.getElementById('audit-logs-list');
+      const countEl = document.getElementById('audit-count');
+      const badgeEl = document.getElementById('audit-badge');
+
+      const card = document.createElement('div');
+      card.className = 'bg-white border border-stone-200 rounded-2xl p-3.5 shadow-xs space-y-2';
+      card.innerHTML = `
+        <div class="flex items-center justify-between border-b border-stone-100 pb-2">
+          <span class="text-[10.5px] text-stone-500 flex items-center gap-1">🕒 เมื่อสักครู่</span>
+          <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] px-2 py-0.5 rounded-full font-bold">ปลดล็อกสำเร็จ</span>
+        </div>
+        <div class="grid grid-cols-1 gap-1 text-[11.5px]">
+          <div><span class="text-stone-500">📱 เบอร์เป้าหมาย:</span> <span class="font-bold text-[#694325]">${formatPhone(phone)} (${name})</span></div>
+          <div><span class="text-stone-500">👮 ผู้ดำเนินการ:</span> <span class="text-stone-800 font-medium">แอดมินสมศักดิ์ (Admin)</span></div>
+          <div><span class="text-stone-500">📝 เหตุผล:</span> <span class="text-stone-700">${reason}</span></div>
+          ${notes ? `<div class="bg-stone-50 p-2 rounded-lg text-[10.5px] text-stone-600 italic">"${notes}"</div>` : ''}
+        </div>
+        <div class="border-t border-stone-100 pt-1.5 text-[10.5px] text-[#8B5A2B] font-medium">
+          🔄 ผลการปลดล็อก: ล้างประวัติกรอกผิด (3 ➔ 0 ครั้ง), ล้างประวัติขอรหัส (5 ➔ 0 ครั้ง)
+        </div>
+      `;
+
+      list.insertBefore(card, list.firstChild);
+      const newCount = list.children.length;
+      countEl.textContent = newCount;
+      badgeEl.textContent = newCount;
+    }
+
+    function refreshAuditLogs() {
+      showToast('🔄 รีเฟรชประวัติการปลดล็อกแล้ว');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-message').textContent = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2500);
+    }
+
+    function simulateBack() {
+      showToast('กลับสู่เมนูตั้งค่าหน่วยงาน');
+    }
+
+    function toggleDeviceView() {
+      const wrapper = document.getElementById('phone-wrapper');
+      const text = document.getElementById('device-text');
+      const icon = document.getElementById('device-icon');
+
+      if (isDeviceFrame) {
+        wrapper.className = 'relative w-full max-w-xl h-[860px] max-h-[96vh] rounded-3xl bg-black border border-slate-700 flex flex-col overflow-hidden shadow-2xl transition-all duration-300';
+        text.textContent = 'Tablet / Expanded';
+        icon.textContent = '🖥️';
+        isDeviceFrame = false;
+      } else {
+        wrapper.className = 'relative w-[390px] h-[820px] max-h-[96vh] rounded-[52px] bg-black shadow-phone border-[4px] border-slate-800 flex flex-col overflow-hidden transition-all duration-300';
+        text.textContent = 'iPhone 16 Pro Frame';
+        icon.textContent = '📱';
+        isDeviceFrame = true;
+      }
+    }
+
+    // Init
+    loadScenario('locked_fail');
+  </script>
+</body>
+</html>
