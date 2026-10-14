@@ -309,6 +309,7 @@
     // Sub-states
     let d1Tab = 'reset'; // 'reset' | 'audit' (for Design 1)
     let d1SearchInput = '0928264455';
+    let d1ShowComparisonOldMode = false; // สลับดูระหว่างแบบเดิม vs แบบอิงเว็บ
     let d1AuditSearchQuery = '';
 
     let d2SearchQuery = '';
@@ -406,6 +407,7 @@
     function selectUserInsidePhone(phone) {
       selectedPhone = phone;
       d1SearchInput = phone;
+      d1HasSearched = true;
       d3SelectedUser = phone;
       renderCurrentDesign();
     }
@@ -425,7 +427,7 @@
     }
 
     // =========================================================================
-    // DESIGN 1: แบบตามแอปจริงที่ทำไว้ 100% (ตรงตามภาพหน้าจอที่ 2, 3, 4 เป๊ะๆ)
+    // DESIGN 1: แบบตามแอปจริง (อิงหลักการเว็บ: Exception-Driven ไม่แสดงสถานะฟุ่มเฟือย)
     // =========================================================================
     function renderDesign1(c, u) {
       const allUsers = Object.values(usersData);
@@ -442,24 +444,24 @@
       c.innerHTML = `
         <div class="flex-1 flex flex-col bg-[#FAF9F6] overflow-hidden">
           
-          <!-- Exact Two Tabs from Screenshot 2 & 3 -->
+          <!-- Exact Two Tabs from App -->
           <div class="bg-white border-b border-stone-200 flex-shrink-0 flex items-center text-xs font-semibold">
             <button onclick="d1Tab = 'reset'; renderCurrentDesign();" class="touch-target flex-1 py-3 text-center transition-colors flex items-center justify-center gap-1.5 ${d1Tab === 'reset' ? 'text-[#694325] border-b-2 border-[#694325] font-bold' : 'text-stone-500 hover:text-stone-800'}">
               <span>🔑</span> <span>ปลดล็อก OTP</span>
             </button>
             <button onclick="d1Tab = 'audit'; renderCurrentDesign();" class="touch-target flex-1 py-3 text-center transition-colors flex items-center justify-center gap-1.5 ${d1Tab === 'audit' ? 'text-[#694325] border-b-2 border-[#694325] font-bold' : 'text-stone-500 hover:text-stone-800'}">
               <span>🕒</span> <span>ประวัติการปลดล็อก</span>
-              ${auditLogs.length > 0 ? `<span class="ml-1 text-[10px] bg-stone-100 text-stone-700 px-1.5 py-0.2 rounded-full">${auditLogs.length}</span>` : ''}
+              ${auditLogs.length > 0 ? `<span class="ml-1 text-[10px] bg-stone-100 text-stone-700 px-1.5 py-0.2 rounded-full font-bold">${auditLogs.length}</span>` : ''}
             </button>
           </div>
 
           <!-- Tab Content Area -->
-          <div class="flex-1 overflow-y-auto p-3.5 space-y-3.5 hide-scrollbar">
+          <div class="flex-1 overflow-y-auto p-3.5 space-y-3 hide-scrollbar">
             
             ${d1Tab === 'reset' ? `
               
-              <!-- Card 1: คำแนะนำการปลดล็อกรหัส OTP (Exact Screenshot 2) -->
-              <div class="bg-[#FAF0E6] border border-[#F3E2CF] rounded-2xl p-3.5 space-y-1.5 shadow-xs">
+              <!-- Card 1: คำแนะนำการปลดล็อกรหัส OTP (สไตล์แอปจริง) -->
+              <div class="bg-[#FAF0E6] border border-[#F3E2CF] rounded-2xl p-3 space-y-1 shadow-xs">
                 <div class="flex items-center gap-2">
                   <div class="w-5 h-5 rounded-full bg-[#694325] text-white flex items-center justify-center text-[11px] font-bold shrink-0">
                     i
@@ -469,11 +471,11 @@
                   </h3>
                 </div>
                 <p class="text-[11px] text-[#57534E] leading-relaxed pl-7">
-                  กรณีผู้ใช้งานกรอกรหัสผิดติดต่อกันเกิน 3 ครั้ง หรือขอรหัสเกินกำหนด ระบบจะระงับการส่งรหัสชั่วคราวเพื่อความปลอดภัย ผู้ดูแลระบบสามารถตรวจสอบยืนยันตัวตน และกดปลดล็อกเพื่อให้ผู้ใช้งานกลับมารับรหัส OTP ได้ตามปกติ
+                  กรณีผู้ใช้งานกรอกรหัสผิดติดต่อกันเกิน 3 ครั้ง หรือขอรหัสเกินกำหนด ระบบจะระงับการส่งรหัสชั่วคราว ผู้ดูแลระบบสามารถตรวจสอบและกดปลดล็อกได้
                 </p>
               </div>
 
-              <!-- Card 2: ค้นหาหมายเลขโทรศัพท์เป้าหมาย (Exact Screenshot 2) -->
+              <!-- Card 2: ค้นหาหมายเลขโทรศัพท์เป้าหมาย -->
               <div class="bg-white border border-stone-200 rounded-2xl p-3.5 shadow-xs space-y-2">
                 <div>
                   <h4 class="font-bold text-xs text-slate-900">ค้นหาหมายเลขโทรศัพท์เป้าหมาย</h4>
@@ -484,9 +486,9 @@
                 <div class="flex items-center gap-2">
                   <div class="flex-1 relative flex items-center">
                     <span class="absolute left-3 text-stone-400 text-xs">📞</span>
-                    <input type="text" id="d1-input-field" value="${d1SearchInput}" maxlength="10" placeholder="เช่น 0812345678" class="touch-target w-full h-11 pl-8 pr-8 bg-stone-50 border border-stone-300 rounded-xl text-xs font-mono outline-none focus:border-[#694325] focus:bg-white transition-colors" oninput="d1SearchInput = this.value; renderCurrentDesign();" />
+                    <input type="text" id="d1-input-field" value="${d1SearchInput}" maxlength="10" placeholder="เช่น 0812345678" class="touch-target w-full h-11 pl-8 pr-8 bg-stone-50 border border-stone-300 rounded-xl text-xs font-mono outline-none focus:border-[#694325] focus:bg-white transition-colors" oninput="d1SearchInput = this.value; d1HasSearched = false; renderCurrentDesign();" onkeydown="if(event.key === 'Enter') d1ExecuteSearch();" />
                     ${d1SearchInput ? `
-                      <button onclick="d1SearchInput = ''; renderCurrentDesign();" class="absolute right-2.5 w-5 h-5 rounded-full bg-stone-300 hover:bg-stone-400 text-white flex items-center justify-center text-[10px] font-bold">✕</button>
+                      <button onclick="d1SearchInput = ''; d1HasSearched = false; renderCurrentDesign();" class="absolute right-2.5 w-5 h-5 rounded-full bg-stone-300 hover:bg-stone-400 text-white flex items-center justify-center text-[10px] font-bold">✕</button>
                     ` : ''}
                   </div>
                   <button onclick="d1ExecuteSearch()" class="touch-target px-4 h-11 bg-[#694325] hover:bg-[#4A2E16] text-white rounded-xl text-xs font-bold active-scale shadow-xs flex items-center gap-1.5 shrink-0">
@@ -494,16 +496,17 @@
                   </button>
                 </div>
 
-                <!-- Helper Text from Screenshot 2 -->
-                <div class="text-[11px] text-stone-700 font-medium">
-                  หมายเลขที่ค้นหา: <span class="font-mono text-stone-900 font-bold">${displayFormatted}</span>
+                <!-- Helper Text -->
+                <div class="flex items-center justify-between text-[11px] text-stone-600">
+                  <div>หมายเลขที่ค้นหา: <span class="font-mono text-slate-900 font-bold">${displayFormatted}</span></div>
+                  ${d1HasSearched ? `<span class="text-[10px] text-emerald-700 font-medium">✓ ผลการค้นหา</span>` : ''}
                 </div>
 
-                <!-- In-App Quick Picker (For Testing) -->
-                <div class="pt-1.5 border-t border-stone-100 flex items-center gap-1.5 overflow-x-auto hide-scrollbar text-[10px]">
-                  <span class="text-stone-400 shrink-0">ลองเลือก:</span>
+                <!-- In-App Quick Picker (แตะเพื่อจำลองการค้นหาทันที) -->
+                <div class="pt-2 border-t border-stone-100 flex items-center gap-1.5 overflow-x-auto hide-scrollbar text-[10px]">
+                  <span class="text-stone-400 shrink-0 font-medium">ลองแตะเบอร์:</span>
                   ${allUsers.map(x => `
-                    <button onclick="selectUserInsidePhone('${x.phone}')" class="touch-target px-2 py-1 rounded-lg border shrink-0 flex items-center gap-1 active-scale ${x.phone === selectedPhone ? 'bg-[#694325] text-white border-[#694325]' : 'bg-stone-50 text-stone-700 border-stone-200'}">
+                    <button onclick="selectUserInsidePhone('${x.phone}')" class="touch-target px-2.5 py-1 rounded-xl border shrink-0 flex items-center gap-1 active-scale ${x.phone === selectedPhone && d1HasSearched ? 'bg-[#694325] text-white border-[#694325] font-bold' : 'bg-stone-50 text-stone-700 border-stone-200'}">
                       <span>${x.isOutOfScope ? '⚠️' : (x.isLocked ? '🔴' : '🟢')}</span>
                       <span>${x.name.split(' ')[0]}</span>
                     </button>
@@ -512,116 +515,103 @@
               </div>
 
               <!-- =========================================================
-                   EXACT SCREENSHOT 3: RESULT SECTION (WHEN SEARCHED)
+                   EXCEPTION-DRIVEN RESULT AREA (อิงหลักการของเว็บ 100%)
                    ========================================================= -->
-              ${u ? `
-                <div class="space-y-3 pt-0.5 animate-fade-in">
+              ${!d1HasSearched ? `
+                
+                <!-- 1. ก่อนกดค้นหา: สะอาดตา ไม่แสดงสถานะหรือการ์ดใดๆ ล่วงหน้า -->
+                <div class="p-6 text-center text-xs text-stone-400 space-y-1">
+                  <div class="text-2xl opacity-60">🔍</div>
+                  <div class="font-medium text-stone-500">พร้อมตรวจสอบสถานะ</div>
+                  <div class="text-[10.5px]">พิมพ์เบอร์โทรแล้วกด "ค้นหา" หรือแตะเลือกรายชื่อด้านบน</div>
+                </div>
+
+              ` : (u && !u.isLocked ? `
+
+                <!-- 2. เมื่อค้นหาแล้ว "สถานะปกติ": มินิมอล ไม่แสดงการ์ดยาว ไม่แสดงปุ่มปลดล็อก -->
+                <div class="bg-white border border-stone-200 rounded-2xl p-4 shadow-xs text-center space-y-2 animate-fade-in">
+                  <div class="w-11 h-11 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto text-lg border border-emerald-200">
+                    ✓
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-bold text-slate-900 flex items-center justify-center gap-1.5">
+                      <span>หมายเลข ${formatPhone(u.phone)}</span>
+                      <span class="bg-emerald-50 text-emerald-800 border border-emerald-300 text-[10px] px-2 py-0.5 rounded-full font-bold">ปกติ</span>
+                    </h4>
+                    <p class="text-[11px] text-stone-600 mt-1 leading-relaxed">
+                      บัญชีของ <strong>${u.name}</strong> (${u.org}) ใช้งานได้ตามปกติ<br>
+                      ไม่มีประวัติการถูกระงับ OTP ในระบบ
+                    </p>
+                  </div>
+                  <div class="pt-1 text-[10.5px] text-emerald-700 font-semibold bg-emerald-50/70 py-1.5 rounded-xl border border-emerald-100">
+                    ✓ พร้อมรับรหัส OTP ตามปกติ • ไม่จำเป็นต้องปลดล็อก
+                  </div>
+                </div>
+
+              ` : (u && u.isLocked ? `
+
+                <!-- 3. เมื่อค้นหาแล้ว "ติดล็อก (Locked)": แสดงการ์ดปัญหา + ปุ่มปลดล็อกเท่านั้น -->
+                <div class="bg-white border-2 border-red-200 rounded-2xl p-3.5 shadow-xs space-y-3 animate-fade-in">
                   
-                  <!-- 1. Status Banner (Exact Screenshot 3) -->
-                  ${u.isLocked ? `
-                    <div class="bg-[#FEF2F2] border border-[#FECACA] rounded-2xl p-3.5 flex items-start gap-3 shadow-xs">
-                      <div class="w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
-                        ⚠️
-                      </div>
-                      <div class="space-y-0.5 flex-1">
-                        <div class="font-bold text-xs text-[#991B1B]">
-                          ถูกระงับ — ขอรหัส OTP เกินกำหนด / กรอกผิด
-                        </div>
-                        <div class="text-[11px] text-red-700 leading-snug">
-                          ${u.reason}
-                        </div>
-                      </div>
+                  <!-- Alert Banner -->
+                  <div class="bg-[#FEF2F2] border border-[#FECACA] rounded-xl p-3 flex items-start gap-2.5 text-xs">
+                    <div class="w-6 h-6 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                      ⚠️
                     </div>
-                  ` : `
-                    <div class="bg-[#ECFDF5] border border-[#A7F3D0] rounded-2xl p-3.5 flex items-start gap-3 shadow-xs">
-                      <div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
-                        ✓
+                    <div class="space-y-0.5 flex-1">
+                      <div class="font-bold text-xs text-[#991B1B] flex items-center justify-between">
+                        <span>ถูกระงับการออกรหัส OTP ชั่วคราว</span>
+                        ${u.isOutOfScope ? '<span class="text-[9.5px] bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">ต่างสังกัด</span>' : ''}
                       </div>
-                      <div class="space-y-0.5 flex-1">
-                        <div class="font-bold text-xs text-[#065F46]">
-                          สถานะปกติ — ไม่ถูกระงับ
-                        </div>
-                        <div class="text-[11px] text-emerald-700 leading-snug">
-                          หมายเลขนี้สามารถขอและยืนยันรหัส OTP ได้ตามปกติ
-                        </div>
+                      <div class="text-[11px] text-red-800 leading-snug">
+                        ${u.reason}
                       </div>
-                    </div>
-                  `}
-
-                  <!-- 2. Officer Profile Card (Exact Screenshot 3) -->
-                  <div class="bg-white border border-stone-200 rounded-2xl p-3.5 flex items-center gap-3.5 shadow-xs">
-                    <div class="w-12 h-12 rounded-full bg-[#F5ECE5] text-stone-500 flex items-center justify-center text-xl shrink-0">
-                      👤
-                    </div>
-                    <div class="min-w-0 flex-1 space-y-0.5">
-                      <div class="font-bold text-slate-900 text-sm truncate">${u.name}</div>
-                      <div class="text-xs font-mono text-stone-700 font-semibold flex items-center gap-1.5">
-                        <span>📱</span> <span>${formatPhone(u.phone)}</span>
-                      </div>
-                      <div class="text-[11px] text-stone-500 flex items-center gap-1.5">
-                        <span>🏢</span> <span>สังกัด: ${u.org}</span>
+                      <div class="text-[10px] font-mono text-red-700 pt-0.5">
+                        counter_fail: <strong>${u.counter_consecutive_fail}/3</strong> • counter_sent: <strong>${u.counter_sent}/5</strong>
                       </div>
                     </div>
                   </div>
 
-                  <!-- 3. Counter Grid: 2 Columns (Exact Screenshot 3) -->
-                  <div class="grid grid-cols-2 gap-2.5">
-                    
-                    <!-- Box 1: กรอกรหัสผิดติดต่อกัน -->
-                    <div class="bg-white border border-stone-200 rounded-2xl p-3 text-center shadow-xs space-y-1">
-                      <div class="text-[11px] text-stone-600 font-medium">
-                        กรอกรหัสผิดติดต่อกัน
-                      </div>
-                      <div class="text-2xl font-mono font-bold ${u.counter_consecutive_fail >= 3 ? 'text-red-600' : 'text-slate-900'}">
-                        ${u.counter_consecutive_fail} / 3
-                      </div>
-                      <div class="text-[10px] text-stone-400">
-                        ครั้ง (จำกัด 3 ครั้ง)
-                      </div>
+                  <!-- Officer Profile Details -->
+                  <div class="flex items-center gap-3 bg-stone-50 p-2.5 rounded-xl border border-stone-100">
+                    <div class="w-10 h-10 rounded-xl bg-red-50 text-red-700 font-bold flex items-center justify-center text-sm shrink-0 border border-red-200">
+                      ${u.name.slice(0, 1)}
                     </div>
-
-                    <!-- Box 2: ขอรับรหัส OTP วันนี้ -->
-                    <div class="bg-white border border-stone-200 rounded-2xl p-3 text-center shadow-xs space-y-1">
-                      <div class="text-[11px] text-stone-600 font-medium">
-                        ขอรับรหัส OTP วันนี้
-                      </div>
-                      <div class="text-2xl font-mono font-bold ${u.counter_sent >= 5 ? 'text-red-600' : 'text-slate-900'}">
-                        ${u.counter_sent} / 5
-                      </div>
-                      <div class="text-[10px] text-stone-400">
-                        ครั้ง (จำกัด 5 ครั้ง/วัน)
-                      </div>
+                    <div class="min-w-0 flex-1">
+                      <div class="font-bold text-slate-900 text-xs truncate">${u.name}</div>
+                      <div class="text-[11px] font-mono text-[#694325] font-semibold mt-0.5">📱 ${formatPhone(u.phone)}</div>
+                      <div class="text-[10px] text-stone-500">🏢 สังกัด: ${u.org} (${u.role})</div>
                     </div>
-
                   </div>
 
-                  <!-- 4. Action Button (Exact Screenshot 3) -->
+                  <!-- Action Button or Scope Warning -->
                   ${u.isOutOfScope ? `
-                    <div class="p-3 bg-amber-50 border border-amber-200 rounded-2xl text-center space-y-1">
+                    <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-center space-y-1">
                       <div class="text-xs font-bold text-amber-900">⚠️ ไม่มีสิทธิ์ดำเนินการข้ามหน่วยงาน</div>
                       <p class="text-[10px] text-amber-700">บัญชีนี้สังกัด ${u.org} ตามระเบียบความปลอดภัย ผู้ดูแลระบบ ${currentAdminOrg} ไม่สามารถปลดล็อกแทนได้</p>
                     </div>
-                  ` : (u.isLocked ? `
-                    <button onclick="openUnlockModalFor('${u.phone}')" class="touch-target w-full h-12 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-2xl text-xs active-scale shadow-sm flex items-center justify-center gap-2">
-                      <span>🔒</span> <span>ปลดล็อกรหัส OTP</span>
-                    </button>
                   ` : `
-                    <button onclick="openUnlockModalFor('${u.phone}')" class="touch-target w-full h-12 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-2xl text-xs active-scale shadow-sm flex items-center justify-center gap-2">
-                      <span>🔒</span> <span>ปลดล็อกรหัส OTP</span>
+                    <button onclick="openUnlockModalFor('${u.phone}')" class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-sm flex items-center justify-center gap-1.5">
+                      <span>⚡</span> <span>ปลดล็อกและคืนสิทธิ์ (รีเซ็ตเคาน์เตอร์ = 0)</span>
                     </button>
-                  `)}
+                  `}
 
                 </div>
-              ` : ''}
+
+              ` : `
+                <div class="p-4 bg-stone-100 text-stone-500 rounded-2xl text-center text-xs">
+                  ไม่พบข้อมูลหมายเลขโทรศัพท์นี้ในระบบ
+                </div>
+              `))}
 
             ` : `
               
               <!-- =========================================================
-                   EXACT SCREENSHOT 4: TAB 2 AUDIT LOG SECTION
+                   TAB 2: AUDIT LOG SECTION
                    ========================================================= -->
               <div class="space-y-3 animate-fade-in">
                 
-                <!-- Search Bar (Screenshot 4) -->
+                <!-- Search Bar -->
                 <div class="relative">
                   <span class="absolute left-3 top-3 text-stone-400 text-xs">🔍</span>
                   <input type="text" value="${d1AuditSearchQuery}" placeholder="ค้นหาตามเบอร์โทรศัพท์ หรือชื่อผู้ดำเนินการ..." class="touch-target w-full h-11 pl-9 pr-8 bg-white border border-stone-200 rounded-2xl text-xs outline-none focus:border-[#694325] shadow-xs" oninput="d1AuditSearchQuery = this.value; renderCurrentDesign();" />
@@ -630,7 +620,7 @@
                   ` : ''}
                 </div>
 
-                <!-- Section Header (Screenshot 4) -->
+                <!-- Section Header -->
                 <div class="flex items-center justify-between text-xs font-bold text-slate-800 px-0.5">
                   <div class="flex items-center gap-1.5">
                     <span>📋</span>
@@ -641,7 +631,7 @@
                   </button>
                 </div>
 
-                <!-- Audit Log Card (Screenshot 4) -->
+                <!-- Audit Log Card -->
                 <div class="space-y-2.5">
                   ${filteredLogs.map(log => `
                     <div class="bg-white border border-stone-200 rounded-2xl p-3.5 shadow-xs space-y-2.5 text-xs">
@@ -672,7 +662,7 @@
                         </div>
                       </div>
 
-                      <!-- Highlight Bottom Box (Screenshot 4) -->
+                      <!-- Highlight Bottom Box -->
                       <div class="bg-[#FFF9F2] border border-[#FDE6D2] rounded-xl p-2.5 text-[10.5px] text-[#8B5A2B] space-y-0.5">
                         <div class="font-bold flex items-center gap-1.5 text-[#694325]">
                           <span>🔄</span> <span>ผลการปลดล็อก:</span>
@@ -699,15 +689,20 @@
       const input = document.getElementById('d1-input-field');
       const val = input ? input.value.trim() : d1SearchInput;
       d1SearchInput = val;
+      d1HasSearched = true;
 
       const found = usersData[val];
       if (found) {
         selectedPhone = val;
+        if (!found.isLocked) {
+          toastNotice('เบอร์นี้สถานะปกติ ไม่ติดล็อก');
+        }
       } else {
         toastNotice('ค้นหาหมายเลข: ' + (val ? formatPhone(val) : 'ไม่ระบุ'));
       }
       renderCurrentDesign();
     }
+
 
     // =========================================================================
     // DESIGN 2: Minimal Quick-Card (มินิมอล ค้นหาเร็ว & ลิสต์คนติดล็อกทันที)
