@@ -538,9 +538,29 @@
       c.innerHTML = `
         <div class="flex-1 flex flex-col bg-slate-50 overflow-hidden">
           
-          <!-- Top Sticky Filter & Search Header -->
+          <!-- Top Sticky Filter & Search Header (Compact & Responsive) -->
           <div class="bg-white border-b border-slate-200 p-3 space-y-2.5 flex-shrink-0 shadow-xs">
             
+            <!-- Mini-Pill Badges แนวนอน (รอปลดล็อค / ปลดล็อคแล้ว / สถานะ Gateway กะทัดรัด ไม่ดันการ์ดตกขอบจอ) -->
+            <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar text-[10.5px]">
+              <div class="flex items-center gap-1 bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded-full font-bold shrink-0 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                <span>รอปลดล็อค:</span>
+                <span id="d9-stat-locked">${lockedTotal}</span>
+                <span class="text-[9.5px] font-normal">รายการ</span>
+              </div>
+              <div class="flex items-center gap-1 bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-full font-bold shrink-0 whitespace-nowrap">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>ปลดล็อคแล้ว:</span>
+                <span id="d9-stat-resolved">${activeTotal}</span>
+                <span class="text-[9.5px] font-normal">รายการ</span>
+              </div>
+              <div class="flex items-center gap-1 bg-slate-100 text-slate-700 border border-slate-200 px-2 py-0.5 rounded-full font-medium shrink-0 whitespace-nowrap ml-auto">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>Gateway: ปกติ (99.9%)</span>
+              </div>
+            </div>
+
             <!-- Instant Live Search Bar (ถอดแบบเว็บ 100%) -->
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -595,10 +615,12 @@
 
           </div>
 
-          <!-- Cards Scrollable Area -->
-          <div class="flex-1 overflow-y-auto p-3 space-y-3 hide-scrollbar">
+          <!-- Cards Scrollable Area (Responsive Card Grid: 1 คอลัมน์บนมือถือ, 2-3 คอลัมน์บนจอใหญ่) -->
+          <div class="flex-1 overflow-y-auto p-3 hide-scrollbar">
             
-            ${list.length > 0 ? list.map(u => {
+            ${list.length > 0 ? `
+              <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+                ${list.map(u => {
               // Accent color & border
               let topAccent = 'bg-emerald-500';
               let borderStyle = 'border border-slate-200';
@@ -684,7 +706,9 @@
 
               </div>
               `;
-            }).join('') : `
+            }).join('')}
+              </div>
+            ` : `
               <!-- Empty Search Result (ถอดแบบเว็บ 100%) -->
               <div class="bg-white rounded-2xl p-6 border border-dashed border-slate-300 text-center space-y-2 mt-4">
                 <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-2">
