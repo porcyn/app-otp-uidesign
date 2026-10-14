@@ -84,10 +84,10 @@
 <body class="h-full flex flex-col text-slate-800 antialiased overflow-hidden bg-[#E8ECF2]">
 
   <!-- =========================================================================
-       TOP SHOWCASE CONTROL BAR (CLEAN TABS - NEVER OVERLAPPING)
+       TOP SHOWCASE CONTROL BAR (CLEAN TABS ONLY - NO EXTERNAL TEST BAR)
        ========================================================================= -->
-  <header class="bg-white border-b border-slate-200 px-3 sm:px-6 py-2 flex-shrink-0 z-30 shadow-xs">
-    <div class="max-w-6xl mx-auto flex flex-col gap-1.5">
+  <header class="bg-white border-b border-slate-200 px-3 sm:px-6 py-2.5 flex-shrink-0 z-30 shadow-xs">
+    <div class="max-w-6xl mx-auto flex flex-col gap-2">
       
       <!-- Top Title + Utilities -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -99,26 +99,26 @@
             <span>✓</span> WCAG 2.2 AAA
           </span>
           <span class="text-xs text-slate-500 hidden lg:inline">
-            • สไตล์แอปมือถือแท้ (Mobile-First) • ปุ่มและสีตรงตามระบบ Traffy Fondue
+            • ทดสอบกดใช้งานได้จริงในจอมือถือจำลอง • ข้อมูลเคาน์เตอร์และสิทธิ์หน่วยงานตรงตาม API
           </span>
         </div>
 
         <!-- Quick Utilities -->
         <div class="flex items-center gap-1.5 flex-wrap text-xs">
           <!-- View / Zoom Mode Toggle -->
-          <button onclick="cycleZoomMode()" id="btn-scale" class="px-2.5 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium flex items-center gap-1 shadow-xs active-scale" title="คลิกเพื่อสลับขนาดแสดงผล">
+          <button onclick="cycleZoomMode()" id="btn-scale" class="touch-target px-2.5 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium flex items-center gap-1 shadow-xs active-scale" title="คลิกเพื่อสลับขนาดแสดงผล">
             <span>📱</span>
             <span id="scale-label">ขอบมือถือ: พอดีจอ</span>
           </button>
 
           <!-- Target Size Helper -->
-          <button onclick="toggleTargetHelper()" id="btn-target-helper" class="px-2 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium flex items-center gap-1 shadow-xs active-scale" title="แสดงกรอบสัมผัสปุ่มทุกจุด 44x44px">
+          <button onclick="toggleTargetHelper()" id="btn-target-helper" class="touch-target px-2.5 py-1 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 font-medium flex items-center gap-1 shadow-xs active-scale" title="แสดงกรอบสัมผัสปุ่มทุกจุด 44x44px">
             <span id="target-helper-dot" class="w-2 h-2 rounded-full bg-slate-400"></span>
             <span>Target 44px</span>
           </button>
 
           <!-- Reset Data -->
-          <button onclick="resetAllDemoData()" class="px-2 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-300 text-[#694325] font-semibold flex items-center gap-1 shadow-xs active-scale" title="รีเซ็ตสถานะบัญชีทดสอบ">
+          <button onclick="resetAllDemoData()" class="touch-target px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-300 text-[#694325] font-semibold flex items-center gap-1 shadow-xs active-scale" title="รีเซ็ตสถานะบัญชีทดสอบ">
             <span>🔄</span> รีเซ็ตข้อมูล
           </button>
         </div>
@@ -140,23 +140,6 @@
         </button>
         <button onclick="switchDesign(5)" id="tab-5" class="tab-btn flex-shrink-0 px-3 py-1.5 rounded-lg text-blue-700 hover:bg-blue-50 font-medium">
           5. มินิมอล ไทม์ไลน์ (Activity Feed) 🕒
-        </button>
-      </div>
-
-      <!-- Quick Test Accounts Bar -->
-      <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar text-xs pt-0.5 border-t border-slate-100">
-        <span class="text-slate-500 font-medium flex-shrink-0 text-[11px]">เลือกทดสอบ:</span>
-        <button onclick="selectUser('0812345678')" id="chip-0812345678" class="flex-shrink-0 px-2 py-0.5 rounded-lg border font-medium flex items-center gap-1 bg-red-50 text-red-900 border-red-300 ring-2 ring-slate-900 font-bold active-scale text-[11px]">
-          <span>🔴</span> สมชาย (ผิด 3/3)
-        </button>
-        <button onclick="selectUser('0898765432')" id="chip-0898765432" class="flex-shrink-0 px-2 py-0.5 rounded-lg border font-medium flex items-center gap-1 bg-amber-50 text-amber-900 border-amber-300 active-scale text-[11px]">
-          <span>🔴</span> สมศรี (ขอเกิน 5)
-        </button>
-        <button onclick="selectUser('0829998877')" id="chip-0829998877" class="flex-shrink-0 px-2 py-0.5 rounded-lg border font-medium flex items-center gap-1 bg-emerald-50 text-emerald-900 border-emerald-300 active-scale text-[11px]">
-          <span>🟢</span> ประสิทธิ์ (ปกติ)
-        </button>
-        <button onclick="selectUser('0861112233')" id="chip-0861112233" class="flex-shrink-0 px-2 py-0.5 rounded-lg border font-medium flex items-center gap-1 bg-stone-100 text-stone-700 border-stone-300 active-scale text-[11px]">
-          <span>⚠️</span> ธนกร (ต่างสังกัด)
         </button>
       </div>
 
@@ -252,7 +235,7 @@
                 <div class="text-center space-y-0.5">
                   <h3 class="text-sm font-bold text-slate-900">ยืนยันการปลดล็อก OTP</h3>
                   <p class="text-[11px] text-stone-600 leading-tight">
-                    รีเซ็ตสถานะความปลอดภัยให้เจ้าหน้าที่ท่านนี้
+                    รีเซ็ตเคาน์เตอร์ <code class="text-[#694325] font-mono font-bold">fail=0</code> และ <code class="text-[#694325] font-mono font-bold">sent=0</code>
                   </p>
                 </div>
 
@@ -264,19 +247,20 @@
                   <div class="min-w-0 flex-1">
                     <div id="modal-user-name" class="font-bold text-xs text-slate-900 truncate">นายสมชาย มั่นคง</div>
                     <div id="modal-user-phone" class="text-[11px] font-mono text-[#694325] font-semibold">081-234-5678</div>
+                    <div id="modal-user-org" class="text-[10px] text-stone-500 truncate">Traffy @ ITS Lab2</div>
                   </div>
                 </div>
 
                 <!-- Quick Reasons Selection -->
                 <div class="space-y-1">
                   <label class="block text-[11px] font-bold text-slate-700">
-                    เหตุผลในการปลดล็อก <span class="text-red-600">*</span>
+                    เหตุผลในการปลดล็อก (บันทึก Audit Log) <span class="text-red-600">*</span>
                   </label>
                   <div class="flex flex-wrap gap-1">
                     <button type="button" onclick="setModalReason('ผู้ใช้โทรแจ้งยืนยันตัวตนแล้ว')" class="touch-target px-2 py-1 rounded-lg text-[10.5px] font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 active-scale">
                       📞 ยืนยันตัวตนแล้ว
                     </button>
-                    <button type="button" onclick="setModalReason('กรอก OTP ผิดเกินโควต้า')" class="touch-target px-2 py-1 rounded-lg text-[10.5px] font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 active-scale">
+                    <button type="button" onclick="setModalReason('กรอก OTP ผิดเกินโควต้า 3 ครั้ง')" class="touch-target px-2 py-1 rounded-lg text-[10.5px] font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 active-scale">
                       🔒 กรอกผิดเกินกำหนด
                     </button>
                     <button type="button" onclick="setModalReason('ขอรีเซ็ตสิทธิ์การเข้าใช้งานด่วน')" class="touch-target px-2 py-1 rounded-lg text-[10.5px] font-semibold bg-stone-100 hover:bg-stone-200 text-stone-800 border border-stone-300 active-scale">
@@ -286,9 +270,9 @@
                 </div>
 
                 <!-- Editable Reason Input -->
-                <textarea id="modal-reason-input" rows="2" class="w-full text-xs p-2.5 bg-stone-50 border border-stone-300 rounded-xl focus:border-[#694325] focus:bg-white outline-none resize-none transition-colors" placeholder="โปรดระบุสาเหตุเพิ่มเติม..."></textarea>
+                <textarea id="modal-reason-input" rows="2" class="w-full text-xs p-2.5 bg-stone-50 border border-stone-300 rounded-xl focus:border-[#694325] focus:bg-white outline-none resize-none transition-colors" placeholder="ระบุเหตุผลในการปลดล็อก..."></textarea>
                 <div class="text-[9.5px] text-stone-500 flex items-center gap-1">
-                  <span>🔒</span> ข้อมูลนี้จะถูกบันทึกใน Audit Log ตามมาตรฐานความปลอดภัย
+                  <span>🔒</span> บันทึกชื่อแอดมิน, เวลา, และสถิติลง Audit Log อัตโนมัติ
                 </div>
 
                 <!-- Actions (WCAG 2.2 AAA compliant buttons) -->
@@ -332,57 +316,60 @@
     let d3SelectedUser = '0812345678';
     let d4Tab = 'locked'; // 'locked' | 'normal' | 'audit'
 
-    // Mock Database
+    // Current Admin Context (ตาม Objective 2: กำหนดสิทธิ์ตามระดับหน่วยงาน)
+    const currentAdminOrg = 'Traffy @ ITS Lab2';
+
+    // Mock Database (อ้างอิง API fields: counter_consecutive_fail, counter_sent)
     const initialUsersData = {
       '0812345678': {
         phone: '0812345678',
         name: 'นายสมชาย มั่นคง',
-        org: 'ITS Lab2',
+        org: 'Traffy @ ITS Lab2',
         role: 'เจ้าหน้าที่ภาคสนาม',
         isLocked: true,
-        failCount: 3,
-        sentCount: 2,
-        reason: 'กรอกรหัสผิดติดต่อกันเกิน 3 ครั้ง',
+        counter_consecutive_fail: 3,
+        counter_sent: 2,
+        reason: 'กรอกรหัสผิดติดต่อกันเกิน 3 ครั้ง (counter_fail >= 3)',
         isOutOfScope: false,
       },
       '0898765432': {
         phone: '0898765432',
         name: 'นางสมศรี มีสุข',
-        org: 'ITS Lab2',
+        org: 'Traffy @ ITS Lab2',
         role: 'เจ้าหน้าที่ธุรการ',
         isLocked: true,
-        failCount: 1,
-        sentCount: 5,
-        reason: 'ขอรับรหัส OTP เกินโควตารายวัน (5 ครั้ง)',
+        counter_consecutive_fail: 1,
+        counter_sent: 5,
+        reason: 'ขอรับรหัส OTP เกินโควตารายวัน (counter_sent >= 5)',
         isOutOfScope: false,
       },
       '0829998877': {
         phone: '0829998877',
         name: 'นายประสิทธิ์ พัฒนา',
-        org: 'ITS Lab2',
+        org: 'Traffy @ ITS Lab2',
         role: 'เจ้าหน้าที่สารสนเทศ',
         isLocked: false,
-        failCount: 0,
-        sentCount: 1,
+        counter_consecutive_fail: 0,
+        counter_sent: 1,
         reason: 'สถานะปกติ ไม่ติดล็อก',
         isOutOfScope: false,
       },
       '0861112233': {
         phone: '0861112233',
         name: 'นายธนกร รุ่งเรือง',
-        org: 'ITS Lab1 (ต่างสังกัด)',
+        org: 'สป.กทม. (ต่างสังกัด)',
         role: 'วิศวกรระบบ',
         isLocked: true,
-        failCount: 3,
-        sentCount: 3,
-        reason: 'ต่างสังกัด ไม่สามารถปลดล็อกได้',
-        isOutOfScope: true,
+        counter_consecutive_fail: 3,
+        counter_sent: 3,
+        reason: 'กรอก OTP ผิดเกินกำหนด (อยู่ต่างสังกัด)',
+        isOutOfScope: true, // Objective 2: อยู่นอกระดับหน่วยงานที่แอดมินดูแล
       },
     };
 
     let usersData = JSON.parse(JSON.stringify(initialUsersData));
 
-    // Audit Logs
+    // Audit Logs (Objective 3: บันทึกประวัติการปลดล็อก)
     let auditLogs = [
       {
         id: 'LOG-001',
@@ -391,6 +378,7 @@
         phone: '081-234-5678',
         name: 'นายสมชาย มั่นคง',
         reason: 'ผู้ใช้โทรแจ้งยืนยันตัวตนแล้ว',
+        resetDetails: 'fail: 3->0, sent: 2->0',
       },
     ];
 
@@ -414,24 +402,12 @@
       renderCurrentDesign();
     }
 
-    // Select User
-    function selectUser(phone) {
+    // Select User directly inside Phone Mockup
+    function selectUserInsidePhone(phone) {
       selectedPhone = phone;
       d1SearchInput = phone;
       d1HasSearched = true;
       d3SelectedUser = phone;
-
-      const phones = ['0812345678', '0898765432', '0829998877', '0861112233'];
-      phones.forEach(p => {
-        const el = document.getElementById(`chip-${p}`);
-        if (el) {
-          if (p === phone) {
-            el.classList.add('ring-2', 'ring-slate-900', 'font-bold');
-          } else {
-            el.classList.remove('ring-2', 'ring-slate-900', 'font-bold');
-          }
-        }
-      });
       renderCurrentDesign();
     }
 
@@ -453,6 +429,8 @@
     // DESIGN 1: แบบตามภาพแนบ 100% (Baseline - Two-Tab Form with Guidance Card)
     // =========================================================================
     function renderDesign1(c, u) {
+      const allUsers = Object.values(usersData);
+
       c.innerHTML = `
         <div class="flex-1 flex flex-col bg-[#FAF9F6] overflow-hidden">
           
@@ -462,7 +440,7 @@
               <span>🔑</span> <span>ปลดล็อก OTP</span>
             </button>
             <button onclick="d1Tab = 'audit'; renderCurrentDesign();" class="touch-target flex-1 py-3 text-center transition-colors flex items-center justify-center gap-1.5 ${d1Tab === 'audit' ? 'text-[#694325] border-b-2 border-[#694325] font-bold' : 'text-stone-500 hover:text-stone-800'}">
-              <span>🕒</span> <span>ประวัติการปลดล็อก</span>
+              <span>🕒</span> <span>ประวัติการปลดล็อก (${auditLogs.length})</span>
             </button>
           </div>
 
@@ -486,7 +464,7 @@
                 </p>
               </div>
 
-              <!-- Card 2: ค้นหาหมายเลขโทรศัพท์เป้าหมาย (Exact layout from Screenshot) -->
+              <!-- Card 2: ค้นหาหมายเลขโทรศัพท์เป้าหมาย (Exact layout from Screenshot + In-App Selector) -->
               <div class="bg-white border border-stone-200 rounded-2xl p-3.5 shadow-xs space-y-2.5">
                 <div>
                   <h4 class="font-bold text-xs text-slate-900">ค้นหาหมายเลขโทรศัพท์เป้าหมาย</h4>
@@ -503,6 +481,19 @@
                     <span>🔍</span> <span>ค้นหา</span>
                   </button>
                 </div>
+
+                <!-- In-App Quick Officer Selection (ตรงตามจอ mock up) -->
+                <div class="pt-1 border-t border-stone-100 space-y-1">
+                  <div class="text-[10px] text-stone-500 font-semibold">แตะเลือกบัญชีในระบบเพื่อทดสอบ:</div>
+                  <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar py-0.5">
+                    ${allUsers.map(x => `
+                      <button onclick="selectUserInsidePhone('${x.phone}')" class="touch-target px-2.5 py-1.5 rounded-xl border text-[10.5px] font-medium shrink-0 flex items-center gap-1 active-scale ${x.phone === selectedPhone ? 'bg-[#F5ECE5] text-[#694325] border-[#694325] font-bold' : 'bg-stone-50 text-stone-700 border-stone-200'}">
+                        <span>${x.isOutOfScope ? '⚠️' : (x.isLocked ? '🔴' : '🟢')}</span>
+                        <span>${x.name.split(' ')[0]}</span>
+                      </button>
+                    `).join('')}
+                  </div>
+                </div>
               </div>
 
               <!-- Search Result Card (Shows when searched) -->
@@ -513,9 +504,18 @@
                   ${u.isLocked ? `
                     <div class="bg-[#FEF2F2] border border-[#F87171] text-[#991B1B] rounded-xl p-2.5 flex items-start gap-2 text-xs">
                       <span class="text-base leading-none text-red-600 mt-0.5">⚠️</span>
-                      <div class="space-y-0.5">
-                        <div class="font-bold text-xs">ถูกระงับการออกรหัส OTP ชั่วคราว</div>
+                      <div class="space-y-0.5 flex-1">
+                        <div class="font-bold text-xs flex items-center justify-between">
+                          <span>ถูกระงับการออกรหัส OTP ชั่วคราว</span>
+                          ${u.isOutOfScope ? '<span class="text-[9.5px] bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-bold">ต่างสังกัด</span>' : ''}
+                        </div>
                         <div class="text-[10.5px] text-red-800 leading-snug">${u.reason}</div>
+                        <!-- Live API Counters -->
+                        <div class="text-[10px] font-mono text-red-700 pt-0.5 flex items-center gap-2">
+                          <span>counter_fail: <strong>${u.counter_consecutive_fail}/3</strong></span>
+                          <span>•</span>
+                          <span>counter_sent: <strong>${u.counter_sent}/5</strong></span>
+                        </div>
                       </div>
                     </div>
                   ` : `
@@ -524,6 +524,7 @@
                       <div class="space-y-0.5">
                         <div class="font-bold text-xs">สถานะปกติ — ไม่ถูกระงับ</div>
                         <div class="text-[10.5px] text-emerald-800 leading-snug">หมายเลขนี้สามารถขอและยืนยันรหัส OTP ได้ตามปกติ</div>
+                        <div class="text-[10px] font-mono text-emerald-700">counter_fail: 0/3 • counter_sent: ${u.counter_sent}/5</div>
                       </div>
                     </div>
                   `}
@@ -540,23 +541,28 @@
                     </div>
                   </div>
 
-                  <!-- Action Button -->
-                  ${u.isLocked ? `
+                  <!-- Action Button / Scope Control (Objective 1 & 2) -->
+                  ${u.isOutOfScope ? `
+                    <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-center space-y-1">
+                      <div class="text-xs font-bold text-amber-900">⚠️ ไม่มีสิทธิ์ดำเนินการข้ามหน่วยงาน</div>
+                      <p class="text-[10px] text-amber-700">บัญชีนี้สังกัด ${u.org} ตามระเบียบความปลอดภัย ผู้ดูแลระบบ ${currentAdminOrg} ไม่สามารถปลดล็อกแทนได้</p>
+                    </div>
+                  ` : (u.isLocked ? `
                     <button onclick="openUnlockModalFor('${u.phone}')" class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
-                      <span>🔓</span> <span>ดำเนินการปลดล็อก OTP บัญชีนี้</span>
+                      <span>🔓</span> <span>ดำเนินการปลดล็อก (รีเซ็ตเคาน์เตอร์เป็น 0)</span>
                     </button>
                   ` : `
                     <div class="p-2 text-center text-[11px] text-stone-400 font-medium">
                       บัญชีพร้อมใช้งาน ไม่จำเป็นต้องปลดล็อก
                     </div>
-                  `}
+                  `)}
 
                 </div>
               ` : ''}
 
             ` : `
               
-              <!-- Tab 2: ประวัติการปลดล็อก (Audit Log) -->
+              <!-- Tab 2: ประวัติการปลดล็อก (Audit Log - Objective 3) -->
               <div class="space-y-2">
                 <div class="text-xs font-bold text-slate-800 flex items-center justify-between">
                   <span>ประวัติการปลดล็อกทั้งหมด (${auditLogs.length})</span>
@@ -575,6 +581,7 @@
                       <div><span class="text-stone-500">เป้าหมาย:</span> <strong class="text-[#694325] font-mono">${log.phone}</strong> (${log.name})</div>
                       <div><span class="text-stone-500">ผู้ดำเนินการ:</span> ${log.admin}</div>
                       <div><span class="text-stone-500">เหตุผล:</span> ${log.reason}</div>
+                      <div class="text-[10px] text-emerald-700 font-mono mt-0.5">✓ รีเซ็ตค่า: ${log.resetDetails || 'counter_fail=0, counter_sent=0'}</div>
                     </div>
                   </div>
                 `).join('')}
@@ -593,7 +600,6 @@
       d1SearchInput = val;
       d1HasSearched = true;
 
-      // Find user
       const found = usersData[val];
       if (found) {
         selectedPhone = val;
@@ -607,7 +613,7 @@
     // DESIGN 2: Minimal Quick-Card (มินิมอล ค้นหาเร็ว & ลิสต์คนติดล็อกทันที)
     // =========================================================================
     function renderDesign2(c, u) {
-      const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
+      const allUsers = Object.values(usersData);
       let filtered = allUsers;
       if (d2SearchQuery.trim()) {
         const q = d2SearchQuery.toLowerCase();
@@ -635,38 +641,44 @@
               <span class="flex items-center gap-1.5 text-[#991B1B]">
                 <span>🚨</span> รอการปลดล็อก (${lockedList.length} ท่าน)
               </span>
-              <span class="text-[10px] text-stone-400 font-normal">แตะปลดล็อกได้ทันที</span>
+              <span class="text-[10px] text-stone-400 font-normal">กดปลดล็อกในจอได้ทันที</span>
             </div>
 
             ${lockedList.length > 0 ? lockedList.map(x => `
-              <div class="bg-white border-l-4 border-l-red-500 border-y border-r border-stone-200 rounded-2xl p-3 shadow-xs space-y-2">
+              <div class="bg-white ${x.isOutOfScope ? 'border-l-4 border-l-amber-500' : 'border-l-4 border-l-red-500'} border-y border-r border-stone-200 rounded-2xl p-3 shadow-xs space-y-2">
                 
                 <div class="flex items-start justify-between gap-2">
                   <div class="flex items-center gap-2.5 min-w-0">
-                    <div class="w-10 h-10 rounded-xl bg-red-50 text-red-700 font-bold flex items-center justify-center text-sm shrink-0 border border-red-200">
+                    <div class="w-10 h-10 rounded-xl ${x.isOutOfScope ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-red-50 text-red-700 border-red-200'} font-bold flex items-center justify-center text-sm shrink-0 border">
                       ${x.name.slice(0, 1)}
                     </div>
                     <div class="min-w-0">
                       <div class="font-bold text-slate-900 text-xs truncate">${x.name}</div>
                       <div class="text-[11px] font-mono text-[#694325] font-semibold">${formatPhone(x.phone)}</div>
-                      <div class="text-[10px] text-stone-500">${x.role}</div>
+                      <div class="text-[10px] text-stone-500">${x.org}</div>
                     </div>
                   </div>
 
-                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-[#FEF2F2] text-[#991B1B] border border-[#F87171] shrink-0">
-                    ผิด ${x.failCount}/3 ครั้ง
+                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${x.isOutOfScope ? 'bg-amber-50 text-amber-900 border border-amber-300' : 'bg-[#FEF2F2] text-[#991B1B] border border-[#F87171]'} shrink-0">
+                    ${x.isOutOfScope ? 'ต่างสังกัด' : `ผิด ${x.counter_consecutive_fail}/3`}
                   </span>
                 </div>
 
-                <div class="p-2 rounded-xl bg-stone-50 text-[10.5px] text-stone-700 border border-stone-100 flex items-center gap-1.5">
-                  <span class="text-amber-600">⚠️</span>
-                  <span class="truncate">${x.reason}</span>
+                <div class="p-2 rounded-xl bg-stone-50 text-[10.5px] text-stone-700 border border-stone-100 flex items-center justify-between">
+                  <span class="truncate">⚠️ ${x.reason}</span>
+                  <span class="text-[10px] font-mono text-stone-500 shrink-0 ml-1">fail:${x.counter_consecutive_fail} sent:${x.counter_sent}</span>
                 </div>
 
-                <!-- Primary System Button -->
-                <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
-                  <span>⚡</span> <span>ปลดล็อกทันที</span>
-                </button>
+                <!-- Primary System Button (Enforcing Org Scope) -->
+                ${x.isOutOfScope ? `
+                  <button disabled class="w-full h-11 bg-stone-100 text-stone-400 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 cursor-not-allowed">
+                    <span>🔒</span> <span>ไม่มีสิทธิ์ปลดล็อกข้ามหน่วยงาน</span>
+                  </button>
+                ` : `
+                  <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
+                    <span>⚡</span> <span>ปลดล็อกทันที (รีเซ็ตเคาน์เตอร์ = 0)</span>
+                  </button>
+                `}
               </div>
             `).join('') : `
               <div class="p-4 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-2xl text-center text-xs font-medium">
@@ -695,7 +707,7 @@
                     </div>
                   </div>
                   <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#34D399] font-bold">
-                    ✓ ปกติ
+                    ✓ ปกติ (fail: 0)
                   </span>
                 </div>
               `).join('')}
@@ -710,7 +722,7 @@
     // DESIGN 3: One-Hand Thumb Zone & Bottom Sheet (ควบคุมด้วยมือเดียว)
     // =========================================================================
     function renderDesign3(c, u) {
-      const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
+      const allUsers = Object.values(usersData);
       const targetUser = usersData[d3SelectedUser] || u;
 
       c.innerHTML = `
@@ -721,39 +733,41 @@
             
             <!-- Big Hero Status Card (Large Typography WCAG AAA) -->
             <div class="bg-white border border-stone-200 rounded-3xl p-4 shadow-xs text-center space-y-2">
-              <div class="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center text-2xl font-bold shadow-xs ${targetUser.isLocked ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-emerald-50 text-emerald-600 border border-emerald-200'}">
-                ${targetUser.isLocked ? '🔒' : '✓'}
+              <div class="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center text-2xl font-bold shadow-xs ${targetUser.isOutOfScope ? 'bg-amber-50 text-amber-700 border border-amber-200' : (targetUser.isLocked ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-emerald-50 text-emerald-600 border border-emerald-200')}">
+                ${targetUser.isOutOfScope ? '⚠️' : (targetUser.isLocked ? '🔒' : '✓')}
               </div>
 
               <div>
                 <h3 class="text-base font-bold text-slate-900">${targetUser.name}</h3>
                 <p class="text-xs font-mono text-[#694325] font-semibold">${formatPhone(targetUser.phone)}</p>
-                <p class="text-[10px] text-stone-400 mt-0.5">${targetUser.org} • ${targetUser.role}</p>
+                <p class="text-[10px] text-stone-500 mt-0.5">${targetUser.org} • ${targetUser.role}</p>
               </div>
 
-              <div class="inline-block px-3 py-1 rounded-full text-xs font-bold ${targetUser.isLocked ? 'bg-[#FEF2F2] text-[#991B1B] border border-[#F87171]' : 'bg-[#ECFDF5] text-[#065F46] border border-[#34D399]'}">
-                ${targetUser.isLocked ? '🔴 ถูกระงับ OTP ชั่วคราว' : '🟢 บัญชีใช้งานได้ปกติ'}
+              <div class="inline-block px-3 py-1 rounded-full text-xs font-bold ${targetUser.isOutOfScope ? 'bg-amber-50 text-amber-900 border border-amber-300' : (targetUser.isLocked ? 'bg-[#FEF2F2] text-[#991B1B] border border-[#F87171]' : 'bg-[#ECFDF5] text-[#065F46] border border-[#34D399]')}">
+                ${targetUser.isOutOfScope ? '⚠️ ต่างสังกัด (อยู่นอกขอบเขตดูแล)' : (targetUser.isLocked ? '🔴 ถูกระงับ OTP ชั่วคราว' : '🟢 บัญชีใช้งานได้ปกติ')}
               </div>
 
-              ${targetUser.isLocked ? `
-                <div class="text-[11px] text-stone-600 bg-stone-50 p-2.5 rounded-xl border border-stone-100 text-left space-y-1">
-                  <div><strong>สาเหตุ:</strong> ${targetUser.reason}</div>
-                  <div class="text-stone-400 text-[10px]">กรอกผิด ${targetUser.failCount}/3 ครั้ง • ขอส่งรหัส ${targetUser.sentCount}/5 ครั้ง</div>
+              <!-- Live Counter Info Box -->
+              <div class="text-[11px] text-stone-700 bg-stone-50 p-2.5 rounded-xl border border-stone-100 text-left space-y-1">
+                <div><strong>สาเหตุ:</strong> ${targetUser.reason}</div>
+                <div class="flex items-center justify-between text-stone-500 text-[10px] font-mono pt-0.5 border-t border-stone-200/60">
+                  <span>counter_consecutive_fail: <strong>${targetUser.counter_consecutive_fail}/3</strong></span>
+                  <span>counter_sent: <strong>${targetUser.counter_sent}/5</strong></span>
                 </div>
-              ` : ''}
+              </div>
             </div>
 
-            <!-- Quick Thumb-Switcher (Horizontal avatar chips) -->
+            <!-- In-App Thumb-Switcher (Horizontal avatar selector inside screen) -->
             <div class="space-y-1">
-              <div class="text-[11px] font-bold text-stone-600 px-1">เลือกเจ้าหน้าที่ในหน่วยงาน:</div>
+              <div class="text-[11px] font-bold text-stone-700 px-1">แตะเลือกเจ้าหน้าที่เพื่อตรวจสอบ:</div>
               <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar py-1">
                 ${allUsers.map(x => `
                   <button onclick="d3SelectedUser = '${x.phone}'; renderCurrentDesign();" class="touch-target flex items-center gap-2 px-3 py-2 rounded-2xl border text-xs font-medium shrink-0 transition-all active-scale ${x.phone === targetUser.phone ? 'bg-[#694325] text-white border-[#694325] shadow-xs' : 'bg-white text-stone-700 border-stone-200'}">
-                    <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${x.phone === targetUser.phone ? 'bg-white/20 text-white' : (x.isLocked ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700')}">
+                    <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${x.phone === targetUser.phone ? 'bg-white/20 text-white' : (x.isOutOfScope ? 'bg-amber-100 text-amber-800' : (x.isLocked ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'))}">
                       ${x.name.slice(0, 1)}
                     </span>
                     <span class="truncate">${x.name.split(' ')[0]}</span>
-                    ${x.isLocked ? '<span class="text-[9px] text-red-400">🔴</span>' : ''}
+                    <span>${x.isOutOfScope ? '⚠️' : (x.isLocked ? '🔴' : '🟢')}</span>
                   </button>
                 `).join('')}
               </div>
@@ -767,15 +781,19 @@
               โซนนิ้วโป้งมือเดียว (Natural Thumb Reach)
             </div>
 
-            ${targetUser.isLocked ? `
+            ${targetUser.isOutOfScope ? `
+              <button disabled class="w-full h-12 bg-amber-50 border border-amber-200 text-amber-800 font-bold rounded-2xl text-xs flex items-center justify-center gap-1.5 cursor-not-allowed">
+                <span>⚠️</span> <span>ไม่มีสิทธิ์ปลดล็อกข้ามหน่วยงาน</span>
+              </button>
+            ` : (targetUser.isLocked ? `
               <button onclick="triggerDesign3BottomSheet('${targetUser.phone}')" class="touch-target w-full h-12 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-2xl text-sm active-scale shadow-sm flex items-center justify-center gap-2">
-                <span>⚡</span> <span>เปิดแผ่นสไลด์เพื่อปลดล็อก</span>
+                <span>⚡</span> <span>เปิดแผ่นสไลด์เพื่อปลดล็อก (Bottom Sheet)</span>
               </button>
             ` : `
               <button disabled class="w-full h-12 bg-stone-100 text-stone-400 font-bold rounded-2xl text-sm flex items-center justify-center gap-1.5 cursor-not-allowed">
                 <span>✓</span> <span>สถานะปกติ ไม่จำเป็นต้องปลดล็อก</span>
               </button>
-            `}
+            `)}
           </div>
 
         </div>
@@ -797,32 +815,33 @@
           <div class="w-11 h-11 rounded-2xl bg-amber-50 text-[#694325] font-bold flex items-center justify-center text-lg border border-amber-200">
             🔓
           </div>
-          <div class="min-w-0">
+          <div class="min-w-0 flex-1">
             <h3 class="text-sm font-bold text-slate-900 truncate">ปลดล็อกรหัส OTP</h3>
             <p class="text-xs font-mono text-[#694325] font-semibold">${formatPhone(u.phone)} (${u.name})</p>
+            <p class="text-[10px] text-stone-500 font-mono">รีเซ็ต counter_fail: ${u.counter_consecutive_fail}->0, counter_sent: ${u.counter_sent}->0</p>
           </div>
         </div>
 
         <div class="space-y-1.5">
-          <label class="text-[11px] font-bold text-slate-700">เลือกเหตุผลด่วน:</label>
+          <label class="text-[11px] font-bold text-slate-700">เลือกเหตุผลด่วน (Audit Log):</label>
           <div class="grid grid-cols-2 gap-1.5">
             <button onclick="confirmSheetUnlock('${u.phone}', 'ยืนยันตัวตนทางโทรศัพท์แล้ว')" class="touch-target p-2 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 text-[10.5px] font-semibold text-stone-800 active-scale text-left">
               📞 ยืนยันตัวตนแล้ว
             </button>
-            <button onclick="confirmSheetUnlock('${u.phone}', 'กดผิดเกินโควตา 3 ครั้ง')" class="touch-target p-2 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 text-[10.5px] font-semibold text-stone-800 active-scale text-left">
+            <button onclick="confirmSheetUnlock('${u.phone}', 'กรอก OTP ผิดเกินโควตา 3 ครั้ง')" class="touch-target p-2 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 text-[10.5px] font-semibold text-stone-800 active-scale text-left">
               🔒 กรอกผิดเกินโควตา
             </button>
-            <button onclick="confirmSheetUnlock('${u.phone}', 'ขอรีเซ็ตสิทธิ์ด่วน')" class="touch-target p-2 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 text-[10.5px] font-semibold text-stone-800 active-scale text-left">
+            <button onclick="confirmSheetUnlock('${u.phone}', 'ขอรีเซ็ตสิทธิ์การเข้าใช้งานด่วน')" class="touch-target p-2 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 text-[10.5px] font-semibold text-stone-800 active-scale text-left">
               ⚡ ขอรีเซ็ตสิทธิ์ด่วน
             </button>
-            <button onclick="confirmSheetUnlock('${u.phone}', 'ระบบขัดข้อง')" class="touch-target p-2 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 text-[10.5px] font-semibold text-stone-800 active-scale text-left">
+            <button onclick="confirmSheetUnlock('${u.phone}', 'ตรวจสอบระบบเรียบร้อย')" class="touch-target p-2 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 text-[10.5px] font-semibold text-stone-800 active-scale text-left">
               🛠️ ตรวจสอบระบบ
             </button>
           </div>
         </div>
 
         <button onclick="confirmSheetUnlock('${u.phone}', 'ผู้ดูแลยืนยันปลดล็อก')" class="touch-target w-full h-12 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-2xl text-xs active-scale shadow-sm flex items-center justify-center gap-1.5 mt-2">
-          <span>✓</span> <span>ยืนยันปลดล็อกทันที</span>
+          <span>✓</span> <span>ยืนยันปลดล็อกและบันทึกประวัติ</span>
         </button>
       `;
 
@@ -831,22 +850,27 @@
 
     function confirmSheetUnlock(phone, reason) {
       if (usersData[phone]) {
+        const prevFail = usersData[phone].counter_consecutive_fail;
+        const prevSent = usersData[phone].counter_sent;
+
         usersData[phone].isLocked = false;
-        usersData[phone].failCount = 0;
+        usersData[phone].counter_consecutive_fail = 0;
+        usersData[phone].counter_sent = 0;
         usersData[phone].reason = 'สถานะปกติ ไม่ติดล็อก';
 
         auditLogs.unshift({
           id: `LOG-${Date.now().toString().slice(-3)}`,
           time: 'วันนี้ เมื่อสักครู่',
-          admin: 'Admin ITS Lab2',
+          admin: currentAdminOrg,
           phone: formatPhone(phone),
           name: usersData[phone].name,
           reason: reason,
+          resetDetails: `fail: ${prevFail}->0, sent: ${prevSent}->0`,
         });
 
         closeBottomSheet();
         renderCurrentDesign();
-        toastNotice(`ปลดล็อกสำเร็จ! คืนสิทธิ์ให้ ${usersData[phone].name} แล้ว`);
+        toastNotice(`ปลดล็อกสำเร็จ! รีเซ็ตเคาน์เตอร์ให้ ${usersData[phone].name} แล้ว`);
       }
     }
 
@@ -859,23 +883,27 @@
     // DESIGN 4: Status Segments & 1-Tap Quick Resolve (แยกกลุ่มสถานะ 1 สัมผัส)
     // =========================================================================
     function renderDesign4(c, u) {
-      const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
-      const lockedUsers = allUsers.filter(x => x.isLocked);
+      const allUsers = Object.values(usersData);
+      const lockedUsers = allUsers.filter(x => x.isLocked && !x.isOutOfScope);
       const normalUsers = allUsers.filter(x => !x.isLocked);
+      const outOfScopeUsers = allUsers.filter(x => x.isOutOfScope);
 
       c.innerHTML = `
         <div class="flex-1 flex flex-col bg-[#FAF9F6] overflow-hidden">
           
           <!-- Segmented Control at Top -->
           <div class="bg-white border-b border-stone-200 p-2 flex-shrink-0">
-            <div class="bg-stone-100 p-1 rounded-2xl flex text-xs font-semibold">
-              <button onclick="d4Tab = 'locked'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 rounded-xl text-center transition-all ${d4Tab === 'locked' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
+            <div class="bg-stone-100 p-1 rounded-2xl flex text-xs font-semibold overflow-x-auto hide-scrollbar gap-1">
+              <button onclick="d4Tab = 'locked'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 px-2 rounded-xl text-center whitespace-nowrap transition-all ${d4Tab === 'locked' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
                 🔴 ติดล็อก (${lockedUsers.length})
               </button>
-              <button onclick="d4Tab = 'normal'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 rounded-xl text-center transition-all ${d4Tab === 'normal' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
+              <button onclick="d4Tab = 'normal'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 px-2 rounded-xl text-center whitespace-nowrap transition-all ${d4Tab === 'normal' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
                 🟢 ปกติ (${normalUsers.length})
               </button>
-              <button onclick="d4Tab = 'audit'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 rounded-xl text-center transition-all ${d4Tab === 'audit' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
+              <button onclick="d4Tab = 'scope'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 px-2 rounded-xl text-center whitespace-nowrap transition-all ${d4Tab === 'scope' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
+                ⚠️ ต่างสังกัด (${outOfScopeUsers.length})
+              </button>
+              <button onclick="d4Tab = 'audit'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 px-2 rounded-xl text-center whitespace-nowrap transition-all ${d4Tab === 'audit' ? 'bg-white text-slate-900 shadow-xs font-bold' : 'text-stone-600'}">
                 🕒 ประวัติ (${auditLogs.length})
               </button>
             </div>
@@ -895,22 +923,25 @@
                       <div>
                         <div class="font-bold text-slate-900 text-xs">${x.name}</div>
                         <div class="text-[11px] font-mono text-[#694325] font-semibold">${formatPhone(x.phone)}</div>
-                        <div class="text-[10px] text-stone-500">${x.role}</div>
+                        <div class="text-[10px] text-stone-500">${x.org}</div>
                       </div>
                     </div>
                     <span class="text-[10px] px-2.5 py-1 rounded-full font-bold bg-[#FEF2F2] text-[#991B1B] border border-[#F87171]">
-                      ผิด ${x.failCount}/3
+                      ผิด ${x.counter_consecutive_fail}/3
                     </span>
                   </div>
 
                   <div class="bg-red-50/60 p-2.5 rounded-2xl border border-red-100 text-[11px] text-red-900 space-y-0.5">
                     <div><strong>สาเหตุ:</strong> ${x.reason}</div>
-                    <div class="text-[10px] text-stone-500">จำกัด 3 ครั้ง/วัน • ล็อกอัตโนมัติเพื่อความปลอดภัย</div>
+                    <div class="text-[10px] font-mono text-red-700 flex items-center justify-between pt-0.5">
+                      <span>counter_fail: ${x.counter_consecutive_fail}/3</span>
+                      <span>counter_sent: ${x.counter_sent}/5</span>
+                    </div>
                   </div>
 
                   <!-- 1-Tap Quick Action -->
                   <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
-                    <span>⚡</span> <span>ปลดล็อกบัญชีนี้ (1-Tap)</span>
+                    <span>⚡</span> <span>ปลดล็อกบัญชีนี้ (1-Tap Reset)</span>
                   </button>
                 </div>
               `).join('') : `
@@ -918,8 +949,8 @@
                   <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto text-xl border border-emerald-200">
                     ✓
                   </div>
-                  <h4 class="font-bold text-sm text-slate-900">ไม่มีบัญชีติดล็อก</h4>
-                  <p class="text-xs text-stone-500">เจ้าหน้าที่ทุกคนในสังกัด Traffy @ ITS Lab2 สามารถเข้าสู่ระบบได้ตามปกติ</p>
+                  <h4 class="font-bold text-sm text-slate-900">ไม่มีบัญชีติดล็อกในหน่วยงาน</h4>
+                  <p class="text-xs text-stone-500">เจ้าหน้าที่ทุกคนในสังกัด ${currentAdminOrg} สามารถเข้าสู่ระบบได้ตามปกติ</p>
                 </div>
               `}
             ` : d4Tab === 'normal' ? `
@@ -933,11 +964,37 @@
                       <div>
                         <div class="text-xs font-bold text-slate-900">${x.name}</div>
                         <div class="text-[10.5px] font-mono text-stone-500">${formatPhone(x.phone)}</div>
+                        <div class="text-[9.5px] text-stone-400 font-mono">fail: ${x.counter_consecutive_fail} • sent: ${x.counter_sent}</div>
                       </div>
                     </div>
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#ECFDF5] text-[#065F46] border border-[#34D399] font-bold">
                       ✓ ปกติ
                     </span>
+                  </div>
+                `).join('')}
+              </div>
+            ` : d4Tab === 'scope' ? `
+              <div class="space-y-2.5">
+                <div class="p-3 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 space-y-1">
+                  <div class="font-bold flex items-center gap-1.5">
+                    <span>🛡️</span> กำหนดสิทธิ์ตามระดับหน่วยงาน (Objective 2)
+                  </div>
+                  <p class="text-[10.5px] text-amber-800 leading-relaxed">
+                    เพื่อความปลอดภัยของข้อมูล ระบบจำกัดสิทธิ์ให้ผู้ดูแลระบบสามารถรีเซ็ต OTP ได้เฉพาะเจ้าหน้าที่ภายในสังกัดตนเอง (${currentAdminOrg}) เท่านั้น
+                  </p>
+                </div>
+
+                ${outOfScopeUsers.map(x => `
+                  <div class="bg-white border border-stone-200 rounded-2xl p-3 space-y-2 shadow-xs">
+                    <div class="flex items-center justify-between">
+                      <div class="font-bold text-xs text-slate-900">${x.name}</div>
+                      <span class="text-[10px] px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 font-bold border border-stone-300">ต่างสังกัด</span>
+                    </div>
+                    <div class="text-[11px] font-mono text-[#694325]">${formatPhone(x.phone)}</div>
+                    <div class="text-[10px] text-stone-500">🏢 สังกัด: ${x.org}</div>
+                    <button disabled class="w-full h-10 bg-stone-100 text-stone-400 font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-not-allowed">
+                      <span>🔒</span> <span>ไม่มีสิทธิ์ปลดล็อกบัญชีต่างสังกัด</span>
+                    </button>
                   </div>
                 `).join('')}
               </div>
@@ -953,6 +1010,7 @@
                       <div><span class="text-stone-500">ผู้รับสิทธิ์:</span> <strong class="text-[#694325] font-mono">${log.phone}</strong> (${log.name})</div>
                       <div><span class="text-stone-500">ผู้ดำเนินการ:</span> ${log.admin}</div>
                       <div><span class="text-stone-500">เหตุผล:</span> ${log.reason}</div>
+                      <div class="text-[10px] text-emerald-700 font-mono mt-0.5">✓ ${log.resetDetails || 'รีเซ็ตเคาน์เตอร์ fail=0, sent=0'}</div>
                     </div>
                   </div>
                 `).join('')}
@@ -968,7 +1026,7 @@
     // DESIGN 5: Minimal Activity Feed (มินิมอล ไทม์ไลน์เหตุการณ์)
     // =========================================================================
     function renderDesign5(c, u) {
-      const allUsers = Object.values(usersData).filter(x => !x.isOutOfScope);
+      const allUsers = Object.values(usersData);
       const lockedUsers = allUsers.filter(x => x.isLocked);
 
       c.innerHTML = `
@@ -984,28 +1042,36 @@
             
             <!-- Pending Lock Incidents -->
             ${lockedUsers.map(x => `
-              <div class="bg-white border border-red-200 rounded-2xl p-3 shadow-xs space-y-2">
+              <div class="bg-white ${x.isOutOfScope ? 'border-amber-200' : 'border-red-200'} border rounded-2xl p-3 shadow-xs space-y-2">
                 <div class="flex items-center justify-between">
-                  <span class="text-[10px] font-bold text-red-600 bg-red-50 border border-red-200 px-2 py-0.5 rounded-full flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span> เกิดเหตุการณ์ล่าสุด
+                  <span class="text-[10px] font-bold ${x.isOutOfScope ? 'text-amber-800 bg-amber-50 border border-amber-200' : 'text-red-600 bg-red-50 border border-red-200'} px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full ${x.isOutOfScope ? 'bg-amber-500' : 'bg-red-500 animate-pulse'}"></span>
+                    ${x.isOutOfScope ? 'เกิดเหตุนอกสังกัด' : 'เกิดเหตุการณ์ล่าสุด'}
                   </span>
                   <span class="text-[10px] text-stone-400">12 นาทีที่แล้ว</span>
                 </div>
 
                 <div class="flex items-start gap-2.5">
-                  <div class="w-10 h-10 rounded-xl bg-red-50 text-red-700 font-bold flex items-center justify-center text-sm shrink-0 border border-red-200">
+                  <div class="w-10 h-10 rounded-xl ${x.isOutOfScope ? 'bg-amber-50 text-amber-800 border-amber-200' : 'bg-red-50 text-red-700 border-red-200'} font-bold flex items-center justify-center text-sm shrink-0 border">
                     ${x.name.slice(0, 1)}
                   </div>
-                  <div class="min-w-0">
-                    <div class="text-xs font-bold text-slate-900">${x.name}</div>
+                  <div class="min-w-0 flex-1">
+                    <div class="font-bold text-slate-900 text-xs">${x.name}</div>
                     <div class="text-[11px] font-mono text-[#694325] font-semibold">${formatPhone(x.phone)}</div>
-                    <div class="text-[10px] text-red-700 mt-0.5">⚠️ ${x.reason} (ผิด ${x.failCount}/3 ครั้ง)</div>
+                    <div class="text-[10px] ${x.isOutOfScope ? 'text-amber-800' : 'text-red-700'} mt-0.5 truncate">⚠️ ${x.reason}</div>
+                    <div class="text-[9.5px] font-mono text-stone-500">fail: ${x.counter_consecutive_fail} • sent: ${x.counter_sent}</div>
                   </div>
                 </div>
 
-                <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-10 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
-                  <span>🔓</span> <span>ปลดล็อกและคืนสิทธิ์ให้เจ้าหน้าที่</span>
-                </button>
+                ${x.isOutOfScope ? `
+                  <div class="text-[10px] text-center text-amber-800 bg-amber-50/70 p-2 rounded-xl border border-amber-200 font-medium">
+                    🔒 สังกัด ${x.org} (ผู้ดูแลไม่มีสิทธิ์ปลดล็อก)
+                  </div>
+                ` : `
+                  <button onclick="openUnlockModalFor('${x.phone}')" class="touch-target w-full h-10 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5">
+                    <span>🔓</span> <span>ปลดล็อกและคืนสิทธิ์ให้เจ้าหน้าที่</span>
+                  </button>
+                `}
               </div>
             `).join('')}
 
@@ -1023,9 +1089,10 @@
                   <div class="w-8 h-8 rounded-full bg-stone-100 text-stone-700 font-bold flex items-center justify-center text-xs shrink-0">
                     ${log.name.slice(0, 1)}
                   </div>
-                  <div class="min-w-0 text-xs">
+                  <div class="min-w-0 text-xs flex-1">
                     <div class="font-bold text-slate-800">${log.name} • <span class="font-mono text-[#694325] font-semibold">${log.phone}</span></div>
                     <div class="text-[10px] text-stone-500">โดย: ${log.admin} • เหตุผล: ${log.reason}</div>
+                    <div class="text-[9.5px] text-emerald-700 font-mono">✓ รีเซ็ตค่า: ${log.resetDetails || 'fail: 0, sent: 0'}</div>
                   </div>
                 </div>
               </div>
@@ -1044,7 +1111,7 @@
     }
 
     // =========================================================================
-    // MODAL LOGIC & ACTIONS
+    // MODAL LOGIC & ACTIONS (Objective 1, 2, 3)
     // =========================================================================
     let targetPhoneToUnlock = '';
 
@@ -1053,14 +1120,22 @@
       const u = usersData[phone];
       if (!u) return;
 
+      // Security check
+      if (u.isOutOfScope) {
+        toastNotice('ไม่สามารถดำเนินการได้: บัญชีนี้อยู่ต่างสังกัด');
+        return;
+      }
+
       const avatar = document.getElementById('modal-user-avatar');
       const name = document.getElementById('modal-user-name');
       const ph = document.getElementById('modal-user-phone');
+      const org = document.getElementById('modal-user-org');
       const reasonInput = document.getElementById('modal-reason-input');
 
       if (avatar) avatar.textContent = u.name.slice(0, 1);
       if (name) name.textContent = u.name;
       if (ph) ph.textContent = formatPhone(u.phone);
+      if (org) org.textContent = `${u.org} (${u.role})`;
       if (reasonInput) reasonInput.value = 'ผู้ใช้โทรแจ้งยืนยันตัวตนแล้ว';
 
       const modal = document.getElementById('unlock-modal');
@@ -1084,22 +1159,29 @@
       const reason = reasonInput ? (reasonInput.value.trim() || 'ยืนยันตัวตนแล้ว') : 'ยืนยันตัวตนแล้ว';
 
       if (u) {
+        const prevFail = u.counter_consecutive_fail;
+        const prevSent = u.counter_sent;
+
+        // Reset Counters in mock state (Objective 1: Admin self-service reset)
         u.isLocked = false;
-        u.failCount = 0;
+        u.counter_consecutive_fail = 0;
+        u.counter_sent = 0;
         u.reason = 'สถานะปกติ ไม่ติดล็อก';
 
+        // Record Audit Log (Objective 3: Audit logging with details)
         auditLogs.unshift({
           id: `LOG-${Date.now().toString().slice(-3)}`,
           time: 'วันนี้ เมื่อสักครู่',
-          admin: 'Admin ITS Lab2',
+          admin: currentAdminOrg,
           phone: formatPhone(phone),
           name: u.name,
           reason: reason,
+          resetDetails: `fail: ${prevFail}->0, sent: ${prevSent}->0`,
         });
 
         closeUnlockModal();
         renderCurrentDesign();
-        toastNotice(`ปลดล็อกสำเร็จ! คืนสิทธิ์ให้ ${u.name} แล้ว`);
+        toastNotice(`ปลดล็อกสำเร็จ! รีเซ็ต counter_fail และ counter_sent เป็น 0 แล้ว`);
       }
     }
 
