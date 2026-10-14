@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Traffy Fondue - ระบบจัดการรีเซ็ต OTP (6 Mobile Designs - WCAG 2.2 AAA)</title>
+  <title>Traffy Fondue - ระบบจัดการรีเซ็ต OTP สำหรับแอพมือถือ (แบบที่ 9 ที่เลือก + ทุกแบบ - WCAG 2.2 AAA)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -84,7 +84,7 @@
 <body class="h-full flex flex-col text-slate-800 antialiased overflow-hidden bg-[#E8ECF2]">
 
   <!-- =========================================================================
-       TOP SHOWCASE CONTROL BAR (6 DESIGN SELECTOR TABS) - NO EMOJIS
+       TOP SHOWCASE CONTROL BAR (DESIGN SELECTOR TABS) - NO EMOJIS
        ========================================================================= -->
   <header class="bg-white border-b border-slate-200 px-3 sm:px-6 py-2.5 flex-shrink-0 z-30 shadow-xs">
     <div class="max-w-6xl mx-auto flex flex-col gap-2">
@@ -96,16 +96,19 @@
             TF
           </div>
           <h1 class="text-sm sm:text-base font-bold text-slate-900 tracking-tight">
-            ปลดล็อก OTP (6 Mobile Designs)
+            ปลดล็อก OTP สำหรับแอพมือถือ
           </h1>
+          <span class="text-[10.5px] bg-[#694325] text-white px-2 py-0.5 rounded-full font-bold shadow-xs">
+            แบบที่ 9 (แบบที่เลือก)
+          </span>
           <span class="text-[10.5px] bg-emerald-100 text-emerald-900 border border-emerald-300 px-2 py-0.5 rounded-full font-bold flex items-center gap-1">
             <svg class="w-3 h-3 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
             </svg>
             WCAG 2.2 AAA
           </span>
-          <span class="text-xs text-slate-500 hidden lg:inline">
-            เลือกดูตัวอย่างการออกแบบสำหรับแอพมือถือ
+          <span class="text-xs text-slate-500 hidden xl:inline">
+            ปรับแต่งตามข้อเสนอแนะ: ตัดอวตารออก, เปลี่ยนคำว่าเวลาที่ทำรายการ, ตัด IP และข้อความส่วนเกินออก
           </span>
         </div>
 
@@ -135,10 +138,16 @@
         </div>
       </div>
 
-      <!-- 6 Clean Horizontal Design Selector Tabs (NO EMOJIS) -->
+      <!-- Horizontal Design Selector Tabs (แบบที่ 9 เด่นหน้าสุด) -->
       <div class="bg-slate-100 p-1 rounded-xl flex items-center gap-1 overflow-x-auto hide-scrollbar text-xs font-medium border border-slate-200">
-        <button onclick="switchDesign(1)" id="tab-1" class="tab-btn active flex-shrink-0 px-3.5 py-1.5 rounded-lg font-bold bg-white shadow-xs text-slate-900 ring-1 ring-slate-200">
-          1. รายชื่อปลดล็อก (Mobile Roster)
+        <button onclick="switchDesign(9)" id="tab-9" class="tab-btn active flex-shrink-0 px-3.5 py-1.5 rounded-lg font-bold bg-[#694325] text-white shadow-xs ring-1 ring-[#694325]">
+          แบบที่ 9 (แบบที่เลือกสำหรับแอพ)
+        </button>
+        <button onclick="switchDesign(1)" id="tab-1" class="tab-btn flex-shrink-0 px-3.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
+          1. รายชื่อปลดล็อก (Roster)
+        </button>
+        <button onclick="switchDesign(6)" id="tab-6" class="tab-btn flex-shrink-0 px-3.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
+          6. ค้นหาเบอร์ปลดล็อก (Search)
         </button>
         <button onclick="switchDesign(2)" id="tab-2" class="tab-btn flex-shrink-0 px-3.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
           2. การ์ดฟิลเตอร์ (Filter Grid)
@@ -151,9 +160,6 @@
         </button>
         <button onclick="switchDesign(5)" id="tab-5" class="tab-btn flex-shrink-0 px-3.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
           5. ฟีดความปลอดภัย (Security Feed)
-        </button>
-        <button onclick="switchDesign(6)" id="tab-6" class="tab-btn flex-shrink-0 px-3.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium">
-          6. ค้นหาเบอร์ปลดล็อก (Search by Phone)
         </button>
       </div>
 
@@ -189,7 +195,7 @@
 
             <!-- Status Bar (SVG signal and battery, NO EMOJIS) -->
             <div class="h-9 px-5 pt-1.5 flex items-center justify-between text-white text-[10.5px] font-semibold bg-[#694325] select-none flex-shrink-0 z-40">
-              <span id="live-clock" class="font-mono">14:26</span>
+              <span id="live-clock" class="font-mono">15:20</span>
               <div class="flex items-center gap-1.5">
                 <!-- Mobile Signal SVG -->
                 <svg class="w-3.5 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -204,7 +210,7 @@
               </div>
             </div>
 
-            <!-- App Header (Matching User Screenshot: รีเซ็ต OTP / หน่วยงาน: Traffy @ ITS Lab2) -->
+            <!-- App Header -->
             <div class="bg-[#694325] text-white px-3.5 py-2.5 flex items-center justify-between flex-shrink-0 z-30 shadow-xs">
               <div class="flex items-center gap-2.5">
                 <button onclick="toastNotice('กลับสู่หน้าการตั้งค่า')" class="touch-target w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white active-scale" aria-label="ย้อนกลับ">
@@ -213,7 +219,7 @@
                   </svg>
                 </button>
                 <div>
-                  <h2 id="phone-header-title" class="text-sm font-bold leading-tight">รีเซ็ต OTP</h2>
+                  <h2 id="phone-header-title" class="text-sm font-bold leading-tight">ปลดล็อก OTP</h2>
                   <div class="flex items-center gap-1 mt-0.5">
                     <span class="text-[10px] text-[#E0B075] font-medium">หน่วยงาน: Traffy @ ITS Lab2</span>
                   </div>
@@ -237,7 +243,7 @@
             </div>
 
             <!-- =========================================================================
-                 CONFIRMATION MODAL (ตรงตาม Modal ของหน้าเว็บ UIDesign 100% - NO EMOJIS)
+                 CONFIRMATION MODAL (ตรงตาม Modal ของหน้าเว็บ 100% - NO EMOJIS)
                  ========================================================================= -->
             <div id="unlock-modal" onclick="closeUnlockModal()" class="hidden absolute inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-3 animate-fade-in">
               <div onclick="event.stopPropagation()" class="bg-white rounded-3xl w-full max-w-[320px] shadow-2xl border border-slate-200 overflow-hidden flex flex-col relative p-4 space-y-3">
@@ -264,15 +270,10 @@
                   </p>
                 </div>
 
-                <!-- User Highlight Card (Matching Web Modal) -->
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-2.5 flex items-center gap-3">
-                  <div id="modal-user-avatar" class="w-10 h-10 rounded-full bg-white text-slate-700 font-bold flex items-center justify-center text-sm shadow-xs border border-slate-200 shrink-0">
-                    ก
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <div id="modal-user-name" class="font-bold text-xs text-slate-900 truncate">นาย ก (สมมุติ)</div>
-                    <div id="modal-user-phone" class="text-[11px] font-mono text-slate-500">081-000-0001</div>
-                  </div>
+                <!-- User Highlight Card (Clean without avatar circle) -->
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 flex flex-col gap-0.5">
+                  <div id="modal-user-name" class="font-bold text-xs text-slate-900">นาย ก (สมมุติ)</div>
+                  <div id="modal-user-phone" class="text-[11px] font-mono text-stone-500">081-000-0001</div>
                 </div>
 
                 <!-- Quick Reasons Selection (NO EMOJIS) -->
@@ -330,32 +331,30 @@
   </main>
 
   <script>
-    // State
-    let currentDesign = 6; // Default to Design 6 so the user directly sees the newly added design!
+    // State: Default directly to Design 9 as selected by senior!
+    let currentDesign = 9; 
     let selectedPhone = '081-000-0001';
     let userZoomMode = 'fit';
     let isTargetHelperActive = false;
 
-    // Sub-states for each design
-    let d1Tab = 'roster'; // 'roster' | 'audit'
+    // Sub-states
+    let d9SearchQuery = '';
+    let d9Category = 'all'; // 'all' | 'locked' | 'active'
+
+    let d1Tab = 'roster';
     let d1SearchQuery = '';
-    let d2Filter = 'all'; // 'all' | 'locked' | 'active'
+    let d2Filter = 'all';
     let d2SearchQuery = '';
     let d3SelectedUser = '081-000-0001';
-    let d4KanbanTab = 'locked'; // 'locked' | 'normal'
-
-    // Sub-state for Design 6 (Search by Phone - User Screenshot)
-    let d6Tab = 'unlock'; // 'unlock' | 'audit'
-    let d6PhoneInput = '081-000-0001'; // Default filled for immediate demonstration
-    let d6SearchResult = null;
+    let d4KanbanTab = 'locked';
+    let d6Tab = 'unlock';
+    let d6PhoneInput = '081-000-0001';
     let d6AuditSearchQuery = '';
 
     let targetPhoneToUnlock = '';
-
-    // Current Admin Context
     const currentAdminOrg = 'Traffy @ ITS Lab2';
 
-    // Mock Database
+    // Mock Database (Web Design 9 alignment + adjustments from senior)
     const initialUsersData = [
       {
         id: '1',
@@ -366,7 +365,9 @@
         isLocked: true,
         failCount: 3,
         sentCount: 2,
-        reason: 'กรอกรหัส OTP ไม่ถูกต้องเกิน 3 ครั้งติดต่อกัน',
+        actionTime: '14:20 น. (12 นาทีที่แล้ว)', // Changed from "เวลาที่เกิดเหตุ" -> "เวลาที่ทำรายการ"
+        channel: 'LINE LIFF (Android)',         // Simplified channel without technical IP address
+        reason: 'กรอกรหัส OTP ไม่ถูกต้องเกิน 3 ครั้งติดต่อกัน ระบบระงับเพื่อความปลอดภัย',
         isOutOfScope: false,
       },
       {
@@ -378,6 +379,8 @@
         isLocked: true,
         failCount: 1,
         sentCount: 5,
+        actionTime: '11:45 น.',
+        channel: 'LINE LIFF (iOS)',
         reason: 'ขอรับรหัส OTP เกินโควตารายวัน (5 ครั้ง)',
         isOutOfScope: false,
       },
@@ -390,11 +393,27 @@
         isLocked: false,
         failCount: 0,
         sentCount: 1,
-        reason: 'สถานะปกติ ไม่ติดล็อก',
+        actionTime: '10:15 น.',
+        channel: 'Web Portal (Chrome)',
+        reason: 'เข้าสู่ระบบสำเร็จ (OTP ผ่านในครั้งแรก)', // Removed "ไม่มีความเสี่ยง"
         isOutOfScope: false,
       },
       {
         id: '4',
+        phone: '083-000-0003',
+        name: 'นางสาว ค (สมมุติ)',
+        role: 'เจ้าหน้าที่ประสานงาน',
+        org: 'Traffy @ ITS Lab2',
+        isLocked: false,
+        failCount: 0,
+        sentCount: 1,
+        actionTime: '09:30 น.',
+        channel: 'SMS Gateway (AIS)',
+        reason: 'ส่งรหัสยืนยัน 6 หลักเรียบร้อย ยืนยันตัวตนสำเร็จ', // Removed "ไม่มีความเสี่ยง"
+        isOutOfScope: false,
+      },
+      {
+        id: '5',
         phone: '086-111-2233',
         name: 'นายธนกร รุ่งเรือง',
         role: 'วิศวกรระบบ',
@@ -402,11 +421,13 @@
         isLocked: true,
         failCount: 3,
         sentCount: 3,
+        actionTime: '08:50 น.',
+        channel: 'LINE LIFF',
         reason: 'อยู่ต่างสังกัด แอดมินไม่มีสิทธิ์ปลดล็อก',
         isOutOfScope: true, // Objective 2: อยู่นอกระดับหน่วยงาน
       },
       {
-        id: '5',
+        id: '6',
         phone: '092-826-4455',
         name: 'นายวิชัย เกียรติมั่นคง',
         role: 'เจ้าหน้าที่ปฏิบัติการ',
@@ -414,14 +435,16 @@
         isLocked: false,
         failCount: 0,
         sentCount: 1,
-        reason: 'สถานะปกติ ผ่านการปลดล็อกแล้ว',
+        actionTime: '13:33 น.',
+        channel: 'LINE LIFF',
+        reason: 'ปลดล็อกสิทธิ์เรียบร้อยแล้ว',
         isOutOfScope: false,
       },
     ];
 
     let usersData = JSON.parse(JSON.stringify(initialUsersData));
 
-    // Audit Logs (ตรงตาม Screenshot 2 ของผู้ใช้งานเป๊ะๆ)
+    // Audit Logs
     let auditLogs = [
       {
         id: 'LOG-001',
@@ -444,17 +467,22 @@
     }
 
     // Switch Design
+    const allDesignIds = [9, 1, 6, 2, 3, 4, 5];
     function switchDesign(designId) {
       currentDesign = designId;
-      for (let i = 1; i <= 6; i++) {
-        const btn = document.getElementById(`tab-${i}`);
-        if (!btn) continue;
-        if (i === designId) {
-          btn.className = 'tab-btn active flex-shrink-0 px-3.5 py-1.5 rounded-lg font-bold bg-white shadow-xs text-slate-900 ring-1 ring-slate-200';
+      allDesignIds.forEach(id => {
+        const btn = document.getElementById(`tab-${id}`);
+        if (!btn) return;
+        if (id === designId) {
+          if (id === 9) {
+            btn.className = 'tab-btn active flex-shrink-0 px-3.5 py-1.5 rounded-lg font-bold bg-[#694325] text-white shadow-xs ring-1 ring-[#694325]';
+          } else {
+            btn.className = 'tab-btn active flex-shrink-0 px-3.5 py-1.5 rounded-lg font-bold bg-white shadow-xs text-slate-900 ring-1 ring-slate-200';
+          }
         } else {
           btn.className = 'tab-btn flex-shrink-0 px-3.5 py-1.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium';
         }
-      }
+      });
       renderCurrentDesign();
     }
 
@@ -463,7 +491,8 @@
       const container = document.getElementById('phone-screen-content');
       if (!container) return;
 
-      if (currentDesign === 1) renderDesign1(container);
+      if (currentDesign === 9) renderDesign9(container);
+      else if (currentDesign === 1) renderDesign1(container);
       else if (currentDesign === 2) renderDesign2(container);
       else if (currentDesign === 3) renderDesign3(container);
       else if (currentDesign === 4) renderDesign4(container);
@@ -472,7 +501,203 @@
     }
 
     // =========================================================================
-    // DESIGN 1: รายชื่อปลดล็อกบนมือถือ (Mobile Roster - NO EMOJIS)
+    // DESIGN 9: แบบที่ 9 ที่พี่เขาเลือกสำหรับแอพ (Smart Search & Security Cards)
+    // ปรับแก้ตาม Feedback 4 ข้อ:
+    // 1. ตัดรูป/อวตาร ก ข ค ออกทั้งหมด
+    // 2. เปลี่ยน "เวลาที่เกิดเหตุ" -> "เวลาที่ทำรายการ"
+    // 3. ตัด IP แอดเดรสออก เหลือเฉพาะช่องทางที่กระชับ
+    // 4. ตัดคำว่า "ไม่มีความเสี่ยง" ออกทั้งหมด
+    // =========================================================================
+    function renderDesign9(c) {
+      // Filtering
+      let list = usersData;
+      if (d9Category === 'locked') {
+        list = list.filter(x => x.isLocked && !x.isOutOfScope);
+      } else if (d9Category === 'active') {
+        list = list.filter(x => !x.isLocked);
+      }
+
+      if (d9SearchQuery.trim()) {
+        const q = d9SearchQuery.toLowerCase();
+        const cleanQ = q.replace(/[-\s]/g, '');
+        list = list.filter(x => 
+          x.name.toLowerCase().includes(q) || 
+          x.phone.replace(/[-\s]/g, '').includes(cleanQ) ||
+          x.phone.includes(q)
+        );
+      }
+
+      const lockedTotal = usersData.filter(x => x.isLocked && !x.isOutOfScope).length;
+      const activeTotal = usersData.filter(x => !x.isLocked).length;
+
+      c.innerHTML = `
+        <div class="flex-1 flex flex-col bg-slate-50 overflow-hidden">
+          
+          <!-- Top Sticky Filter & Search Header -->
+          <div class="bg-white border-b border-slate-200 p-3 space-y-2.5 flex-shrink-0 shadow-xs">
+            
+            <!-- Live Search Bar -->
+            <div class="relative">
+              <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input 
+                type="text" 
+                value="${d9SearchQuery}"
+                oninput="d9SearchQuery = this.value; renderCurrentDesign();"
+                placeholder="พิมพ์ค้นหาเบอร์โทร หรือชื่อเจ้าหน้าที่..." 
+                class="touch-target w-full h-11 pl-9 pr-9 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-800 placeholder:font-sans placeholder:text-slate-400 outline-none focus:bg-white focus:border-[#694325] focus:ring-1 focus:ring-[#694325] transition-all shadow-xs" 
+              />
+              ${d9SearchQuery ? `
+                <button onclick="d9SearchQuery = ''; renderCurrentDesign();" class="touch-target absolute right-1 top-1 w-9 h-9 flex items-center justify-center text-slate-400 hover:text-slate-600">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+              ` : ''}
+            </div>
+
+            <!-- Quick Category Filter Chips (3 คอลัมน์ พอดีหน้าจอมือถือ) -->
+            <div class="grid grid-cols-3 gap-1 text-[11px] font-bold">
+              <button 
+                onclick="d9Category = 'all'; renderCurrentDesign();" 
+                class="touch-target py-2 rounded-xl text-center transition-all ${d9Category === 'all' ? 'bg-[#694325] text-white shadow-xs font-bold' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}"
+              >
+                ทั้งหมด (${usersData.length})
+              </button>
+              <button 
+                onclick="d9Category = 'locked'; renderCurrentDesign();" 
+                class="touch-target py-2 rounded-xl text-center transition-all flex items-center justify-center gap-1 ${d9Category === 'locked' ? 'bg-red-700 text-white shadow-xs font-bold' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}"
+              >
+                <span>ถูกระงับ</span>
+                <span class="text-[9.5px] px-1.5 py-0.2 rounded-full ${d9Category === 'locked' ? 'bg-red-900 text-white' : 'bg-red-100 text-red-700 font-bold'}">
+                  ${lockedTotal}
+                </span>
+              </button>
+              <button 
+                onclick="d9Category = 'active'; renderCurrentDesign();" 
+                class="touch-target py-2 rounded-xl text-center transition-all flex items-center justify-center gap-1 ${d9Category === 'active' ? 'bg-emerald-700 text-white shadow-xs font-bold' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}"
+              >
+                <span>ปกติ</span>
+                <span class="text-[9.5px] px-1.5 py-0.2 rounded-full ${d9Category === 'active' ? 'bg-emerald-900 text-white' : 'bg-emerald-100 text-emerald-800 font-bold'}">
+                  ${activeTotal}
+                </span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Cards Scrollable Area -->
+          <div class="flex-1 overflow-y-auto p-3 space-y-3 hide-scrollbar">
+            
+            ${list.length > 0 ? list.map(u => `
+              <div class="bg-white rounded-2xl border-2 ${u.isOutOfScope ? 'border-amber-200' : (u.isLocked ? 'border-red-200' : 'border-slate-200')} p-3.5 shadow-xs relative overflow-hidden flex flex-col justify-between">
+                
+                <!-- Status Top Line Accent -->
+                <div class="absolute top-0 left-0 right-0 h-1 ${u.isOutOfScope ? 'bg-amber-400' : (u.isLocked ? 'bg-red-500' : 'bg-emerald-500')}"></div>
+
+                <!-- Header Row (Clean, NO AVATAR CIRCLE ก ข ค ตามที่พี่เขาบอก) -->
+                <div class="flex items-start justify-between gap-2 pt-0.5">
+                  <div class="min-w-0 flex-1">
+                    <h3 class="font-bold text-slate-900 text-xs truncate">${u.name}</h3>
+                    <div class="font-mono text-[11px] font-semibold text-[#694325] mt-0.5">${u.phone}</div>
+                    <div class="text-[10px] text-slate-400 truncate mt-0.5">${u.org} • ${u.role}</div>
+                  </div>
+
+                  <!-- Status Badge -->
+                  ${u.isOutOfScope ? `
+                    <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold bg-amber-50 text-amber-800 border border-amber-200 shrink-0">
+                      ต่างสังกัด
+                    </span>
+                  ` : (u.isLocked ? `
+                    <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold bg-red-100 text-red-800 border border-red-200 shrink-0 flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> ผิด ${u.failCount}/3 ครั้ง
+                    </span>
+                  ` : `
+                    <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 shrink-0 flex items-center gap-1">
+                      <svg class="w-3 h-3 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                      </svg>
+                      ปกติ
+                    </span>
+                  `)}
+                </div>
+
+                <!-- Metadata Box (ปรับแก้: เปลี่ยนเป็น "เวลาที่ทำรายการ" และตัด IP แอดเดรสออก) -->
+                <div class="bg-slate-50 rounded-xl p-2.5 text-[10.5px] text-slate-600 space-y-1 mt-2.5 border border-slate-100">
+                  <div class="flex items-center justify-between">
+                    <span class="text-slate-400">เวลาที่ทำรายการ:</span>
+                    <span class="font-medium text-slate-700">${u.actionTime}</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-slate-400">ช่องทาง:</span>
+                    <span class="font-medium text-slate-700">${u.channel}</span>
+                  </div>
+                </div>
+
+                <!-- Status / Reason Detail (ตัดคำว่า "ไม่มีความเสี่ยง" ออกทั้งหมดตามที่พี่เขาบอก) -->
+                <div class="mt-2.5">
+                  ${u.isOutOfScope ? `
+                    <div class="text-[10.5px] text-amber-900 bg-amber-50 p-2 rounded-xl border border-amber-200 leading-relaxed">
+                      ผู้ใช้งานต่างสังกัด ผู้ดูแลระบบไม่มีสิทธิ์ปลดล็อก
+                    </div>
+                  ` : (u.isLocked ? `
+                    <div class="text-[10.5px] text-red-800 bg-red-50 p-2 rounded-xl border border-red-100 leading-relaxed">
+                      ${u.reason}
+                    </div>
+                  ` : `
+                    <div class="text-[10.5px] text-emerald-800 bg-emerald-50 p-2 rounded-xl border border-emerald-100 leading-relaxed">
+                      ${u.reason}
+                    </div>
+                  `)}
+                </div>
+
+                <!-- Action Button -->
+                <div class="mt-3 pt-2.5 border-t border-slate-100">
+                  ${u.isOutOfScope ? `
+                    <div class="text-center py-1.5 text-slate-400 text-xs font-medium">
+                      ไม่มีสิทธิ์ดำเนินการ
+                    </div>
+                  ` : (u.isLocked ? `
+                    <button 
+                      onclick="openUnlockModal('${u.phone}', '${u.name}')" 
+                      class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                      </svg>
+                      <span>ปลดล็อคทันที</span>
+                    </button>
+                  ` : `
+                    <div class="text-center py-1.5 text-slate-400 text-xs font-medium">
+                      บัญชีใช้งานได้ปกติ
+                    </div>
+                  `)}
+                </div>
+
+              </div>
+            `).join('') : `
+              <!-- Empty Search Result -->
+              <div class="bg-white rounded-2xl p-6 border border-slate-200 text-center space-y-2 mt-4">
+                <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-sm font-bold">
+                  ?
+                </div>
+                <div class="text-xs font-bold text-slate-800">ไม่พบข้อมูลที่ตรงกับคำค้นหา</div>
+                <div class="text-[10.5px] text-slate-500">กรุณาตรวจสอบเบอร์โทรหรือชื่อใหม่อีกครั้ง</div>
+                <button onclick="d9SearchQuery = ''; renderCurrentDesign();" class="touch-target px-3.5 py-1.5 bg-slate-900 text-white rounded-xl text-xs font-bold active-scale">
+                  ล้างการค้นหา
+                </button>
+              </div>
+            `}
+
+          </div>
+
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // DESIGN 1: รายชื่อปลดล็อกบนมือถือ (Mobile Roster)
     // =========================================================================
     function renderDesign1(c) {
       let list = usersData;
@@ -530,22 +755,13 @@
                 ${list.map(u => `
                   <div class="p-3.5 flex items-center justify-between gap-3 hover:bg-stone-50 transition-colors">
                     
-                    <!-- Left: Avatar + Info -->
-                    <div class="flex items-center gap-3 min-w-0 flex-1">
-                      <div class="w-10 h-10 rounded-full font-bold text-sm flex items-center justify-center shrink-0 ${u.isOutOfScope ? 'bg-amber-100 text-amber-800' : (u.isLocked ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-600')}">
-                        ${u.name.slice(0, 1)}
-                      </div>
-                      <div class="min-w-0 flex-1">
-                        <div class="font-bold text-slate-900 text-xs truncate">${u.name}</div>
-                        <div class="text-[11px] font-mono text-stone-500">${u.phone}</div>
-                        <div class="text-[10px] text-stone-400 truncate">${u.org}</div>
-                      </div>
+                    <div class="min-w-0 flex-1">
+                      <div class="font-bold text-slate-900 text-xs truncate">${u.name}</div>
+                      <div class="text-[11px] font-mono text-stone-500">${u.phone}</div>
+                      <div class="text-[10px] text-stone-400 truncate">${u.org}</div>
                     </div>
 
-                    <!-- Right: Status Badge & Unlock Button -->
                     <div class="flex flex-col items-end gap-1.5 shrink-0">
-                      
-                      <!-- Status Badge -->
                       ${u.isOutOfScope ? `
                         <span class="text-[9.5px] px-2 py-0.5 rounded-full font-bold bg-amber-50 text-amber-800 border border-amber-200">
                           ต่างสังกัด
@@ -560,7 +776,6 @@
                         </span>
                       `)}
 
-                      <!-- Action Button -->
                       ${u.isOutOfScope ? `
                         <span class="text-[10px] text-stone-400 font-medium py-1">ไม่มีสิทธิ์</span>
                       ` : (u.isLocked ? `
@@ -570,7 +785,6 @@
                       ` : `
                         <span class="text-[11px] text-stone-300 font-bold px-2 py-1">-</span>
                       `)}
-
                     </div>
 
                   </div>
@@ -611,324 +825,15 @@
     }
 
     // =========================================================================
-    // DESIGN 2: Filter Grid Cards (NO EMOJIS)
-    // =========================================================================
-    function renderDesign2(c) {
-      let list = usersData;
-      if (d2Filter === 'locked') list = usersData.filter(x => x.isLocked && !x.isOutOfScope);
-      else if (d2Filter === 'active') list = usersData.filter(x => !x.isLocked);
-
-      if (d2SearchQuery.trim()) {
-        const q = d2SearchQuery.toLowerCase();
-        list = list.filter(x => x.name.toLowerCase().includes(q) || x.phone.includes(q));
-      }
-
-      const lockedTotal = usersData.filter(x => x.isLocked && !x.isOutOfScope).length;
-      const activeTotal = usersData.filter(x => !x.isLocked).length;
-
-      c.innerHTML = `
-        <div class="flex-1 flex flex-col bg-slate-50 p-3 space-y-3 overflow-y-auto hide-scrollbar">
-          
-          <!-- Filter Pills -->
-          <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar shrink-0">
-            <button onclick="d2Filter = 'all'; renderCurrentDesign();" class="touch-target px-3 py-1.5 rounded-full text-xs font-bold transition-all ${d2Filter === 'all' ? 'bg-slate-800 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200'}">
-              ทั้งหมด (${usersData.length})
-            </button>
-            <button onclick="d2Filter = 'locked'; renderCurrentDesign();" class="touch-target px-3 py-1.5 rounded-full text-xs font-bold transition-all ${d2Filter === 'locked' ? 'bg-slate-800 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200'}">
-              เฉพาะที่ถูกระงับ (${lockedTotal})
-            </button>
-            <button onclick="d2Filter = 'active'; renderCurrentDesign();" class="touch-target px-3 py-1.5 rounded-full text-xs font-bold transition-all ${d2Filter === 'active' ? 'bg-slate-800 text-white shadow-xs' : 'bg-white text-slate-600 border border-slate-200'}">
-              เฉพาะปกติ (${activeTotal})
-            </button>
-          </div>
-
-          <!-- Cards Grid -->
-          <div class="space-y-3">
-            ${list.map(u => `
-              <div class="bg-white p-3.5 rounded-2xl border-2 ${u.isLocked ? 'border-red-200' : 'border-slate-200'} shadow-xs flex flex-col relative overflow-hidden">
-                <div class="absolute top-0 left-0 right-0 h-1 ${u.isLocked ? 'bg-red-500' : 'bg-green-500'}"></div>
-                
-                <div class="flex items-start justify-between mb-2 mt-1">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600 text-sm">
-                      ${u.name.slice(0, 1)}
-                    </div>
-                    <div>
-                      <h3 class="text-xs font-bold text-slate-900">${u.name}</h3>
-                      <p class="text-[11px] font-mono text-slate-500">${u.phone}</p>
-                    </div>
-                  </div>
-
-                  <span class="text-[10px] px-2 py-0.5 rounded-md font-bold ${u.isLocked ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-green-50 text-green-700 border border-green-100'}">
-                    ${u.isLocked ? 'ถูกระงับ' : 'ปกติ'}
-                  </span>
-                </div>
-
-                ${u.isLocked ? `
-                  <div class="text-[10.5px] text-red-800 bg-red-50 p-2 rounded-xl border border-red-100 mb-3">
-                    ${u.reason} (ผิด ${u.failCount}/3 ครั้ง)
-                  </div>
-                  <button onclick="openUnlockModal('${u.phone}', '${u.name}')" class="touch-target w-full bg-[#694325] hover:bg-[#4A2E16] text-white font-bold py-2 rounded-xl text-xs active-scale shadow-xs">
-                    จัดการปลดล็อค
-                  </button>
-                ` : `
-                  <div class="text-center py-2 text-slate-400 text-xs font-semibold">
-                    บัญชีใช้งานได้ปกติ
-                  </div>
-                `}
-
-              </div>
-            `).join('')}
-          </div>
-
-        </div>
-      `;
-    }
-
-    // =========================================================================
-    // DESIGN 3: Side Drawer / Bottom Sheet (NO EMOJIS)
-    // =========================================================================
-    function renderDesign3(c) {
-      c.innerHTML = `
-        <div class="flex-1 flex flex-col bg-slate-50 p-3.5 space-y-3 overflow-y-auto hide-scrollbar">
-          
-          <div class="flex items-center justify-between text-xs px-1">
-            <h2 class="font-bold text-slate-900">รายชื่อผู้ใช้งานทั้งหมด</h2>
-            <span class="text-[10px] text-stone-500">แตะเพื่อดูรายละเอียด</span>
-          </div>
-
-          <div class="bg-white border border-slate-200 rounded-2xl shadow-xs divide-y divide-slate-100 overflow-hidden">
-            ${usersData.map(u => `
-              <div onclick="openDrawerFor('${u.phone}')" class="p-3.5 hover:bg-slate-50 transition-colors flex items-center justify-between cursor-pointer active-scale">
-                
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full font-bold flex items-center justify-center text-sm ${u.isLocked ? 'bg-red-100 text-red-600' : 'bg-slate-100 text-slate-600'}">
-                    ${u.name.slice(0, 1)}
-                  </div>
-                  <div>
-                    <div class="font-bold text-slate-900 text-xs">${u.name}</div>
-                    <div class="text-[11px] text-slate-500 font-mono">${u.phone}</div>
-                  </div>
-                </div>
-
-                <div class="flex items-center gap-2">
-                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${u.isLocked ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
-                    ${u.isLocked ? 'ถูกระงับ' : 'ปกติ'}
-                  </span>
-                  <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </div>
-
-              </div>
-            `).join('')}
-          </div>
-
-        </div>
-      `;
-    }
-
-    function openDrawerFor(phone) {
-      const u = usersData.find(x => x.phone === phone);
-      if (!u) return;
-
-      const sheet = document.getElementById('phone-bottom-sheet');
-      const content = document.getElementById('phone-bottom-sheet-content');
-      if (!sheet || !content) return;
-
-      content.innerHTML = `
-        <div class="w-10 h-1 bg-stone-300 rounded-full mx-auto mb-2"></div>
-        
-        <div class="text-center pb-2">
-          <div class="w-16 h-16 rounded-full font-bold text-xl flex items-center justify-center mx-auto mb-2 border-2 border-white shadow-xs ${u.isLocked ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-700'}">
-            ${u.name.slice(0, 1)}
-          </div>
-          <h2 class="text-base font-bold text-slate-900">${u.name}</h2>
-          <p class="text-xs font-mono text-slate-500">${u.phone}</p>
-        </div>
-
-        <div class="space-y-2 text-xs">
-          <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-            <div class="text-[10px] font-bold text-slate-400 uppercase">สถานะปัจจุบัน</div>
-            <div class="font-bold ${u.isLocked ? 'text-red-700' : 'text-emerald-700'} flex items-center gap-1 mt-0.5">
-              ${u.isLocked ? 'ถูกระงับชั่วคราว' : 'ใช้งานได้ปกติ'}
-            </div>
-          </div>
-
-          <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100">
-            <div class="text-[10px] font-bold text-slate-400 uppercase">เหตุผลที่ถูกระงับ</div>
-            <div class="text-slate-700 mt-0.5">${u.reason}</div>
-          </div>
-        </div>
-
-        <div class="pt-2">
-          ${u.isLocked ? `
-            <button onclick="closeBottomSheet(); openUnlockModal('${u.phone}', '${u.name}');" class="touch-target w-full bg-[#694325] hover:bg-[#4A2E16] text-white font-bold py-3 rounded-xl text-xs active-scale shadow-sm">
-              ดำเนินการปลดล็อค
-            </button>
-          ` : `
-            <button onclick="closeBottomSheet()" class="touch-target w-full bg-slate-100 text-slate-700 font-bold py-3 rounded-xl text-xs">
-              ปิด
-            </button>
-          `}
-        </div>
-      `;
-
-      sheet.classList.remove('hidden');
-    }
-
-    // =========================================================================
-    // DESIGN 4: Kanban Columns (NO EMOJIS)
-    // =========================================================================
-    function renderDesign4(c) {
-      const lockedList = usersData.filter(x => x.isLocked);
-      const normalList = usersData.filter(x => !x.isLocked);
-
-      c.innerHTML = `
-        <div class="flex-1 flex flex-col bg-[#F4F5F7] overflow-hidden">
-          
-          <!-- Column Switcher Tabs -->
-          <div class="bg-white border-b border-slate-200 p-2 flex-shrink-0">
-            <div class="bg-slate-100 p-1 rounded-2xl flex text-xs font-semibold">
-              <button onclick="d4KanbanTab = 'locked'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 rounded-xl text-center transition-all flex items-center justify-center gap-1.5 ${d4KanbanTab === 'locked' ? 'bg-white text-red-800 shadow-xs font-bold' : 'text-slate-600'}">
-                <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                <span>ถูกระงับ (${lockedList.length})</span>
-              </button>
-              <button onclick="d4KanbanTab = 'normal'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 rounded-xl text-center transition-all flex items-center justify-center gap-1.5 ${d4KanbanTab === 'normal' ? 'bg-white text-green-800 shadow-xs font-bold' : 'text-slate-600'}">
-                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span>ปกติ (${normalList.length})</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Cards Column -->
-          <div class="flex-1 overflow-y-auto p-3.5 space-y-3 hide-scrollbar">
-            ${d4KanbanTab === 'locked' ? `
-              ${lockedList.map(u => `
-                <div class="bg-white p-3.5 rounded-xl shadow-xs border border-slate-200 border-l-4 border-l-red-500 space-y-2.5">
-                  <div>
-                    <div class="font-bold text-slate-800 text-xs">${u.name}</div>
-                    <div class="text-[11px] text-slate-500 font-mono">${u.phone}</div>
-                    <div class="text-[10.5px] text-red-700 mt-1">${u.reason}</div>
-                  </div>
-                  <button onclick="openUnlockModal('${u.phone}', '${u.name}')" class="touch-target w-full bg-red-50 text-red-700 font-bold py-2 rounded-lg text-xs border border-red-100 hover:bg-red-100 transition-colors">
-                    ปลดล็อค
-                  </button>
-                </div>
-              `).join('')}
-            ` : `
-              ${normalList.map(u => `
-                <div class="bg-white p-3.5 rounded-xl shadow-xs border border-slate-200 border-l-4 border-l-green-500">
-                  <div class="font-bold text-slate-800 text-xs">${u.name}</div>
-                  <div class="text-[11px] text-slate-500 font-mono">${u.phone}</div>
-                  <div class="text-[10.5px] text-emerald-700 mt-1">บัญชีใช้งานได้ปกติ</div>
-                </div>
-              `).join('')}
-            `}
-          </div>
-
-        </div>
-      `;
-    }
-
-    // =========================================================================
-    // DESIGN 5: Live Security Feed (NO EMOJIS, Professional SVG Metrics)
-    // =========================================================================
-    function renderDesign5(c) {
-      const lockedList = usersData.filter(x => x.isLocked);
-
-      c.innerHTML = `
-        <div class="flex-1 flex flex-col bg-slate-50 p-3 space-y-3 overflow-y-auto hide-scrollbar">
-          
-          <!-- Summary Metrics Cards -->
-          <div class="grid grid-cols-2 gap-2 shrink-0">
-            <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center font-bold text-sm shrink-0 border border-red-100">
-                <svg class="w-4 h-4 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                </svg>
-              </div>
-              <div>
-                <div class="text-[9.5px] text-slate-400 font-medium">รอการแก้ไข</div>
-                <div class="text-xs font-bold text-slate-900">${lockedList.length} รายการ</div>
-              </div>
-            </div>
-
-            <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-2.5">
-              <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm shrink-0 border border-emerald-100">
-                <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                </svg>
-              </div>
-              <div>
-                <div class="text-[9.5px] text-slate-400 font-medium">ปลดล็อกวันนี้</div>
-                <div class="text-xs font-bold text-slate-900">${auditLogs.length} รายการ</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Incident Feed Header -->
-          <div class="flex items-center justify-between text-xs font-bold text-slate-900 px-1">
-            <span class="flex items-center gap-1.5">
-              <span>บันทึกเหตุการณ์ (Security Feed)</span>
-              <span class="text-[9.5px] bg-red-100 text-red-700 font-bold px-1.5 py-0.5 rounded-full">LIVE</span>
-            </span>
-          </div>
-
-          <!-- Incidents List -->
-          <div class="space-y-2.5">
-            ${lockedList.map(u => `
-              <div class="bg-white rounded-2xl border-2 border-red-200 p-3 shadow-xs relative overflow-hidden space-y-2">
-                <div class="absolute top-0 left-0 bottom-0 w-1 bg-red-500"></div>
-                <div class="flex items-start justify-between pl-1">
-                  <div>
-                    <h3 class="font-bold text-slate-900 text-xs">${u.name}</h3>
-                    <p class="text-[11px] font-mono text-slate-500">${u.phone}</p>
-                    <span class="inline-block mt-1 text-[9.5px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">
-                      ผิด ${u.failCount}/3 ครั้ง (ระบบระงับ)
-                    </span>
-                  </div>
-                </div>
-
-                <p class="text-[10px] text-red-700 bg-red-50/70 p-2 rounded-lg border border-red-100 pl-2">
-                  ${u.reason}
-                </p>
-
-                <button onclick="openUnlockModal('${u.phone}', '${u.name}')" class="touch-target w-full py-2 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center">
-                  ปลดล็อคทันที
-                </button>
-              </div>
-            `).join('')}
-
-            <div class="bg-white rounded-2xl border border-slate-200 p-3 shadow-xs relative overflow-hidden">
-              <div class="absolute top-0 left-0 bottom-0 w-1 bg-green-500"></div>
-              <div class="pl-1">
-                <div class="flex items-center justify-between">
-                  <h3 class="font-bold text-slate-900 text-xs">นาย ข (สมมุติ)</h3>
-                  <span class="bg-green-100 text-green-700 text-[9.5px] px-2 py-0.5 rounded-full font-bold">ปกติ</span>
-                </div>
-                <p class="text-[11px] font-mono text-slate-500">082-000-0002</p>
-                <div class="text-[10.5px] text-green-700 mt-1">เข้าสู่ระบบสำเร็จ (ไม่มีความเสี่ยง)</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      `;
-    }
-
-    // =========================================================================
-    // DESIGN 6: ค้นหาเบอร์ปลดล็อก (Search by Phone - ตรงตามภาพผู้ใช้ 100%)
+    // DESIGN 6: ค้นหาเบอร์ปลดล็อก (Search by Phone)
     // =========================================================================
     function renderDesign6(c) {
-      // Find search result if input is present
       const cleanInput = d6PhoneInput.replace(/[-\s]/g, '');
       let foundUser = null;
       if (cleanInput.length >= 8) {
         foundUser = usersData.find(x => x.phone.replace(/[-\s]/g, '').includes(cleanInput));
       }
 
-      // Filter audit logs for tab 2
       let filteredAudit = auditLogs;
       if (d6AuditSearchQuery.trim()) {
         const q = d6AuditSearchQuery.toLowerCase();
@@ -938,7 +843,6 @@
       c.innerHTML = `
         <div class="flex-1 flex flex-col bg-[#FAF9F6] overflow-hidden">
           
-          <!-- Top Sub-Tabs (ตรงตามภาพ Screenshot: ปลดล็อก OTP vs ประวัติการปลดล็อก) -->
           <div class="bg-white border-b border-stone-200 flex-shrink-0 flex items-center text-xs font-semibold">
             <button onclick="d6Tab = 'unlock'; renderCurrentDesign();" class="touch-target flex-1 py-3 text-center transition-colors flex items-center justify-center gap-1.5 ${d6Tab === 'unlock' ? 'text-[#694325] border-b-2 border-[#694325] font-bold' : 'text-stone-500 hover:text-stone-800'}">
               <svg class="w-4 h-4 ${d6Tab === 'unlock' ? 'text-[#694325]' : 'text-stone-400'}" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -957,12 +861,8 @@
             </button>
           </div>
 
-          <!-- Content Area -->
           <div class="flex-1 overflow-y-auto p-3.5 space-y-3.5 hide-scrollbar">
-            
             ${d6Tab === 'unlock' ? `
-              
-              <!-- Card 1: คำแนะนำการปลดล็อกรหัส OTP (Warm card matching Screenshot 1) -->
               <div class="bg-[#F8F3EE] rounded-2xl p-4 border border-[#ECDCCF] shadow-xs space-y-1.5">
                 <div class="flex items-center gap-2">
                   <div class="w-5 h-5 rounded-full bg-[#694325] text-white flex items-center justify-center font-bold text-[10.5px] shrink-0">
@@ -975,14 +875,12 @@
                 </p>
               </div>
 
-              <!-- Card 2: ค้นหาหมายเลขโทรศัพท์เป้าหมาย (Search Card matching Screenshot 1) -->
               <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-xs space-y-3">
                 <div>
                   <h3 class="text-xs font-bold text-slate-900">ค้นหาหมายเลขโทรศัพท์เป้าหมาย</h3>
                   <p class="text-[10.5px] text-stone-500 mt-0.5">กรอกเบอร์โทรศัพท์ 10 หลักของผู้ใช้งานที่ต้องการตรวจสอบสถานะ</p>
                 </div>
 
-                <!-- Input + Search Button Row -->
                 <div class="flex items-center gap-2">
                   <div class="relative flex-1">
                     <svg class="w-4 h-4 text-stone-400 absolute left-3 top-3.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -995,8 +893,7 @@
                       value="${d6PhoneInput}" 
                       placeholder="เช่น 0812345678" 
                       oninput="d6PhoneInput = this.value; renderCurrentDesign();"
-                      onkeydown="if(event.key === 'Enter') renderCurrentDesign();"
-                      class="touch-target w-full h-11 pl-9 pr-3 bg-white border border-stone-200 rounded-xl text-xs font-mono text-slate-800 outline-none focus:border-[#694325] focus:ring-1 focus:ring-[#694325] shadow-xs" 
+                      class="touch-target w-full h-11 pl-9 pr-3 bg-white border border-stone-200 rounded-xl text-xs font-mono text-slate-800 outline-none focus:border-[#694325] shadow-xs" 
                     />
                   </div>
 
@@ -1011,189 +908,272 @@
                   </button>
                 </div>
 
-                <!-- Quick Test Demo Chips (แตะเพื่อทดสอบเบอร์ทันที) -->
                 <div class="space-y-1.5 pt-1 border-t border-stone-100">
                   <div class="text-[10px] text-stone-400 font-medium">เบอร์ทดสอบ: แตะเพื่อใส่เบอร์ทันที</div>
                   <div class="flex flex-wrap gap-1">
                     <button type="button" onclick="d6PhoneInput = '081-000-0001'; renderCurrentDesign();" class="touch-target px-2 py-1 bg-stone-50 hover:bg-stone-100 text-stone-700 text-[10px] rounded-lg border border-stone-200 font-mono active-scale">
-                      081-000-0001 (นาย ก: ติดล็อก)
-                    </button>
-                    <button type="button" onclick="d6PhoneInput = '089-876-5432'; renderCurrentDesign();" class="touch-target px-2 py-1 bg-stone-50 hover:bg-stone-100 text-stone-700 text-[10px] rounded-lg border border-stone-200 font-mono active-scale">
-                      089-876-5432 (นางสมศรี: ติดล็อก)
+                      081-000-0001 (ติดล็อก)
                     </button>
                     <button type="button" onclick="d6PhoneInput = '082-000-0002'; renderCurrentDesign();" class="touch-target px-2 py-1 bg-stone-50 hover:bg-stone-100 text-stone-700 text-[10px] rounded-lg border border-stone-200 font-mono active-scale">
-                      082-000-0002 (นาย ข: ปกติ)
-                    </button>
-                    <button type="button" onclick="d6PhoneInput = '086-111-2233'; renderCurrentDesign();" class="touch-target px-2 py-1 bg-stone-50 hover:bg-stone-100 text-stone-700 text-[10px] rounded-lg border border-stone-200 font-mono active-scale">
-                      086-111-2233 (ต่างสังกัด)
+                      082-000-0002 (ปกติ)
                     </button>
                   </div>
                 </div>
-
               </div>
 
-              <!-- Search Result Area (แสดงผลการค้นหาและปุ่มปลดล็อก) -->
               ${foundUser ? `
-                <div class="bg-white rounded-2xl p-4 border-2 ${foundUser.isOutOfScope ? 'border-amber-200' : (foundUser.isLocked ? 'border-red-200' : 'border-emerald-200')} shadow-xs space-y-3 animate-fade-in">
-                  
-                  <!-- Header Result Row -->
+                <div class="bg-white rounded-2xl p-4 border-2 ${foundUser.isOutOfScope ? 'border-amber-200' : (foundUser.isLocked ? 'border-red-200' : 'border-emerald-200')} shadow-xs space-y-3">
                   <div class="flex items-start justify-between">
-                    <div class="flex items-center gap-3">
-                      <div class="w-11 h-11 rounded-full font-bold text-sm flex items-center justify-center shrink-0 ${foundUser.isOutOfScope ? 'bg-amber-100 text-amber-800' : (foundUser.isLocked ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-800')}">
-                        ${foundUser.name.slice(0, 1)}
-                      </div>
-                      <div>
-                        <h4 class="font-bold text-slate-900 text-xs">${foundUser.name}</h4>
-                        <div class="text-[11px] font-mono text-stone-500">${foundUser.phone}</div>
-                        <div class="text-[10px] text-stone-400">${foundUser.org} • ${foundUser.role}</div>
-                      </div>
+                    <div>
+                      <h4 class="font-bold text-slate-900 text-xs">${foundUser.name}</h4>
+                      <div class="text-[11px] font-mono text-stone-500">${foundUser.phone}</div>
+                      <div class="text-[10px] text-stone-400">${foundUser.org} • ${foundUser.role}</div>
                     </div>
-
-                    <!-- Status Pill -->
-                    ${foundUser.isOutOfScope ? `
-                      <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold bg-amber-50 text-amber-800 border border-amber-200">
-                        ต่างสังกัด
-                      </span>
-                    ` : (foundUser.isLocked ? `
-                      <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold bg-red-100 text-red-800 border border-red-200 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> ถูกระงับ
+                    ${foundUser.isLocked ? `
+                      <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold bg-red-100 text-red-800 border border-red-200">
+                        ถูกระงับ
                       </span>
                     ` : `
-                      <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1">
-                        <svg class="w-3 h-3 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                        </svg>
+                      <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
                         ปกติ
                       </span>
-                    `)}
+                    `}
                   </div>
 
-                  <!-- Lock Reason & Status Details -->
-                  ${foundUser.isOutOfScope ? `
-                    <div class="bg-amber-50 rounded-xl p-3 border border-amber-200 text-xs text-amber-900 space-y-1">
-                      <div class="font-bold">ไม่มีสิทธิ์ดำเนินการ</div>
-                      <div class="text-[10.5px] text-amber-800 leading-relaxed">
-                        ผู้ใช้งานนี้สังกัด สป.กทม. ผู้ดูแลระบบสังกัด ${currentAdminOrg} ไม่มีสิทธิ์ปลดล็อกผู้ใช้งานต่างหน่วยงาน
-                      </div>
-                    </div>
-                  ` : (foundUser.isLocked ? `
+                  ${foundUser.isLocked ? `
                     <div class="bg-red-50 rounded-xl p-3 border border-red-100 text-xs text-red-900 space-y-1">
                       <div class="font-bold text-red-800">สาเหตุที่ถูกระงับ:</div>
-                      <div class="text-[11px] text-red-700 leading-relaxed">
-                        ${foundUser.reason} (กรอกผิด ${foundUser.failCount}/3 ครั้ง | ขอรับรหัส ${foundUser.sentCount}/5 ครั้ง)
-                      </div>
+                      <div class="text-[11px] text-red-700 leading-relaxed">${foundUser.reason}</div>
                     </div>
-
-                    <!-- Direct Action Button: ปลดล็อกรหัส OTP -->
                     <button 
                       onclick="openUnlockModal('${foundUser.phone}', '${foundUser.name}')" 
                       class="touch-target w-full h-11 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
                     >
-                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                      </svg>
                       <span>ปลดล็อกรหัส OTP</span>
                     </button>
                   ` : `
-                    <div class="bg-emerald-50 rounded-xl p-3 border border-emerald-100 text-xs text-emerald-900 space-y-0.5">
+                    <div class="bg-emerald-50 rounded-xl p-3 border border-emerald-100 text-xs text-emerald-900">
                       <div class="font-bold text-emerald-800">บัญชีใช้งานได้ตามปกติ</div>
-                      <div class="text-[10.5px] text-emerald-700 leading-relaxed">
-                        ผู้ใช้งานสามารถขอรับและกรอกรหัส OTP ได้ทันที ไม่มีความจำเป็นต้องปลดล็อก
-                      </div>
                     </div>
-                  `)}
-
+                  `}
                 </div>
-              ` : (d6PhoneInput.trim().length >= 8 ? `
-                <div class="bg-white rounded-2xl p-6 border border-stone-200 text-center space-y-2">
-                  <div class="w-10 h-10 rounded-full bg-stone-100 text-stone-400 flex items-center justify-center mx-auto text-sm font-bold">
-                    ?
-                  </div>
-                  <div class="text-xs font-bold text-slate-800">ไม่พบหมายเลขโทรศัพท์นี้ในระบบ</div>
-                  <div class="text-[10.5px] text-stone-500">กรุณาตรวจสอบหมายเลข 10 หลัก หรือเลือกจากเบอร์ทดสอบด้านบน</div>
-                </div>
-              ` : '')}
+              ` : ''}
 
             ` : `
-              
-              <!-- Tab 2: ประวัติการปลดล็อก (ตรงตาม Screenshot 2 ของผู้ใช้งานเป๊ะๆ) -->
+              <!-- Audit Logs -->
               <div class="space-y-3">
-                
-                <!-- Search within Audit Log -->
-                <div class="relative">
-                  <svg class="w-4 h-4 text-stone-400 absolute left-3.5 top-3.5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                  </svg>
-                  <input 
-                    type="text" 
-                    value="${d6AuditSearchQuery}" 
-                    placeholder="ค้นหาตามเบอร์โทรศัพท์ หรือชื่อผู้ดำเนินการ..." 
-                    class="touch-target w-full h-11 pl-9 pr-3 bg-white border border-stone-200 rounded-2xl text-xs outline-none focus:border-[#694325] shadow-xs" 
-                    oninput="d6AuditSearchQuery = this.value; renderCurrentDesign();" 
-                  />
-                </div>
-
-                <!-- Section Title with Refresh Button (ตรงตาม Screenshot 2) -->
-                <div class="flex items-center justify-between text-xs px-1">
-                  <div class="font-bold text-slate-800 flex items-center gap-1.5">
-                    <span>รายการปลดล็อกล่าสุด (${filteredAudit.length} รายการ)</span>
-                  </div>
-                  <button onclick="toastNotice('อัปเดตข้อมูลล่าสุดแล้ว');" class="touch-target w-8 h-8 flex items-center justify-center text-stone-500 hover:text-stone-800 active-scale" title="รีเฟรช">
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                  </button>
-                </div>
-
-                <!-- Audit Log Cards (ตรงตาม Screenshot 2) -->
-                <div class="space-y-3">
-                  ${filteredAudit.map(log => `
-                    <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-xs space-y-2.5 text-xs">
-                      
-                      <!-- Top Line: Time + Success Badge -->
-                      <div class="flex items-center justify-between pb-2 border-b border-stone-100">
-                        <div class="flex items-center gap-1.5 text-stone-500 text-[10.5px]">
-                          <svg class="w-3.5 h-3.5 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                          </svg>
-                          <span>${log.time}</span>
-                        </div>
-                        <span class="bg-emerald-50 text-emerald-800 text-[9.5px] px-2.5 py-0.5 rounded-full font-bold border border-emerald-200 flex items-center gap-1">
-                          <svg class="w-3 h-3 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-                          </svg>
-                          ปลดล็อกสำเร็จ
-                        </span>
-                      </div>
-
-                      <!-- Details Line items (ตรงตามภาพ Screenshot 2) -->
-                      <div class="space-y-1.5 text-[11px] leading-relaxed">
-                        <div class="flex items-start gap-2">
-                          <span class="text-stone-500 shrink-0 w-24">เบอร์เป้าหมาย:</span>
-                          <span class="font-bold font-mono text-[#694325] text-xs">${log.phone}</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                          <span class="text-stone-500 shrink-0 w-24">ผู้ดำเนินการ:</span>
-                          <span class="text-slate-800 font-medium">${log.admin}</span>
-                        </div>
-                        <div class="flex items-start gap-2">
-                          <span class="text-stone-500 shrink-0 w-24">เหตุผล:</span>
-                          <span class="text-slate-800">${log.reason}</span>
-                        </div>
-                      </div>
-
-                      <!-- Bottom Highlight: ผลการปลดล็อก (ตรงตามภาพ Screenshot 2) -->
-                      <div class="bg-[#FFFBEB] text-[#78350F] text-[10.5px] p-2.5 rounded-xl border border-[#FDE68A] font-medium leading-relaxed">
-                        ${log.resetDetails || 'ล้างประวัติกรอกผิด (3 -> 0 ครั้ง), ล้างประวัติขอรหัส (5 -> 0 ครั้ง)'}
-                      </div>
-
+                ${filteredAudit.map(log => `
+                  <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-xs space-y-2 text-xs">
+                    <div class="flex items-center justify-between pb-2 border-b border-stone-100">
+                      <span class="text-stone-500 text-[10.5px]">${log.time}</span>
+                      <span class="bg-emerald-50 text-emerald-800 text-[9.5px] px-2 py-0.5 rounded-full font-bold border border-emerald-200">
+                        ปลดล็อกสำเร็จ
+                      </span>
                     </div>
-                  `).join('')}
-                </div>
-
+                    <div class="space-y-1 text-[11px]">
+                      <div><span class="text-stone-500">เบอร์เป้าหมาย:</span> <strong class="text-[#694325] font-mono">${log.phone}</strong></div>
+                      <div><span class="text-stone-500">ผู้ดำเนินการ:</span> ${log.admin}</div>
+                      <div><span class="text-stone-500">เหตุผล:</span> ${log.reason}</div>
+                    </div>
+                    <div class="bg-[#FFFBEB] text-[#78350F] text-[10.5px] p-2 rounded-xl border border-[#FDE68A]">
+                      ${log.resetDetails}
+                    </div>
+                  </div>
+                `).join('')}
               </div>
             `}
+          </div>
+        </div>
+      `;
+    }
 
+    // =========================================================================
+    // DESIGN 2, 3, 4, 5 (Kept intact for complete prototype coverage)
+    // =========================================================================
+    function renderDesign2(c) {
+      let list = usersData;
+      if (d2Filter === 'locked') list = usersData.filter(x => x.isLocked && !x.isOutOfScope);
+      else if (d2Filter === 'active') list = usersData.filter(x => !x.isLocked);
+
+      if (d2SearchQuery.trim()) {
+        const q = d2SearchQuery.toLowerCase();
+        list = list.filter(x => x.name.toLowerCase().includes(q) || x.phone.includes(q));
+      }
+
+      c.innerHTML = `
+        <div class="flex-1 flex flex-col bg-slate-50 p-3 space-y-3 overflow-y-auto hide-scrollbar">
+          <div class="flex items-center gap-1.5 overflow-x-auto hide-scrollbar shrink-0">
+            <button onclick="d2Filter = 'all'; renderCurrentDesign();" class="touch-target px-3 py-1.5 rounded-full text-xs font-bold ${d2Filter === 'all' ? 'bg-slate-800 text-white' : 'bg-white text-slate-600 border border-slate-200'}">ทั้งหมด (${usersData.length})</button>
+            <button onclick="d2Filter = 'locked'; renderCurrentDesign();" class="touch-target px-3 py-1.5 rounded-full text-xs font-bold ${d2Filter === 'locked' ? 'bg-slate-800 text-white' : 'bg-white text-slate-600 border border-slate-200'}">ถูกระงับ</button>
+            <button onclick="d2Filter = 'active'; renderCurrentDesign();" class="touch-target px-3 py-1.5 rounded-full text-xs font-bold ${d2Filter === 'active' ? 'bg-slate-800 text-white' : 'bg-white text-slate-600 border border-slate-200'}">ปกติ</button>
+          </div>
+          <div class="space-y-3">
+            ${list.map(u => `
+              <div class="bg-white p-3.5 rounded-2xl border ${u.isLocked ? 'border-red-200' : 'border-slate-200'} shadow-xs flex flex-col">
+                <div class="flex items-start justify-between mb-2">
+                  <div>
+                    <h3 class="text-xs font-bold text-slate-900">${u.name}</h3>
+                    <p class="text-[11px] font-mono text-slate-500">${u.phone}</p>
+                  </div>
+                  <span class="text-[10px] px-2 py-0.5 rounded-md font-bold ${u.isLocked ? 'bg-red-100 text-red-700' : 'bg-green-50 text-green-700'}">
+                    ${u.isLocked ? 'ถูกระงับ' : 'ปกติ'}
+                  </span>
+                </div>
+                ${u.isLocked ? `
+                  <button onclick="openUnlockModal('${u.phone}', '${u.name}')" class="touch-target w-full bg-[#694325] hover:bg-[#4A2E16] text-white font-bold py-2 rounded-xl text-xs active-scale shadow-xs">
+                    จัดการปลดล็อค
+                  </button>
+                ` : `
+                  <div class="text-center py-1.5 text-slate-400 text-xs">บัญชีใช้งานได้ปกติ</div>
+                `}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDesign3(c) {
+      c.innerHTML = `
+        <div class="flex-1 flex flex-col bg-slate-50 p-3.5 space-y-3 overflow-y-auto hide-scrollbar">
+          <div class="text-xs font-bold text-slate-900">รายชื่อผู้ใช้งานทั้งหมด</div>
+          <div class="bg-white border border-slate-200 rounded-2xl shadow-xs divide-y divide-slate-100 overflow-hidden">
+            ${usersData.map(u => `
+              <div onclick="openDrawerFor('${u.phone}')" class="p-3.5 hover:bg-slate-50 transition-colors flex items-center justify-between cursor-pointer active-scale">
+                <div>
+                  <div class="font-bold text-slate-900 text-xs">${u.name}</div>
+                  <div class="text-[11px] text-slate-500 font-mono">${u.phone}</div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-[10px] px-2 py-0.5 rounded-full font-bold ${u.isLocked ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}">
+                    ${u.isLocked ? 'ถูกระงับ' : 'ปกติ'}
+                  </span>
+                  <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function openDrawerFor(phone) {
+      const u = usersData.find(x => x.phone === phone);
+      if (!u) return;
+      const sheet = document.getElementById('phone-bottom-sheet');
+      const content = document.getElementById('phone-bottom-sheet-content');
+      if (!sheet || !content) return;
+
+      content.innerHTML = `
+        <div class="w-10 h-1 bg-stone-300 rounded-full mx-auto mb-2"></div>
+        <div class="text-center pb-2">
+          <h2 class="text-base font-bold text-slate-900">${u.name}</h2>
+          <p class="text-xs font-mono text-slate-500">${u.phone}</p>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="bg-slate-50 p-2.5 rounded-xl">
+            <div class="text-[10px] font-bold text-slate-400 uppercase">สถานะปัจจุบัน</div>
+            <div class="font-bold ${u.isLocked ? 'text-red-700' : 'text-emerald-700'} mt-0.5">
+              ${u.isLocked ? 'ถูกระงับชั่วคราว' : 'ใช้งานได้ปกติ'}
+            </div>
+          </div>
+          <div class="bg-slate-50 p-2.5 rounded-xl">
+            <div class="text-[10px] font-bold text-slate-400 uppercase">เหตุผล</div>
+            <div class="text-slate-700 mt-0.5">${u.reason}</div>
+          </div>
+        </div>
+        <div class="pt-2">
+          ${u.isLocked ? `
+            <button onclick="closeBottomSheet(); openUnlockModal('${u.phone}', '${u.name}');" class="touch-target w-full bg-[#694325] hover:bg-[#4A2E16] text-white font-bold py-3 rounded-xl text-xs active-scale">
+              ดำเนินการปลดล็อค
+            </button>
+          ` : `
+            <button onclick="closeBottomSheet()" class="touch-target w-full bg-slate-100 text-slate-700 font-bold py-3 rounded-xl text-xs">
+              ปิด
+            </button>
+          `}
+        </div>
+      `;
+      sheet.classList.remove('hidden');
+    }
+
+    function renderDesign4(c) {
+      const lockedList = usersData.filter(x => x.isLocked);
+      const normalList = usersData.filter(x => !x.isLocked);
+
+      c.innerHTML = `
+        <div class="flex-1 flex flex-col bg-[#F4F5F7] overflow-hidden">
+          <div class="bg-white border-b border-slate-200 p-2 flex-shrink-0">
+            <div class="bg-slate-100 p-1 rounded-2xl flex text-xs font-semibold">
+              <button onclick="d4KanbanTab = 'locked'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 rounded-xl text-center flex items-center justify-center gap-1.5 ${d4KanbanTab === 'locked' ? 'bg-white text-red-800 shadow-xs font-bold' : 'text-slate-600'}">
+                <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                <span>ถูกระงับ (${lockedList.length})</span>
+              </button>
+              <button onclick="d4KanbanTab = 'normal'; renderCurrentDesign();" class="touch-target flex-1 py-1.5 rounded-xl text-center flex items-center justify-center gap-1.5 ${d4KanbanTab === 'normal' ? 'bg-white text-green-800 shadow-xs font-bold' : 'text-slate-600'}">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>ปกติ (${normalList.length})</span>
+              </button>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto p-3.5 space-y-3 hide-scrollbar">
+            ${d4KanbanTab === 'locked' ? `
+              ${lockedList.map(u => `
+                <div class="bg-white p-3.5 rounded-xl shadow-xs border border-slate-200 border-l-4 border-l-red-500 space-y-2.5">
+                  <div>
+                    <div class="font-bold text-slate-800 text-xs">${u.name}</div>
+                    <div class="text-[11px] text-slate-500 font-mono">${u.phone}</div>
+                    <div class="text-[10.5px] text-red-700 mt-1">${u.reason}</div>
+                  </div>
+                  <button onclick="openUnlockModal('${u.phone}', '${u.name}')" class="touch-target w-full bg-red-50 text-red-700 font-bold py-2 rounded-lg text-xs border border-red-100 hover:bg-red-100">
+                    ปลดล็อค
+                  </button>
+                </div>
+              `).join('')}
+            ` : `
+              ${normalList.map(u => `
+                <div class="bg-white p-3.5 rounded-xl shadow-xs border border-slate-200 border-l-4 border-l-green-500">
+                  <div class="font-bold text-slate-800 text-xs">${u.name}</div>
+                  <div class="text-[11px] text-slate-500 font-mono">${u.phone}</div>
+                  <div class="text-[10.5px] text-emerald-700 mt-1">บัญชีใช้งานได้ปกติ</div>
+                </div>
+              `).join('')}
+            `}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDesign5(c) {
+      const lockedList = usersData.filter(x => x.isLocked);
+      c.innerHTML = `
+        <div class="flex-1 flex flex-col bg-slate-50 p-3 space-y-3 overflow-y-auto hide-scrollbar">
+          <div class="grid grid-cols-2 gap-2 shrink-0">
+            <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-2">
+              <div>
+                <div class="text-[9.5px] text-slate-400 font-medium">รอการแก้ไข</div>
+                <div class="text-xs font-bold text-slate-900">${lockedList.length} รายการ</div>
+              </div>
+            </div>
+            <div class="bg-white p-2.5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-2">
+              <div>
+                <div class="text-[9.5px] text-slate-400 font-medium">ปลดล็อกวันนี้</div>
+                <div class="text-xs font-bold text-slate-900">${auditLogs.length} รายการ</div>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-2.5">
+            ${lockedList.map(u => `
+              <div class="bg-white rounded-2xl border-2 border-red-200 p-3 shadow-xs space-y-2">
+                <h3 class="font-bold text-slate-900 text-xs">${u.name}</h3>
+                <p class="text-[11px] font-mono text-slate-500">${u.phone}</p>
+                <p class="text-[10px] text-red-700 bg-red-50 p-2 rounded-lg">${u.reason}</p>
+                <button onclick="openUnlockModal('${u.phone}', '${u.name}')" class="touch-target w-full py-2 bg-[#694325] hover:bg-[#4A2E16] text-white font-bold rounded-xl text-xs active-scale">
+                  ปลดล็อคทันที
+                </button>
+              </div>
+            `).join('')}
           </div>
         </div>
       `;
@@ -1207,12 +1187,10 @@
       const u = usersData.find(x => x.phone === phone);
       if (!u) return;
 
-      const avatar = document.getElementById('modal-user-avatar');
       const nameEl = document.getElementById('modal-user-name');
       const ph = document.getElementById('modal-user-phone');
       const reasonInput = document.getElementById('modal-reason-input');
 
-      if (avatar) avatar.textContent = u.name.slice(0, 1);
       if (nameEl) nameEl.textContent = u.name;
       if (ph) ph.textContent = u.phone;
       if (reasonInput) reasonInput.value = 'ตรวจสอบและยืนยันตัวตนเจ้าหน้าที่เรียบร้อยแล้ว (Verified Officer Identity)';
@@ -1239,7 +1217,7 @@
       if (u) {
         u.isLocked = false;
         u.failCount = 0;
-        u.reason = 'สถานะปกติ ไม่ติดล็อก';
+        u.reason = 'ปลดล็อกสิทธิ์เรียบร้อยแล้ว';
 
         const now = new Date();
         const dateStr = `${String(now.getDate()).padStart(2, '0')}/${String(now.getMonth() + 1).padStart(2, '0')}/${now.getFullYear()} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} น.`;
@@ -1280,6 +1258,8 @@
     // Reset Data
     function resetAllDemoData() {
       usersData = JSON.parse(JSON.stringify(initialUsersData));
+      d9SearchQuery = '';
+      d9Category = 'all';
       d1SearchQuery = '';
       d2Filter = 'all';
       d2SearchQuery = '';
@@ -1313,7 +1293,7 @@
       fitPhoneToScreen();
     }
 
-    // CRITICAL: FIT PHONE TO SCREEN (GUARANTEES 100% VISIBILITY, NEVER CLIPPED)
+    // Fit Phone To Screen
     function fitPhoneToScreen() {
       const stage = document.getElementById('main-stage');
       const scaler = document.getElementById('phone-scaler');
@@ -1364,14 +1344,14 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Initial Setup - Default open Design 6
+    // Initial Setup: Default directly to Design 9
     window.addEventListener('DOMContentLoaded', () => {
       fitPhoneToScreen();
-      switchDesign(6);
+      switchDesign(9);
     });
     setTimeout(() => {
       fitPhoneToScreen();
-      switchDesign(6);
+      switchDesign(9);
     }, 150);
 
   </script>
